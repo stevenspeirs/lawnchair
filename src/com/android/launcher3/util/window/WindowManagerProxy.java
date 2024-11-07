@@ -127,11 +127,17 @@ public class WindowManagerProxy implements ResourceBasedOverride, SafeCloseable 
      * normalization
      */
     public WindowBounds getRealBounds(Context displayInfoContext, CachedDisplayInfo info) {
-        WindowMetrics windowMetrics = displayInfoContext.getSystemService(WindowManager.class)
-                .getMaximumWindowMetrics();
+        WindowMetrics windowMetrics;
+        if (Utilities.ATLEAST_R) {
+            windowMetrics = displayInfoContext.getSystemService(WindowManager.class)
+                    .getMaximumWindowMetrics();
+        
         Rect insets = new Rect();
         normalizeWindowInsets(displayInfoContext, windowMetrics.getWindowInsets(), insets);
         return new WindowBounds(windowMetrics.getBounds(), insets, info.rotation);
+        } else {
+        return new WindowBounds(new Rect(), new Rect(), info.rotation);
+      }
     }
 
     /**
@@ -368,11 +374,13 @@ public class WindowManagerProxy implements ResourceBasedOverride, SafeCloseable 
             DisplayCutout rotatedCutout = rotateCutout(
                     displayInfo.cutout, displayInfo.size.x, displayInfo.size.y, rotation, i);
             Rect insets = getSafeInsets(rotatedCutout);
-            if (areBottomDisplayCutoutsSmallAndAtCorners(
-                    rotatedCutout.getBoundingRectBottom(),
-                    bounds.width(),
-                    context.getResources())) {
-                insets.bottom = 0;
+            if (Utilities.ATLEAST_Q) {
+                if (areBottomDisplayCutoutsSmallAndAtCorners(
+                        rotatedCutout.getBoundingRectBottom(),
+                        bounds.width(),
+                        context.getResources())) {
+                    insets.bottom = 0;
+                }
             }
             insets.top = Math.max(insets.top, statusBarHeight);
             insets.bottom = Math.max(insets.bottom, navBarHeight);
@@ -468,7 +476,9 @@ public class WindowManagerProxy implements ResourceBasedOverride, SafeCloseable 
      */
     protected Display getDisplay(Context displayInfoContext) {
         try {
-            return displayInfoContext.getDisplay();
+            if (Utilities.ATLEAST_R) {
+                return displayInfoContext.getDisplay();
+            }
         } catch (UnsupportedOperationException e) {
             // Ignore
         }
@@ -483,7 +493,7 @@ public class WindowManagerProxy implements ResourceBasedOverride, SafeCloseable 
             int fromRotation, int toRotation) {
         Rect safeCutout = getSafeInsets(original);
         rotateRect(safeCutout, deltaRotation(fromRotation, toRotation));
-        return new DisplayCutout(Insets.of(safeCutout), null, null, null, null);
+        return Utilities.ATLEAST_Q ? new DisplayCutout(Insets.of(safeCutout), null, null, null, null) : null;
     }
 
     /**
@@ -513,7 +523,10 @@ public class WindowManagerProxy implements ResourceBasedOverride, SafeCloseable 
      * @see DisplayCutout#getSafeInsets
      */
     public static Rect getSafeInsets(DisplayCutout cutout) {
-        return new Rect(cutout.getSafeInsetLeft(), cutout.getSafeInsetTop(),
-                cutout.getSafeInsetRight(), cutout.getSafeInsetBottom());
+        if (Utilities.ATLEAST_Q) {
+            return new Rect(cutout.getSafeInsetLeft(), cutout.getSafeInsetTop(),
+                    cutout.getSafeInsetRight(), cutout.getSafeInsetBottom());
+        }
+            return new Rect();
     }
 }
