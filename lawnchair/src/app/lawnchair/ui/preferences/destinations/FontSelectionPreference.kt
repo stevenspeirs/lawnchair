@@ -29,7 +29,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -72,14 +72,28 @@ fun FontSelection(
     val items by produceState(initialValue = emptyList<FontCache.Family>()) {
         val list = mutableListOf<FontCache.Family>()
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif")))
-        list.add(FontCache.Family(FontCache.SystemFont("sans-serif-medium")))
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-condensed")))
+        list.add(FontCache.Family(FontCache.SystemFont("sans-serif-medium")))
         val interVariants = HashMap<String, FontCache.Font>()
-        interVariants["regular"] = FontCache.ResourceFont(context, R.font.inter_regular, "Inter v3 " + context.getString(R.string.font_weight_regular))
-        interVariants["500"] = FontCache.ResourceFont(context, R.font.inter_medium, "Inter v3 " + context.getString(R.string.font_weight_medium))
-        interVariants["600"] = FontCache.ResourceFont(context, R.font.inter_semi_bold, "Inter v3 " + context.getString(R.string.font_weight_semi_bold))
-        interVariants["700"] = FontCache.ResourceFont(context, R.font.inter_bold, "Inter v3 " + context.getString(R.string.font_weight_bold))
-        list.add(FontCache.Family("Inter v3", interVariants))
+        interVariants["100"] = FontCache.ResourceFont(context, R.font.inter_thin, "Inter v4.1 " + context.getString(R.string.font_weight_thin))
+        interVariants["100italic"] = FontCache.ResourceFont(context, R.font.inter_thin_italic, "Inter v4.1 " + context.getString(R.string.font_weight_thin) + " " + context.getString(R.string.font_variant_italic))
+        interVariants["200"] = FontCache.ResourceFont(context, R.font.inter_extra_light, "Inter v4.1 " + context.getString(R.string.font_weight_extra_light))
+        interVariants["200italic"] = FontCache.ResourceFont(context, R.font.inter_extra_light_italic, "Inter v4.1 " + context.getString(R.string.font_weight_extra_light) + " " + context.getString(R.string.font_variant_italic))
+        interVariants["300"] = FontCache.ResourceFont(context, R.font.inter_light, "Inter v4.1 " + context.getString(R.string.font_weight_light))
+        interVariants["300italic"] = FontCache.ResourceFont(context, R.font.inter_light_italic, "Inter v4.1 " + context.getString(R.string.font_weight_light) + " " + context.getString(R.string.font_variant_italic))
+        interVariants["regular"] = FontCache.ResourceFont(context, R.font.inter_regular, "Inter v4.1 " + context.getString(R.string.font_weight_regular))
+        interVariants["italic"] = FontCache.ResourceFont(context, R.font.inter_italic, "Inter v4.1 " + context.getString(R.string.font_weight_regular) + " " + context.getString(R.string.font_variant_italic))
+        interVariants["500"] = FontCache.ResourceFont(context, R.font.inter_medium, "Inter v4.1 " + context.getString(R.string.font_weight_medium))
+        interVariants["500italic"] = FontCache.ResourceFont(context, R.font.inter_medium_italic, "Inter v4.1 " + context.getString(R.string.font_weight_medium) + " " + context.getString(R.string.font_variant_italic))
+        interVariants["600"] = FontCache.ResourceFont(context, R.font.inter_semi_bold, "Inter v4.1 " + context.getString(R.string.font_weight_semi_bold))
+        interVariants["600italic"] = FontCache.ResourceFont(context, R.font.inter_semi_bold_italic, "Inter v4.1 " + context.getString(R.string.font_weight_semi_bold) + " " + context.getString(R.string.font_variant_italic))
+        interVariants["700"] = FontCache.ResourceFont(context, R.font.inter_bold, "Inter v4.1 " + context.getString(R.string.font_weight_bold))
+        interVariants["700italic"] = FontCache.ResourceFont(context, R.font.inter_bold_italic, "Inter v4.1 " + context.getString(R.string.font_weight_bold) + " " + context.getString(R.string.font_variant_italic))
+        interVariants["800"] = FontCache.ResourceFont(context, R.font.inter_extra_bold, "Inter v4.1 " + context.getString(R.string.font_weight_extra_bold))
+        interVariants["800italic"] = FontCache.ResourceFont(context, R.font.inter_extra_bold_italic, "Inter v4.1 " + context.getString(R.string.font_weight_extra_bold) + " " + context.getString(R.string.font_variant_italic))
+        interVariants["900"] = FontCache.ResourceFont(context, R.font.inter_black, "Inter v4.1 " + context.getString(R.string.font_weight_extra_black))
+        interVariants["900italic"] = FontCache.ResourceFont(context, R.font.inter_black_italic, "Inter v4.1 " + context.getString(R.string.font_weight_extra_black) + " " + context.getString(R.string.font_variant_italic))
+        list.add(FontCache.Family("Inter v4.1", interVariants))
         GoogleFontsListing.INSTANCE.get(context).getFonts().mapTo(list) { font ->
             val variantsMap = HashMap<String, FontCache.Font>()
             val variants = font.variants.toTypedArray()
@@ -290,10 +304,9 @@ private fun VariantDropdown(
         var showVariants by remember { mutableStateOf(false) }
 
         val context = LocalContext.current
-        DisposableEffect(family) {
+        LaunchedEffect(family) {
             val fontCache = FontCache.INSTANCE.get(context)
-            family.variants.forEach { fontCache.preloadFont(it.value) }
-            onDispose { }
+            family.sortedVariants.forEach { fontCache.preloadFont(it) }
         }
 
         TextButton(

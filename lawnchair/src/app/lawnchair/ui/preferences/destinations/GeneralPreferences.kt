@@ -103,23 +103,23 @@ fun GeneralPreferences() {
             PreferenceGroup(heading = stringResource(id = R.string.font_label)) {
                 FontPreference(
                     fontPref = prefs.fontWorkspace,
-                    label = stringResource(R.string.fontWorkspace),
+                    label = stringResource(id = R.string.fontWorkspace),
                 )
                 FontPreference(
                     fontPref = prefs.fontHeading,
-                    label = stringResource(R.string.fontHeading),
+                    label = stringResource(id = R.string.fontHeading),
                 )
                 FontPreference(
                     fontPref = prefs.fontHeadingMedium,
-                    label = stringResource(R.string.fontHeadingMedium),
+                    label = stringResource(id = R.string.fontHeadingMedium),
                 )
                 FontPreference(
                     fontPref = prefs.fontBody,
-                    label = stringResource(R.string.fontBody),
+                    label = stringResource(id = R.string.fontBody),
                 )
                 FontPreference(
                     fontPref = prefs.fontBodyMedium,
-                    label = stringResource(R.string.fontBodyMedium),
+                    label = stringResource(id = R.string.fontBodyMedium),
                 )
             }
         }
@@ -164,8 +164,8 @@ fun GeneralPreferences() {
                 SliderPreference(
                     label = stringResource(id = R.string.background_lightness_label),
                     adapter = prefs.coloredBackgroundLightness.getAdapter(),
-                    valueRange = 0F..1F,
-                    step = 0.1f,
+                    valueRange = 0.0f..1.0f,
+                    step = 0.05f,
                     showAsPercentage = true,
                 )
             }

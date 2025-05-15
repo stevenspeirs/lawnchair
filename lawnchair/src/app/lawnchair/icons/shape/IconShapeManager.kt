@@ -74,10 +74,25 @@ class IconShapeManager(private val context: Context) : SafeCloseable {
             IconShape.Sammy,
             IconShape.Teardrop,
             IconShape.Cylinder,
+            IconShape.Cupertino,
+            IconShape.Diamond,
+            IconShape.Egg,
+            IconShape.FlatHexagon,
+            IconShape.Heptagon,
+            IconShape.Hexagon,
+            IconShape.Lemon,
+            IconShape.LightSquircle,
+            IconShape.Nonagon,
+            IconShape.Octagon,
+            IconShape.Pentagon,
+            IconShape.SharpSquare,
+            IconShape.StrongSquircle,
+            IconShape.Triangle,
+            IconShape.UltraSquircle,
         )
             .minByOrNull {
                 shapePath.reset()
-                it.addShape(shapePath, 0f, 0f, size / 2f)
+                it.addShape(shapePath, 0.0f, 0.0f, size / 2.0f)
                 shapeR.setPath(shapePath, clip)
                 shapeR.op(iconR, Region.Op.XOR)
 

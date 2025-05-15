@@ -44,8 +44,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:gravity="start|center"
             android:maxLines="1"
             android:singleLine="true"
+            android:textAlignment="viewStart"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/search_result_hero_subtitle_size" />
     </LinearLayout>

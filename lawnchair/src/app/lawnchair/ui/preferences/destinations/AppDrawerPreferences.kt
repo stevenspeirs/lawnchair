@@ -87,13 +87,13 @@ fun AppDrawerPreferences(
             SearchBarPreference(SearchRoute.DRAWER_SEARCH, showLabel = false)
             SuggestionsPreference()
         }
-        PreferenceGroup(heading = stringResource(R.string.style)) {
+        PreferenceGroup(heading = stringResource(id = R.string.style)) {
             ColorPreference(preference = prefs2.appDrawerBackgroundColor)
             SliderPreference(
                 label = stringResource(id = R.string.background_opacity),
                 adapter = prefs.drawerOpacity.getAdapter(),
-                step = 0.1f,
-                valueRange = 0F..1F,
+                step = 0.05f,
+                valueRange = 0.0f..1.0f,
                 showAsPercentage = true,
             )
         }
@@ -107,15 +107,15 @@ fun AppDrawerPreferences(
             SliderPreference(
                 adapter = prefs2.drawerCellHeightFactor.getAdapter(),
                 label = stringResource(id = R.string.row_height_label),
-                valueRange = 0.3F..1.5F,
-                step = 0.1F,
+                valueRange = 0.3f..1.5f,
+                step = 0.05f,
                 showAsPercentage = true,
             )
             SliderPreference(
                 adapter = prefs2.drawerLeftRightMarginFactor.getAdapter(),
                 label = stringResource(id = R.string.app_drawer_indent_label),
-                valueRange = 0.0F..1.5F,
-                step = 0.05F,
+                valueRange = 0.0f..1.5f,
+                step = 0.05f,
                 showAsPercentage = true,
             )
         }
@@ -123,8 +123,8 @@ fun AppDrawerPreferences(
             SliderPreference(
                 label = stringResource(id = R.string.icon_sizes),
                 adapter = prefs2.drawerIconSizeFactor.getAdapter(),
-                step = 0.1f,
-                valueRange = 0.5F..1.5F,
+                step = 0.05f,
+                valueRange = 0.5f..1.5f,
                 showAsPercentage = true,
             )
             val showDrawerLabels = prefs2.showIconLabelsInDrawer.getAdapter()
@@ -137,13 +137,13 @@ fun AppDrawerPreferences(
                     SliderPreference(
                         label = stringResource(id = R.string.label_size),
                         adapter = prefs2.drawerIconLabelSizeFactor.getAdapter(),
-                        step = 0.1F,
-                        valueRange = 0.5F..1.5F,
+                        step = 0.05f,
+                        valueRange = 0.5f..1.5f,
                         showAsPercentage = true,
                     )
                     SwitchPreference(
                         adapter = prefs2.twoLineAllApps.getAdapter(),
-                        label = stringResource(R.string.twoline_label),
+                        label = stringResource(id = R.string.twoline_label),
                     )
                 }
             }

@@ -64,7 +64,7 @@ fun SmartspacePreferences(
         } else {
             MainSwitchPreference(
                 adapter = smartspaceAdapter,
-                label = stringResource(R.string.smartspace_widget_toggle_label),
+                label = stringResource(id = R.string.smartspace_widget_toggle_label),
                 description = stringResource(id = R.string.smartspace_widget_toggle_description).takeIf { modeIsLawnchair },
             ) {
                 PreferenceGroup {
@@ -281,12 +281,12 @@ fun SmartspacerSettings(
             heading = stringResource(id = R.string.smartspacer_settings),
         ) {
             SliderPreference(
-                label = stringResource(R.string.maximum_number_of_targets),
+                label = stringResource(id = R.string.maximum_number_of_targets),
                 adapter = prefs2.smartspacerMaxCount.getAdapter(),
                 valueRange = 5..15,
                 step = 1,
             )
-            ClickablePreference(label = stringResource(R.string.open_smartspacer_settings)) {
+            ClickablePreference(label = stringResource(id = R.string.open_smartspacer_settings)) {
                 val intent = context.packageManager.getLaunchIntentForPackage(
                     SmartspacerConstants.SMARTSPACER_PACKAGE_NAME,
                 )

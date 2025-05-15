@@ -89,9 +89,9 @@ fun SelectAppsForDrawerFolder(
 
     PreferenceScaffold(
         label = if (loading) {
-            stringResource(R.string.loading)
+            stringResource(id = R.string.loading)
         } else {
-            stringResource(R.string.x_with_y_count, folderInfo?.title.toString(), selectedAppsInFolder.size)
+            stringResource(id = R.string.x_with_y_count, folderInfo?.title.toString(), selectedAppsInFolder.size)
         },
         modifier = modifier,
         actions = {
@@ -207,7 +207,7 @@ private fun ListSortingOptions(
                 hideMenu()
             },
             text = {
-                Text(stringResource(R.string.inverse_selection))
+                Text(stringResource(id = R.string.inverse_selection))
             },
         )
 
@@ -242,7 +242,7 @@ private fun ListSortingOptions(
                 }
             },
             text = {
-                Text(stringResource(R.string.folders_filter_duplicates))
+                Text(stringResource(id = R.string.folders_filter_duplicates))
             },
         )
         PreferenceDivider(modifier = Modifier.padding(vertical = 8.dp))
@@ -253,7 +253,7 @@ private fun ListSortingOptions(
                 )
             },
             text = {
-                Text(stringResource(R.string.action_reset))
+                Text(stringResource(id = R.string.action_reset))
             },
         )
     }

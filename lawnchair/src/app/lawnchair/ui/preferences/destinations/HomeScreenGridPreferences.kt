@@ -56,7 +56,7 @@ fun HomeScreenGridPreferences(
             GridOverridesPreview(
                 modifier = Modifier
                     .padding(top = 8.dp)
-                    .weight(1f)
+                    .weight(1.0f)
                     .align(Alignment.CenterHorizontally)
                     .clip(MaterialTheme.shapes.large),
             ) {

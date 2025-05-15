@@ -42,7 +42,7 @@ fun SearchProviderPreferences(
     val forceWebsiteAdapter = preferenceManager2().hotseatQsbForceWebsite.getAdapter()
 
     PreferenceLayout(
-        label = stringResource(R.string.search_provider),
+        label = stringResource(id = R.string.search_provider),
         modifier = modifier,
     ) {
         PreferenceGroup {

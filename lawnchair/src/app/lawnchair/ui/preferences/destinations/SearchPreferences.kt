@@ -33,7 +33,7 @@ fun SearchBarPreference(
     val preference = remember {
         movableContentOf {
             ClickablePreference(
-                label = stringResource(R.string.search_bar_settings),
+                label = stringResource(id = R.string.search_bar_settings),
                 modifier = modifier,
             ) {
                 navController.navigate(route = "${Routes.SEARCH}/${id.ordinal}")

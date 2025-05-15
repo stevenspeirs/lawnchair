@@ -17,9 +17,6 @@ class Expressions {
     private val evaluator = Evaluator()
 
     init {
-        define("pi", BigDecimal(Math.PI).setScale(33, RoundingMode.HALF_EVEN))
-        define("e", BigDecimal(Math.E).setScale(33, RoundingMode.HALF_EVEN))
-
         evaluator.addFunction("abs") { arguments ->
             if (arguments.size != 1) {
                 throw ExpressionException(

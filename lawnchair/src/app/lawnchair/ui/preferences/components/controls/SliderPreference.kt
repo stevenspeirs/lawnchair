@@ -100,7 +100,7 @@ fun SliderPreference(
                 Text(
                     text = label,
                     modifier = Modifier
-                        .weight(1f)
+                        .weight(1.0f)
                         .padding(end = 8.dp),
                 )
                 CompositionLocalProvider(

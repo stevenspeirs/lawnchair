@@ -139,9 +139,9 @@ class DeviceProfileOverrides(context: Context) : SafeCloseable {
             enableAllAppsIconText: Boolean,
             allAppsIconTextSizeFactor: Float,
         ) : this(
-            iconTextSizeFactor = if (enableIconText) iconTextSizeFactor else 0f,
-            allAppsIconTextSizeFactor = if (enableAllAppsIconText) allAppsIconTextSizeFactor else 0f,
-            iconFolderTextSizeFactor = if (enableIconTextFolder) iconFolderTextSizeFactor else 0f,
+            iconTextSizeFactor = if (enableIconText) iconTextSizeFactor else 0.0f,
+            allAppsIconTextSizeFactor = if (enableAllAppsIconText) allAppsIconTextSizeFactor else 0.0f,
+            iconFolderTextSizeFactor = if (enableIconTextFolder) iconFolderTextSizeFactor else 0.0f,
         )
     }
 

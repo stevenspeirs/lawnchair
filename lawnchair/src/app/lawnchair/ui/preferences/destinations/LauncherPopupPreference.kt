@@ -55,7 +55,7 @@ fun LauncherPopupPreferenceItem(
     val navController = LocalNavController.current
     ClickablePreference(
         modifier = modifier,
-        label = stringResource(R.string.edit_menu_items),
+        label = stringResource(id = R.string.edit_menu_items),
         onClick = {
             navController.navigate(HomeScreenRoutes.POPUP_EDITOR)
         },
@@ -74,18 +74,18 @@ fun LauncherPopupPreference(
     var optionsList = optionsPref.state.value.toLauncherOptions()
 
     PreferenceLayout(
-        label = stringResource(R.string.popup_menu),
+        label = stringResource(id = R.string.popup_menu),
         backArrowVisible = !LocalIsExpandedScreen.current,
         isExpandedScreen = true,
         modifier = modifier,
     ) {
         Column {
-            PreferenceGroupHeading(stringResource(R.string.preview_label))
+            PreferenceGroupHeading(stringResource(id = R.string.preview_label))
             LauncherPopupPreview(optionsList)
         }
 
         DraggablePreferenceGroup(
-            label = stringResource(R.string.popup_menu_items),
+            label = stringResource(id = R.string.popup_menu_items),
             items = optionsList,
             defaultList = LauncherOptionsPopup.DEFAULT_ORDER,
             onOrderChange = {
@@ -105,7 +105,7 @@ fun LauncherPopupPreference(
 
             DraggableSwitchPreference(
                 label = stringResource(metadata.label),
-                description = if (!enabled && item.identifier != "home_settings") stringResource(R.string.home_screen_locked) else null,
+                description = if (!enabled && item.identifier != "home_settings") stringResource(id = R.string.home_screen_locked) else null,
                 checked = if (!enabled && item.identifier != "home_settings") false else item.isEnabled,
                 onCheckedChange = {
                     optionsList[index].isEnabled = it

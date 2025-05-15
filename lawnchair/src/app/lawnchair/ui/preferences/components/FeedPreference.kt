@@ -70,7 +70,7 @@ fun FeedPreference(
         value = resolvedEntry?.value ?: "",
         onValueChange = adapter::onChange,
         entries = entries,
-        label = stringResource(R.string.feed_provider),
+        label = stringResource(id = R.string.feed_provider),
         modifier = modifier,
         endWidget = resolvedEntry?.endWidget,
     )

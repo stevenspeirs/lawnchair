@@ -1,0 +1,41 @@
+name: Build APK Debug Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Time
+        run: echo time=$(date +'%s') >> $GITHUB_ENV
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: 24
+      - name: Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-cleanup: always
+      - name: Sign
+        if: github.repository_owner == 'tgex0'
+        run: |
+          if [ ! -z '${{ secrets.KEYSTORE }}' ]; then
+            echo storePassword='${{ secrets.KEYSTORE_PASSWORD }}' >> keystore.properties
+            echo keyAlias='${{ secrets.KEY_ALIAS }}' >> keystore.properties
+            echo keyPassword='${{ secrets.KEY_PASSWORD }}' >> keystore.properties
+            echo storeFile='${{ github.workspace }}/keystore.jks' >> keystore.properties
+            echo ${{ secrets.KEYSTORE }} | base64 --decode > ${{ github.workspace }}/keystore.jks
+          fi
+      - name: Build
+        run: ./gradlew assembleLawnWithQuickstepGithubDebug assembleLawnWithQuickstepGithubRelease
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: lawnchair-${{ env.time }}
+          path: build/outputs/apk/lawnWithQuickstepGithub/*/*.apk

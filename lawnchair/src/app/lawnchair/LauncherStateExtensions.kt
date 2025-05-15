@@ -19,7 +19,7 @@ suspend fun Launcher.animateToAllApps() {
         val animation = stateManager
             .createAnimationToNewWorkspace(LauncherState.ALL_APPS, config)
         val anim = animation.animationPlayer
-        anim.setFloatValues(0f, 1f)
+        anim.setFloatValues(0.0f, 1.0f)
         anim.duration = duration
         anim.interpolator = Interpolators.DECELERATE
         anim.addListener(forEndCallback(Runnable { cont.resume(Unit) }))

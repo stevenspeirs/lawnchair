@@ -54,8 +54,8 @@ class PreferenceManager private constructor(private val context: Context) :
     val workspaceIncreaseMaxGridSize = BoolPref("pref_workspace_increase_max_grid_size", false)
     val folderRows = IdpIntPref("pref_folderRows", { numFolderRows[INDEX_DEFAULT] }, reloadGrid)
 
-    val drawerOpacity = FloatPref("pref_drawerOpacity", 1F, recreate)
-    val coloredBackgroundLightness = FloatPref("pref_coloredBackgroundLightness", 0.9F, recreate)
+    val drawerOpacity = FloatPref("pref_drawerOpacity", 1.0f, recreate)
+    val coloredBackgroundLightness = FloatPref("pref_coloredBackgroundLightness", 0.9f, recreate)
     val feedProvider = StringPref("pref_feedProvider", "")
     val ignoreFeedWhitelist = BoolPref("pref_ignoreFeedWhitelist", false)
     val launcherTheme = StringPref("pref_launcherTheme", "system")
@@ -100,9 +100,9 @@ class PreferenceManager private constructor(private val context: Context) :
     val drawerThemedIcons = BoolPref("drawer_themed_icons", false, recreate)
     val tintIconPackBackgrounds = BoolPref("tint_icon_pack_backgrounds", false, recreate)
 
-    val hotseatQsbCornerRadius = FloatPref("pref_hotseatQsbCornerRadius", 1F, recreate)
+    val hotseatQsbCornerRadius = FloatPref("pref_hotseatQsbCornerRadius", 1.0f, recreate)
     val hotseatQsbAlpha = IntPref("pref_searchHotseatTranparency", 100, recreate)
-    val hotseatQsbStrokeWidth = FloatPref("pref_searchStrokeWidth", 0F, recreate)
+    val hotseatQsbStrokeWidth = FloatPref("pref_searchStrokeWidth", 0.0f, recreate)
     val hotseatBG = BoolPref("pref_hotseatBG", false, recreate)
     val hotseatBGHorizontalInsetLeft = IntPref("pref_hotseatBGHRinsetLeft", 0, recreate)
     val hotseatBGVerticalInsetTop = IntPref("pref_hotseatBGVRinsetTop", 0, recreate)
@@ -113,7 +113,7 @@ class PreferenceManager private constructor(private val context: Context) :
 
     val enableWallpaperBlur = BoolPref("pref_enableWallpaperBlur", false, recreate)
     val wallpaperBlur = IntPref("pref_wallpaperBlur", 25, recreate)
-    val wallpaperBlurFactorThreshold = FloatPref("pref_wallpaperBlurFactor", 3.0F, recreate)
+    val wallpaperBlurFactorThreshold = FloatPref("pref_wallpaperBlurFactor", 3.0f, recreate)
 
     val drawerList = BoolPref("pref_drawerList", true, recreate)
     val folderApps = BoolPref("pref_hideFolderApps", true, reloadGrid)
@@ -124,7 +124,7 @@ class PreferenceManager private constructor(private val context: Context) :
     val recentsActionClearAll = BoolPref("pref_clearAllAsAction", false)
     val recentsActionLocked = BoolPref("pref_lockedAsAction", false)
     val recentsTranslucentBackground = BoolPref("pref_recentsTranslucentBackground", false, recreate)
-    val recentsTranslucentBackgroundAlpha = FloatPref("pref_recentTranslucentBackgroundAlpha", .8f, recreate)
+    val recentsTranslucentBackgroundAlpha = FloatPref("pref_recentTranslucentBackgroundAlpha", 0.8f, recreate)
 
     override fun close() {
         TODO("Not yet implemented")

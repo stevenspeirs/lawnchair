@@ -154,7 +154,7 @@ private fun AnnouncementItemContent(
                 PreferenceTemplate(
                     {},
                     description = {
-                        Text(stringResource(R.string.accessibility_close))
+                        Text(stringResource(id = R.string.accessibility_close))
                     },
                 )
             }
@@ -246,7 +246,7 @@ private fun AnnouncementPreferenceItemContent(
 @Composable
 private fun InfoPreferenceWithoutLinkPreview() {
     AnnouncementPreferenceItemContent(
-        text = "Very important announcement ",
+        text = stringResource(id = R.string.info_preference_without_link_preview),
         url = "",
         icon = Icons.Rounded.NewReleases,
     )
@@ -256,7 +256,7 @@ private fun InfoPreferenceWithoutLinkPreview() {
 @Composable
 private fun InfoPreferenceWithLinkPreview() {
     AnnouncementPreferenceItemContent(
-        text = "Very important announcement with a very important link",
+        text = stringResource(id = R.string.info_preference_with_link_preview),
         url = "https://lawnchair.app/",
         icon = Icons.Rounded.NewReleases,
     )

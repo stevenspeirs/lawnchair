@@ -60,7 +60,7 @@ fun AppDrawerFolderPreferenceItem(
         modifier = modifier,
     ) {
         ClickablePreference(
-            label = stringResource(R.string.app_drawer_folder),
+            label = stringResource(id = R.string.app_drawer_folder),
             modifier = Modifier,
             onClick = {
                 navController.navigate(route = Routes.APP_DRAWER_FOLDER)
@@ -131,7 +131,7 @@ fun AppDrawerFoldersPreference(
             backArrowVisible = true,
         ) {
             item(contentType = "heading") {
-                PreferenceGroupHeading(stringResource(R.string.settings))
+                PreferenceGroupHeading(stringResource(id = R.string.settings))
             }
             item {
                 val prefs = preferenceManager()
@@ -144,7 +144,7 @@ fun AppDrawerFoldersPreference(
                 }
             }
             item(contentType = "heading") {
-                PreferenceGroupHeading(stringResource(R.string.folders_label))
+                PreferenceGroupHeading(stringResource(id = R.string.folders_label))
             }
             item {
                 PreferenceGroup {
@@ -152,7 +152,7 @@ fun AppDrawerFoldersPreference(
                         title = {},
                         description = {
                             Text(
-                                text = stringResource(R.string.add_folder),
+                                text = stringResource(id = R.string.add_folder),
                                 color = MaterialTheme.colorScheme.onSurface,
                             )
                         },
@@ -160,7 +160,7 @@ fun AppDrawerFoldersPreference(
                             bottomSheetHandler.show {
                                 FolderEditSheet(
                                     FolderInfo().apply {
-                                        title = stringResource(R.string.my_folder_label)
+                                        title = stringResource(id = R.string.my_folder_label)
                                     },
                                     onRename = onCreateFolder,
                                     onNavigate = {},
@@ -223,7 +223,7 @@ fun FolderEditSheet(
             OutlinedButton(
                 onClick = onDismiss,
             ) {
-                Text(stringResource(android.R.string.cancel))
+                Text(stringResource(id = android.R.string.cancel))
             }
             Spacer(Modifier.width(8.dp))
             Button(
@@ -232,7 +232,7 @@ fun FolderEditSheet(
                     onDismiss()
                 },
             ) {
-                Text(stringResource(android.R.string.ok))
+                Text(stringResource(id = android.R.string.ok))
             }
         },
         modifier = modifier,

@@ -75,7 +75,7 @@ sealed class IconCornerShape {
 
     object Cut : BaseBezierPath() {
 
-        override val controlDistance: Float = 1f
+        override val controlDistance: Float = 1.0f
 
         override fun addCorner(
             path: Path,
@@ -85,7 +85,7 @@ sealed class IconCornerShape {
             offsetX: Float,
             offsetY: Float,
         ) {
-            if (progress == 0f) {
+            if (progress == 0.0f) {
                 path.lineTo(
                     position.endX * size.x + offsetX,
                     position.endY * size.y + offsetY,
@@ -108,13 +108,13 @@ sealed class IconCornerShape {
             offsetX: Float,
             offsetY: Float,
         ) {
-            if (progress == 0f) {
+            if (progress == 0.0f) {
                 val paddingX = size.x - (size.x * sqrt(3.0) / 2).toFloat()
                 var newOffsetX = offsetX
 
                 when (position) {
                     Position.BottomLeft -> newOffsetX += paddingX
-                    Position.BottomRight -> path.rMoveTo(-paddingX, 0f)
+                    Position.BottomRight -> path.rMoveTo(-paddingX, 0.0f)
                     Position.TopLeft -> path.setLastPoint(paddingX + offsetX, size.y + offsetY)
                     Position.TopRight -> newOffsetX -= paddingX
                 }
@@ -135,43 +135,57 @@ sealed class IconCornerShape {
 
     object LightSquircle : BaseBezierPath() {
 
-        override val controlDistance: Float = .1f
+        override val controlDistance: Float = 0.1f
 
-        override fun toString(): String = "lightsquircle"
+        override fun toString(): String {
+            return "lightsquircle"
+        }
     }
 
     object Squircle : BaseBezierPath() {
 
-        override val controlDistance: Float = .2f
+        override val controlDistance: Float = 0.2f
 
-        override fun toString(): String = "squircle"
+        override fun toString(): String {
+            return "squircle"
+        }
     }
 
     object StrongSquircle : BaseBezierPath() {
 
-        override val controlDistance: Float = .3f
+        override val controlDistance: Float = 0.3f
 
-        override fun toString(): String = "strongsquircle"
+        override fun toString(): String {
+            return "strongsquircle"
+        }
     }
 
     object UltraSquircle : BaseBezierPath() {
 
-        override val controlDistance: Float = .37f
+        override val controlDistance: Float = 0.37f
 
-        override fun toString(): String = "ultrasquircle"
+        override fun toString(): String {
+            return "ultrasquircle"
+        }
     }
 
-    data object Sammy : BaseBezierPath() {
+    object Sammy : BaseBezierPath() {
 
         override val controlDistanceX: Float = 0.4431717f
         override val controlDistanceY: Float = 0.14010102f
+
+        override fun toString(): String {
+            return "sammy"
+        }
     }
 
     open class Arc : BaseBezierPath() {
 
         override val controlDistance: Float = roundControlDistance
 
-        override fun toString(): String = "arc"
+        override fun toString(): String {
+            return "arc"
+        }
     }
 
     object Cupertino : Arc() {
@@ -179,9 +193,9 @@ sealed class IconCornerShape {
 
         init {
             val tmp = listOf(
-                PointF(0.302716f, 0f),
-                PointF(0.5035f, 0f),
-                PointF(0.603866f, 0f),
+                PointF(0.302716f, 0.0f),
+                PointF(0.5035f, 0.0f),
+                PointF(0.603866f, 0.0f),
                 PointF(0.71195f, 0.0341666f),
                 PointF(0.82995f, 0.0771166f),
             )
@@ -217,8 +231,8 @@ sealed class IconCornerShape {
             offsetY: Float,
         ) {
             if (progress >= 0.55f) {
-                val sizeScale = Utilities.mapToRange(progress, 0.55f, 1f, 0.45f, 1f, LINEAR)
-                val adjustment = 1f - sizeScale
+                val sizeScale = Utilities.mapToRange(progress, 0.55f, 1.0f, 0.45f, 1.0f, LINEAR)
+                val adjustment = 1.0f - sizeScale
                 val xAdjustment = size.x * position.controlX * adjustment
                 val yAdjustment = size.y * position.controlY * adjustment
                 val newSize = PointF(size.x * sizeScale, size.y * sizeScale)
@@ -266,42 +280,42 @@ sealed class IconCornerShape {
 
         data object TopLeft : Position() {
 
-            override val startX = 0f
-            override val startY = 1f
-            override val controlX = 0f
-            override val controlY = 0f
-            override val endX = 1f
-            override val endY = 0f
+            override val startX = 0.0f
+            override val startY = 1.0f
+            override val controlX = 0.0f
+            override val controlY = 0.0f
+            override val endX = 1.0f
+            override val endY = 0.0f
         }
 
         data object TopRight : Position() {
 
-            override val startX = 0f
-            override val startY = 0f
-            override val controlX = 1f
-            override val controlY = 0f
-            override val endX = 1f
-            override val endY = 1f
+            override val startX = 0.0f
+            override val startY = 0.0f
+            override val controlX = 1.0f
+            override val controlY = 0.0f
+            override val endX = 1.0f
+            override val endY = 1.0f
         }
 
         data object BottomRight : Position() {
 
-            override val startX = 1f
-            override val startY = 0f
-            override val controlX = 1f
-            override val controlY = 1f
-            override val endX = 0f
-            override val endY = 1f
+            override val startX = 1.0f
+            override val startY = 0.0f
+            override val controlX = 1.0f
+            override val controlY = 1.0f
+            override val endX = 0.0f
+            override val endY = 1.0f
         }
 
         data object BottomLeft : Position() {
 
-            override val startX = 1f
-            override val startY = 1f
-            override val controlX = 0f
-            override val controlY = 1f
-            override val endX = 0f
-            override val endY = 0f
+            override val startX = 1.0f
+            override val startY = 1.0f
+            override val controlX = 0.0f
+            override val controlY = 1.0f
+            override val endX = 0.0f
+            override val endY = 0.0f
         }
     }
 

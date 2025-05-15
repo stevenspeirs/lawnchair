@@ -143,15 +143,15 @@ fun GridSettings(prefs: PreferenceManager, prefs2: PreferenceManager2) {
     SliderPreference(
         adapter = prefs2.hotseatBottomFactor.getAdapter(),
         label = stringResource(id = R.string.hotseat_bottom_space_label),
-        valueRange = 0.0F..1.7F,
-        step = 0.1F,
+        valueRange = 0.0f..1.7f,
+        step = 0.05f,
         showAsPercentage = true,
     )
     SliderPreference(
         adapter = prefs2.pageIndicatorHeightFactor.getAdapter(),
         label = stringResource(id = R.string.page_indicator_height),
-        valueRange = 0.0F..1.0F,
-        step = 0.1F,
+        valueRange = 0.0f..1.0f,
+        step = 0.05f,
         showAsPercentage = true,
     )
 }
@@ -188,7 +188,7 @@ fun ColumnScope.DockPreferencesPreview(modifier: Modifier = Modifier) {
         ) {
             DummyLauncherBox(
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(1.0f)
                     .align(Alignment.CenterHorizontally)
                     .clip(MaterialTheme.shapes.large)
                     .clipToVisiblePercentage(0.3f)

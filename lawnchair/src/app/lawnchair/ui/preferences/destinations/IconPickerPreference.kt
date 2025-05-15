@@ -216,7 +216,7 @@ fun IconPreview(
         Image(
             painter = rememberDrawablePainter(drawable),
             contentDescription = iconItem.drawableName,
-            modifier = Modifier.aspectRatio(1f),
+            modifier = Modifier.aspectRatio(1.0f),
         )
     }
 }

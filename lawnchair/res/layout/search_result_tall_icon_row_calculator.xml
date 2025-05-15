@@ -26,6 +26,19 @@
         android:paddingStart="@dimen/search_result_padding">
 
         <TextView
+            android:id="@+id/subtitle"
+            style="@style/AllAppsSearchResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="start|center"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textAlignment="viewStart"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="@dimen/search_result_hero_subtitle_size" />
+
+       <TextView
             android:id="@+id/title"
             style="@style/AllAppsSearchResult"
             android:layout_width="wrap_content"
@@ -37,17 +50,6 @@
             android:textAlignment="viewStart"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/search_result_hero_title_size" />
-
-        <TextView
-            android:id="@+id/subtitle"
-            style="@style/AllAppsSearchResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="@dimen/search_result_hero_subtitle_size" />
     </LinearLayout>
 
     <ImageView

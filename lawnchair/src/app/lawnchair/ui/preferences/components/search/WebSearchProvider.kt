@@ -52,16 +52,16 @@ fun WebSearchProvider(
         ListPreferenceChips(
             adapter = adapter,
             entries = entries,
-            label = stringResource(R.string.allapps_web_suggestion_provider_label),
+            label = stringResource(id = R.string.allapps_web_suggestion_provider_label),
         )
         if (adapter.state.value == WebSearchProvider.fromString("custom")) {
             SearchUrlPreference(
-                title = stringResource(R.string.custom_search_url),
+                title = stringResource(id = R.string.custom_search_url),
                 initialValue = urlAdapter.state.value,
                 onConfirm = urlAdapter::onChange,
             )
             SearchUrlPreference(
-                title = stringResource(R.string.custom_search_suggestions_url),
+                title = stringResource(id = R.string.custom_search_suggestions_url),
                 initialValue = suggestionsUrlAdapter.state.value,
                 onConfirm = suggestionsUrlAdapter::onChange,
             )
@@ -113,11 +113,11 @@ fun SearchUrlPreference(
                         singleLine = true,
                         isError = value.text.isEmpty() || !value.text.contains("%s"),
                         placeholder = {
-                            Text(stringResource(R.string.custom_search_input_placeholder))
+                            Text(stringResource(id = R.string.custom_search_input_placeholder))
                         },
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(stringResource(R.string.custom_search_input_hint))
+                    Text(stringResource(id = R.string.custom_search_input_hint))
                 }
             },
         )

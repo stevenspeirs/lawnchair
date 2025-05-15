@@ -23,7 +23,9 @@ import app.lawnchair.search.algorithms.data.calculator.internal.TokenType.RIGHT_
 import app.lawnchair.search.algorithms.data.calculator.internal.TokenType.SLASH
 import app.lawnchair.search.algorithms.data.calculator.internal.TokenType.SQUARE_ROOT
 import app.lawnchair.search.algorithms.data.calculator.internal.TokenType.STAR
+import java.math.BigDecimal
 import java.math.MathContext
+import java.math.RoundingMode
 
 private fun invalidToken(c: Char) {
     throw ExpressionException("Invalid token '$c'")
@@ -37,6 +39,11 @@ internal class Scanner(
     private val tokens: MutableList<Token> = mutableListOf()
     private var start = 0
     private var current = 0
+
+    private val eValue = BigDecimal(Math.E).setScale(33, RoundingMode.HALF_EVEN)
+    private val phiValue = BigDecimal("1.618033988749894848204586834365638")
+    private val piValue = BigDecimal(Math.PI).setScale(33, RoundingMode.HALF_EVEN)
+    private val tauValue = BigDecimal(2 * Math.PI).setScale(33, RoundingMode.HALF_EVEN)
 
     fun scanTokens(): List<Token> {
         while (!isAtEnd()) {
@@ -55,15 +62,22 @@ internal class Scanner(
         start = current
         when (val c = advance()) {
             ' ',
+            '\n',
             '\r',
             '\t',
             -> {
                 // Ignore whitespace.
             }
             '+' -> addToken(PLUS)
-            '-' -> addToken(MINUS)
-            '*' -> addToken(STAR)
-            '/' -> addToken(SLASH)
+            '-',
+            '−',
+            -> addToken(MINUS)
+            '*',
+            '×',
+            -> addToken(STAR)
+            '/',
+            '÷',
+            -> addToken(SLASH)
             '%' -> addToken(MODULO)
             '^' -> addToken(EXPONENT)
             '√' -> addToken(SQUARE_ROOT)
@@ -76,6 +90,35 @@ internal class Scanner(
             ',' -> addToken(COMMA)
             '(' -> addToken(LEFT_PAREN)
             ')' -> addToken(RIGHT_PAREN)
+            '≠' -> addToken(NOT_EQUAL)
+            '≥' -> addToken(GREATER_EQUAL)
+            '≤' -> addToken(LESS_EQUAL)
+            '∨' -> addToken(BAR_BAR)
+            '∧' -> addToken(AMP_AMP)
+            'ɸ' -> addToken(NUMBER, phiValue)
+            'Φ' -> addToken(NUMBER, phiValue)
+            'φ' -> addToken(NUMBER, phiValue)
+            'ϕ' -> addToken(NUMBER, phiValue)
+            'ᵠ' -> addToken(NUMBER, phiValue)
+            'ᵩ' -> addToken(NUMBER, phiValue)
+            'ᶲ' -> addToken(NUMBER, phiValue)
+            'ⱷ' -> addToken(NUMBER, phiValue)
+            'Ⲫ' -> addToken(NUMBER, phiValue)
+            'ⲫ' -> addToken(NUMBER, phiValue)
+            'Π' -> addToken(NUMBER, piValue)
+            'π' -> addToken(NUMBER, piValue)
+            'ϖ' -> addToken(NUMBER, piValue)
+            'ᴨ' -> addToken(NUMBER, piValue)
+            'ℿ' -> addToken(NUMBER, piValue)
+            'ℼ' -> addToken(NUMBER, piValue)
+            '∏' -> addToken(NUMBER, piValue)
+            '∐' -> addToken(NUMBER, piValue)
+            'Ⲡ' -> addToken(NUMBER, piValue)
+            'ⲡ' -> addToken(NUMBER, piValue)
+            'Τ' -> addToken(NUMBER, tauValue)
+            'τ' -> addToken(NUMBER, tauValue)
+            'Ⲧ' -> addToken(NUMBER, tauValue)
+            'ⲧ' -> addToken(NUMBER, tauValue)
             else -> {
                 when {
                     c.isDigit() -> number()
@@ -118,7 +161,17 @@ internal class Scanner(
     private fun identifier() {
         while (peek().isAlphaNumeric()) advance()
 
-        addToken(IDENTIFIER)
+        val value = source
+            .substring(start, current)
+            .lowercase()
+
+        when (value) {
+            "e" -> addToken(NUMBER, eValue)
+            "phi" -> addToken(NUMBER, phiValue)
+            "pi" -> addToken(NUMBER, piValue)
+            "tau" -> addToken(NUMBER, tauValue)
+            else -> addToken(IDENTIFIER)
+        }
     }
 
     private fun advance() = source[current++]

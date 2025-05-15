@@ -135,7 +135,7 @@ fun IconPackPreferences(
         if (isPortrait) {
             Column(
                 modifier = Modifier
-                    .weight(weight = 1f)
+                    .weight(weight = 1.0f)
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -287,7 +287,7 @@ fun IconPackGrid(
     BoxWithConstraints(modifier = modifier.fillMaxWidth()) {
         val iconPackItemWidth = getIconPackItemWidth(
             availableWidth = this.maxWidth.value - padding.value,
-            minimumWidth = 80f,
+            minimumWidth = 80.0f,
             gutterWidth = padding.value,
         )
         NestedScrollStretch {
@@ -322,8 +322,8 @@ private fun getIconPackItemWidth(
     var visibleItemCount = gutterCount + 0.5f
     var iconPackItemWidth = minimumWidth
     while (true) {
-        gutterCount += 1f
-        visibleItemCount += 1f
+        gutterCount += 1.0f
+        visibleItemCount += 1.0f
         val possibleIconPackItemWidth = (availableWidth - gutterCount * gutterWidth) / visibleItemCount
         if (possibleIconPackItemWidth >= minimumWidth) {
             iconPackItemWidth = possibleIconPackItemWidth

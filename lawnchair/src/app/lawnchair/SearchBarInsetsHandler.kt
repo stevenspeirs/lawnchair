@@ -33,7 +33,7 @@ class SearchBarInsetsHandler(private val shiftRange: Float) : WindowInsetsAnimat
         val bottomInset = targetBottomInset.coerceIn(hiddenBottomInset, shownBottomInset)
         controller.setInsetsAndAlpha(
             Insets.of(0, 0, 0, bottomInset),
-            1f,
+            1.0f,
             progress.value,
         )
     }

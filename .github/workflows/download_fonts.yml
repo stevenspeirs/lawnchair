@@ -1,0 +1,40 @@
+name: Download Fonts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-fonts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download
+        run: |
+          url='https://www.googleapis.com/webfonts/v1/webfonts?key=${{ secrets.GOOGLE_FONTS_API }}'
+          output='lawnchair/assets/google_fonts.json'
+          mkdir -p lawnchair/assets
+          curl -o $output $url || exit 1
+      - name: Checksum
+        run: |
+          output='lawnchair/assets/google_fonts.json'
+          if [ -f $output ]; then
+            old_checksum=$(git show HEAD:$output | sha256sum | awk '{print $1}')
+            new_checksum=$(sha256sum $output | awk '{print $1}')
+            if [ $old_checksum == $new_checksum ]; then
+              echo 'checksum_match=true' >> $GITHUB_ENV
+            else
+              echo 'checksum_match=false' >> $GITHUB_ENV
+            fi
+          else
+            echo 'checksum_match=false' >> $GITHUB_ENV
+          fi
+      - name: Commit
+        run: |
+          if [ '${{ env.checksum_match }}' == 'false' ]; then
+            git config --global user.name 'GitHub Action'
+            git config --global user.email 'action@github.com'
+            git add lawnchair/assets/google_fonts.json
+            git commit -m 'Update Google fonts'
+            git push
+          fi

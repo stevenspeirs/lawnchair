@@ -53,7 +53,7 @@ fun DrawerSearchPreference(
         label = stringResource(id = R.string.show_app_search_bar),
         modifier = modifier,
     ) {
-        PreferenceGroup(heading = stringResource(R.string.general_label)) {
+        PreferenceGroup(heading = stringResource(id = R.string.general_label)) {
             ExpandAndShrink(visible = hiddenApps.isNotEmpty()) {
                 HiddenAppsInSearchPreference()
             }
@@ -65,8 +65,8 @@ fun DrawerSearchPreference(
                 context = context,
             )
             SwitchPreference(
-                label = stringResource(R.string.allapps_match_qsb_style_label),
-                description = stringResource(R.string.allapps_match_qsb_style_description),
+                label = stringResource(id = R.string.allapps_match_qsb_style_label),
+                description = stringResource(id = R.string.allapps_match_qsb_style_description),
                 adapter = prefs2.matchHotseatQsbStyle.getAdapter(),
             )
         }
@@ -84,8 +84,8 @@ fun DrawerSearchPreference(
                     onRequestPermission = {},
                     maxCountAdapter = prefs2.maxAppSearchResultCount.getAdapter(),
                     maxCountRange = 3..15,
-                    label = stringResource(R.string.search_pref_result_apps_and_shortcuts_title),
-                    maxCountLabel = stringResource(R.string.max_apps_result_count_title),
+                    label = stringResource(id = R.string.search_pref_result_apps_and_shortcuts_title),
+                    maxCountLabel = stringResource(id = R.string.max_apps_result_count_title),
                 ) {
                     SwitchPreference(
                         adapter = prefs2.enableFuzzySearch.getAdapter(),
@@ -137,9 +137,9 @@ private fun SearchProvider(
 ) {
     val searchAlgorithmEntries = remember {
         sequenceOf(
-            ListPreferenceEntry(LawnchairSearchAlgorithm.APP_SEARCH) { stringResource(R.string.search_algorithm_app_search) },
-            ListPreferenceEntry(LawnchairSearchAlgorithm.LOCAL_SEARCH) { stringResource(R.string.search_algorithm_global_search_on_device) },
-            ListPreferenceEntry(LawnchairSearchAlgorithm.ASI_SEARCH) { stringResource(R.string.search_algorithm_global_search_via_asi) },
+            ListPreferenceEntry(LawnchairSearchAlgorithm.APP_SEARCH) { stringResource(id = R.string.search_algorithm_app_search) },
+            ListPreferenceEntry(LawnchairSearchAlgorithm.LOCAL_SEARCH) { stringResource(id = R.string.search_algorithm_global_search_on_device) },
+            ListPreferenceEntry(LawnchairSearchAlgorithm.ASI_SEARCH) { stringResource(id = R.string.search_algorithm_global_search_via_asi) },
         ).filter {
             when (it.value) {
                 LawnchairSearchAlgorithm.ASI_SEARCH -> LawnchairSearchAlgorithm.isASISearchEnabled(
@@ -154,7 +154,7 @@ private fun SearchProvider(
     ListPreference(
         adapter = preferenceManager2().searchAlgorithm.getAdapter(),
         entries = searchAlgorithmEntries,
-        label = stringResource(R.string.app_search_algorithm),
+        label = stringResource(id = R.string.app_search_algorithm),
     )
 }
 
@@ -271,6 +271,6 @@ private fun LocalSearchSettings(
     )
     SwitchPreference(
         adapter = prefs.searchResultCalculator.getAdapter(),
-        label = stringResource(R.string.all_apps_search_result_calculator),
+        label = stringResource(id = R.string.all_apps_search_result_calculator),
     )
 }

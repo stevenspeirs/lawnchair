@@ -73,18 +73,27 @@ fun iconShapeEntries(context: Context): List<ListPreferenceEntry<IconShape>> {
         // Organized as seen in /lawnchair/res/values/strings.xml
         ListPreferenceEntry(systemShape) { stringResource(id = R.string.icon_shape_system) },
         ListPreferenceEntry(IconShape.Circle) { stringResource(id = R.string.icon_shape_circle) },
+        ListPreferenceEntry(IconShape.Cupertino) { stringResource(id = R.string.icon_shape_cupertino) },
         ListPreferenceEntry(IconShape.Cylinder) { stringResource(id = R.string.icon_shape_cylinder) },
         ListPreferenceEntry(IconShape.Diamond) { stringResource(id = R.string.icon_shape_diamond) },
         ListPreferenceEntry(IconShape.Egg) { stringResource(id = R.string.icon_shape_egg) },
+        ListPreferenceEntry(IconShape.FlatHexagon) { stringResource(id = R.string.icon_shape_flat_hexagon) },
+        ListPreferenceEntry(IconShape.Heptagon) { stringResource(id = R.string.icon_shape_heptagon) },
         ListPreferenceEntry(IconShape.Hexagon) { stringResource(id = R.string.icon_shape_hexagon) },
-        ListPreferenceEntry(IconShape.Cupertino) { stringResource(id = R.string.icon_shape_cupertino) },
+        ListPreferenceEntry(IconShape.Lemon) { stringResource(id = R.string.icon_shape_lemon) },
+        ListPreferenceEntry(IconShape.LightSquircle) { stringResource(id = R.string.icon_shape_light_squircle) },
+        ListPreferenceEntry(IconShape.Nonagon) { stringResource(id = R.string.icon_shape_nonagon) },
         ListPreferenceEntry(IconShape.Octagon) { stringResource(id = R.string.icon_shape_octagon) },
-        ListPreferenceEntry(IconShape.Sammy) { stringResource(id = R.string.icon_shape_sammy) },
+        ListPreferenceEntry(IconShape.Pentagon) { stringResource(id = R.string.icon_shape_pentagon) },
         ListPreferenceEntry(IconShape.RoundedSquare) { stringResource(id = R.string.icon_shape_rounded_square) },
+        ListPreferenceEntry(IconShape.Sammy) { stringResource(id = R.string.icon_shape_sammy) },
         ListPreferenceEntry(IconShape.SharpSquare) { stringResource(id = R.string.icon_shape_sharp_square) },
         ListPreferenceEntry(IconShape.Square) { stringResource(id = R.string.icon_shape_square) },
         ListPreferenceEntry(IconShape.Squircle) { stringResource(id = R.string.icon_shape_squircle) },
+        ListPreferenceEntry(IconShape.StrongSquircle) { stringResource(id = R.string.icon_shape_strong_squircle) },
         ListPreferenceEntry(IconShape.Teardrop) { stringResource(id = R.string.icon_shape_teardrop) },
+        ListPreferenceEntry(IconShape.Triangle) { stringResource(id = R.string.icon_shape_triangle) },
+        ListPreferenceEntry(IconShape.UltraSquircle) { stringResource(id = R.string.icon_shape_ultra_squircle) },
     )
 }
 
@@ -256,7 +265,7 @@ fun IconShapePreview(
         drawPath(
             path = path,
             color = strokeColor,
-            style = Stroke(width = 4f),
+            style = Stroke(width = 4.0f),
         )
     }
 }

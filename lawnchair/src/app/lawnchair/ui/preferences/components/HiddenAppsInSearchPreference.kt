@@ -15,9 +15,9 @@ object HiddenAppsInSearch {
 }
 
 val hiddenAppsInSearchEntries = sequenceOf(
-    ListPreferenceEntry(HiddenAppsInSearch.NEVER) { stringResource(R.string.never_choice) },
-    ListPreferenceEntry(HiddenAppsInSearch.IF_NAME_TYPED) { stringResource(R.string.hidden_apps_show_name_typed) },
-    ListPreferenceEntry(HiddenAppsInSearch.ALWAYS) { stringResource(R.string.always_choice) },
+    ListPreferenceEntry(HiddenAppsInSearch.NEVER) { stringResource(id = R.string.never_choice) },
+    ListPreferenceEntry(HiddenAppsInSearch.IF_NAME_TYPED) { stringResource(id = R.string.hidden_apps_show_name_typed) },
+    ListPreferenceEntry(HiddenAppsInSearch.ALWAYS) { stringResource(id = R.string.always_choice) },
 )
 
 @Composable
@@ -25,6 +25,6 @@ fun HiddenAppsInSearchPreference() {
     ListPreference(
         adapter = preferenceManager2().hiddenAppsInSearch.getAdapter(),
         entries = hiddenAppsInSearchEntries.toList(),
-        label = stringResource(R.string.show_hidden_apps_in_search_results),
+        label = stringResource(id = R.string.show_hidden_apps_in_search_results),
     )
 }
