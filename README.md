@@ -114,7 +114,6 @@ You can view all our links in the [Lawnchair Wiki](https://github.com/LawnchairL
 -   Arranged Web Search providers in alphabetical order
 -   Attempted to initially display font variants
 -   Corrected case of user interface label
--   Corrected Obtainium link
 -   Corrected typo in text string
 -   Ensured Custom Icon shape sliders are of equal length
 -   Ensured System Icon shape is as accurate as possible
