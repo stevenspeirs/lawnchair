@@ -172,7 +172,7 @@ private fun SliderPreference(
 }
 
 fun getSteps(valueRange: ClosedFloatingPointRange<Float>, step: Float): Int {
-    if (step == 0f) return 0
+    if (step == 0.0f) return 0
     val start = valueRange.start.toBigDecimal()
     val end = valueRange.endInclusive.toBigDecimal()
     val decimalSteps = (end - start) / step.toBigDecimal()
@@ -184,7 +184,7 @@ fun getSteps(valueRange: ClosedFloatingPointRange<Float>, step: Float): Int {
 }
 
 fun snapSliderValue(start: Float, value: Float, step: Float): Float {
-    if (step == 0f) return value
+    if (step == 0.0f) return value
     val distance = value - start
     val stepsFromStart = (distance / step).roundToInt()
     val snappedDistance = stepsFromStart * step
@@ -202,7 +202,7 @@ private fun SliderPreferencePreview(
                 label = "Label",
                 value = sliderValue,
                 onValueChangeFinished = {},
-                valueRange = 0f..1f,
+                valueRange = 0.0f..1.0f,
                 step = 0.1f,
                 showAsPercentage = true,
             )
@@ -211,5 +211,5 @@ private fun SliderPreferencePreview(
 }
 
 private class SliderPreferencePreviewParameterProvider : PreviewParameterProvider<Float> {
-    override val values = sequenceOf(0f, 0.25f, 0.5f, 0.75f, 1f)
+    override val values = sequenceOf(0.0f, 0.25f, 0.5f, 0.75f, 1.0f)
 }
