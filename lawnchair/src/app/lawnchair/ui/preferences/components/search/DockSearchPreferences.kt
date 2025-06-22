@@ -33,7 +33,7 @@ import app.lawnchair.ui.preferences.components.layout.ExpandAndShrink
 import app.lawnchair.ui.preferences.components.layout.PreferenceGroup
 import app.lawnchair.ui.preferences.components.layout.PreferenceTemplate
 import app.lawnchair.ui.preferences.destinations.DockPreferencesPreview
-import app.lawnchair.ui.preferences.destinations.DockRoutes
+import app.lawnchair.ui.preferences.navigation.DockSearchProvider
 import com.android.launcher3.R
 
 @Composable
@@ -66,11 +66,11 @@ fun DockSearchPreference(
                     Column {
                         val hotseatQsbProviderAdapter by preferenceManager2().hotseatQsbProvider.getAdapter()
                         PreferenceGroup(
-                            heading = stringResource(id = R.string.search_bar_settings),
+                            heading = stringResource(R.string.search_bar_settings),
                         ) {
                             NavigationActionPreference(
-                                label = stringResource(id = R.string.search_provider),
-                                destination = DockRoutes.SEARCH_PROVIDER,
+                                label = stringResource(R.string.search_provider),
+                                destination = DockSearchProvider,
                                 subtitle = stringResource(
                                     id = QsbSearchProvider.values()
                                         .first { it == hotseatQsbProviderAdapter }
@@ -79,7 +79,7 @@ fun DockSearchPreference(
                             )
                         }
                         PreferenceGroup(
-                            heading = stringResource(id = R.string.style),
+                            heading = stringResource(R.string.style),
                         ) {
                             SwitchPreference(
                                 adapter = themeQsbAdapter,
@@ -88,8 +88,8 @@ fun DockSearchPreference(
                             SliderPreference(
                                 label = stringResource(id = R.string.corner_radius_label),
                                 adapter = qsbCornerAdapter,
-                                step = 0.05f,
-                                valueRange = 0.0f..1.0f,
+                                step = 0.05F,
+                                valueRange = 0F..1F,
                                 showAsPercentage = true,
                             )
                             SliderPreference(
@@ -103,11 +103,11 @@ fun DockSearchPreference(
                             SliderPreference(
                                 label = stringResource(id = R.string.qsb_hotseat_stroke_width),
                                 adapter = qsbHotseatStrokeWidth,
-                                step = 1.0f,
-                                valueRange = 0.0f..10.0f,
+                                step = 1f,
+                                valueRange = 0f..10f,
                                 showUnit = "vw",
                             )
-                            ExpandAndShrink(visible = qsbHotseatStrokeWidth.state.value > 0.0f) {
+                            ExpandAndShrink(visible = qsbHotseatStrokeWidth.state.value > 0f) {
                                 ColorPreference(preference = prefs2.strokeColorStyle)
                             }
                         }

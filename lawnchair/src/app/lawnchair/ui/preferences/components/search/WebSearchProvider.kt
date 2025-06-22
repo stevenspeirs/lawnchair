@@ -35,6 +35,7 @@ import com.android.launcher3.R
 @Composable
 fun WebSearchProvider(
     adapter: PreferenceAdapter<WebSearchProvider>,
+    nameAdapter: PreferenceAdapter<String>,
     urlAdapter: PreferenceAdapter<String>,
     suggestionsUrlAdapter: PreferenceAdapter<String>,
     modifier: Modifier = Modifier,
@@ -52,16 +53,23 @@ fun WebSearchProvider(
         ListPreferenceChips(
             adapter = adapter,
             entries = entries,
-            label = stringResource(id = R.string.allapps_web_suggestion_provider_label),
+            label = stringResource(R.string.allapps_web_suggestion_provider_label),
         )
         if (adapter.state.value == WebSearchProvider.fromString("custom")) {
+            SearchPopupPreference(
+                title = stringResource(R.string.custom_search_label),
+                initialValue = nameAdapter.state.value,
+                placeholder = stringResource(R.string.custom),
+                onConfirm = nameAdapter::onChange,
+                isErrorCheck = { it.isEmpty() },
+            )
             SearchUrlPreference(
-                title = stringResource(id = R.string.custom_search_url),
+                title = stringResource(R.string.custom_search_url),
                 initialValue = urlAdapter.state.value,
                 onConfirm = urlAdapter::onChange,
             )
             SearchUrlPreference(
-                title = stringResource(id = R.string.custom_search_suggestions_url),
+                title = stringResource(R.string.custom_search_suggestions_url),
                 initialValue = suggestionsUrlAdapter.state.value,
                 onConfirm = suggestionsUrlAdapter::onChange,
             )
@@ -75,6 +83,26 @@ fun SearchUrlPreference(
     initialValue: String,
     onConfirm: (String) -> Unit,
     modifier: Modifier = Modifier,
+) {
+    SearchPopupPreference(
+        title = title,
+        initialValue = initialValue,
+        placeholder = stringResource(R.string.custom_search_input_placeholder),
+        hint = stringResource(R.string.custom_search_input_hint),
+        onConfirm = onConfirm,
+        modifier = modifier,
+    )
+}
+
+@Composable
+fun SearchPopupPreference(
+    title: String,
+    initialValue: String,
+    placeholder: String,
+    onConfirm: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    hint: String? = null,
+    isErrorCheck: (String) -> Boolean = { it.isEmpty() || !it.contains("%s") },
 ) {
     var showPopup by remember { mutableStateOf(false) }
     var value by remember { mutableStateOf(TextFieldValue(initialValue)) }
@@ -111,13 +139,15 @@ fun SearchUrlPreference(
                         onValueChange = { value = it },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
-                        isError = value.text.isEmpty() || !value.text.contains("%s"),
+                        isError = isErrorCheck(value.text),
                         placeholder = {
-                            Text(stringResource(id = R.string.custom_search_input_placeholder))
+                            Text(placeholder)
                         },
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(stringResource(id = R.string.custom_search_input_hint))
+                    if (hint != null) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(hint)
+                    }
                 }
             },
         )
