@@ -56,7 +56,7 @@ fun WebSearchProvider(
             label = stringResource(id = R.string.allapps_web_suggestion_provider_label),
         )
         if (adapter.state.value == WebSearchProvider.fromString("custom")) {
-            SearchPopupPreference(Add commentMore actions
+            SearchPopupPreference(
                 title = stringResource(R.string.custom_search_label),
                 initialValue = nameAdapter.state.value,
                 placeholder = stringResource(R.string.custom),
