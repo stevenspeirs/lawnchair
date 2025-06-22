@@ -141,7 +141,7 @@ fun SearchPopupPreference(
                         singleLine = true,
                         isError = isErrorCheck(value.text),
                         placeholder = {
-                            Text(stringResource(placeholder)
+                            Text(placeholder)
                         },
                     )
                     if (hint != null) {
