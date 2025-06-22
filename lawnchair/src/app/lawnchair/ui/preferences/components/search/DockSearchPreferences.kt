@@ -66,10 +66,10 @@ fun DockSearchPreference(
                     Column {
                         val hotseatQsbProviderAdapter by preferenceManager2().hotseatQsbProvider.getAdapter()
                         PreferenceGroup(
-                            heading = stringResource(R.string.search_bar_settings),
+                            heading = stringResource(id = R.string.search_bar_settings),
                         ) {
                             NavigationActionPreference(
-                                label = stringResource(R.string.search_provider),
+                                label = stringResource(id = R.string.search_provider),
                                 destination = DockSearchProvider,
                                 subtitle = stringResource(
                                     id = QsbSearchProvider.values()
@@ -79,7 +79,7 @@ fun DockSearchPreference(
                             )
                         }
                         PreferenceGroup(
-                            heading = stringResource(R.string.style),
+                            heading = stringResource(id = R.string.style),
                         ) {
                             SwitchPreference(
                                 adapter = themeQsbAdapter,
@@ -88,8 +88,8 @@ fun DockSearchPreference(
                             SliderPreference(
                                 label = stringResource(id = R.string.corner_radius_label),
                                 adapter = qsbCornerAdapter,
-                                step = 0.05F,
-                                valueRange = 0F..1F,
+                                step = 0.05f,
+                                valueRange = 0.0f..1.0f,
                                 showAsPercentage = true,
                             )
                             SliderPreference(
@@ -103,11 +103,11 @@ fun DockSearchPreference(
                             SliderPreference(
                                 label = stringResource(id = R.string.qsb_hotseat_stroke_width),
                                 adapter = qsbHotseatStrokeWidth,
-                                step = 1f,
-                                valueRange = 0f..10f,
+                                step = 1.0f,
+                                valueRange = 0.0f..10.0f,
                                 showUnit = "vw",
                             )
-                            ExpandAndShrink(visible = qsbHotseatStrokeWidth.state.value > 0f) {
+                            ExpandAndShrink(visible = qsbHotseatStrokeWidth.state.value > 0.0f) {
                                 ColorPreference(preference = prefs2.strokeColorStyle)
                             }
                         }

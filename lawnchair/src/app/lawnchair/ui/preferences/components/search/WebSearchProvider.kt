@@ -53,10 +53,10 @@ fun WebSearchProvider(
         ListPreferenceChips(
             adapter = adapter,
             entries = entries,
-            label = stringResource(R.string.allapps_web_suggestion_provider_label),
+            label = stringResource(id = R.string.allapps_web_suggestion_provider_label),
         )
         if (adapter.state.value == WebSearchProvider.fromString("custom")) {
-            SearchPopupPreference(
+            SearchPopupPreference(Add commentMore actions
                 title = stringResource(R.string.custom_search_label),
                 initialValue = nameAdapter.state.value,
                 placeholder = stringResource(R.string.custom),
@@ -64,12 +64,12 @@ fun WebSearchProvider(
                 isErrorCheck = { it.isEmpty() },
             )
             SearchUrlPreference(
-                title = stringResource(R.string.custom_search_url),
+                title = stringResource(id = R.string.custom_search_url),
                 initialValue = urlAdapter.state.value,
                 onConfirm = urlAdapter::onChange,
             )
             SearchUrlPreference(
-                title = stringResource(R.string.custom_search_suggestions_url),
+                title = stringResource(id = R.string.custom_search_suggestions_url),
                 initialValue = suggestionsUrlAdapter.state.value,
                 onConfirm = suggestionsUrlAdapter::onChange,
             )
@@ -141,7 +141,7 @@ fun SearchPopupPreference(
                         singleLine = true,
                         isError = isErrorCheck(value.text),
                         placeholder = {
-                            Text(placeholder)
+                            Text(stringResource(placeholder)
                         },
                     )
                     if (hint != null) {
