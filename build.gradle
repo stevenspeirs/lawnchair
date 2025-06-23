@@ -309,11 +309,11 @@ android {
         }
 
         github {
-            manifest.srcFile "github/AndroidManifest.xml"
+            manifest.srcFile 'github/AndroidManifest.xml'
         }
 
         nightly {
-            manifest.srcFile "nightly/AndroidManifest.xml"
+            manifest.srcFile 'nightly/AndroidManifest.xml'
         }
 
         lawnWithQuickstepGithub {
