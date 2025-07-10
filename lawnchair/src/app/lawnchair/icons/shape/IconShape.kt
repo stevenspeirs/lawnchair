@@ -540,6 +540,22 @@ open class IconShape(
         }
     }
 
+    object Leaf : IconShape(
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        0.0f,
+        1.0f,
+        1.0f,
+        0.0f,
+    ) {
+
+        override fun toString(): String {
+            return "leaf"
+        }
+    }
+
     object Lemon : IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
@@ -742,6 +758,7 @@ open class IconShape(
             "egg" -> Egg
             "flatHexagon" -> FlatHexagon
             "heptagon" -> Heptagon
+            "leaf" -> Leaf
             "lemon" -> Lemon
             "lightSquircle" -> LightSquircle
             "nonagon" -> Nonagon
