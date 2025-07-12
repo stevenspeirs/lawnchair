@@ -140,7 +140,7 @@ private fun ListSortingOptions(
                 hideMenu()
             },
             text = {
-                Text(stringResource(R.string.inverse_selection))
+                Text(stringResource(id = R.string.inverse_selection))
             },
         )
         val originalKeys = originalList
@@ -174,7 +174,7 @@ private fun ListSortingOptions(
                 )
             },
             text = {
-                Text(stringResource(R.string.action_reset))
+                Text(stringResource(id = R.string.action_reset))
             },
         )
     }

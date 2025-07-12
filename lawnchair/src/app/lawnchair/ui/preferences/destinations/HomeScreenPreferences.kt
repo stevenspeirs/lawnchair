@@ -103,7 +103,7 @@ fun HomeScreenPreferences(
                 FeedPreference()
             }
         }
-        PreferenceGroup(heading = stringResource(R.string.style)) {
+        PreferenceGroup(heading = stringResource(id = R.string.style)) {
             HomeScreenTextColorPreference()
             OverlayHandlerPreference(
                 adapter = prefs2.closingAppOverlay.getAdapter(),

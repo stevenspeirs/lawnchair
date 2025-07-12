@@ -57,7 +57,7 @@ fun HomeLayoutSettings(
     var isLoading by remember { mutableStateOf(false) }
 
     SwitchPreferenceWithPreview(
-        label = stringResource(R.string.layout),
+        label = stringResource(id = R.string.layout),
         checked = deskLayout.state.value,
         onCheckedChange = { newValue ->
             isLoading = true
@@ -81,13 +81,13 @@ fun HomeLayoutSettings(
                 }
             }
         },
-        disabledLabel = stringResource(R.string.feed_default),
+        disabledLabel = stringResource(id = R.string.feed_default),
         disabledContent = {
             PreviewLayout(
                 loading = isLoading,
             )
         },
-        enabledLabel = stringResource(R.string.home_lawn_deck_label_beta),
+        enabledLabel = stringResource(id = R.string.home_lawn_deck_label_beta),
         enabledContent = {
             PreviewLayout(
                 topQsb = false,

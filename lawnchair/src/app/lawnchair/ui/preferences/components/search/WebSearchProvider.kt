@@ -57,9 +57,9 @@ fun WebSearchProvider(
         )
         if (adapter.state.value == WebSearchProvider.fromString("custom")) {
             SearchPopupPreference(
-                title = stringResource(R.string.custom_search_label),
+                title = stringResource(id = R.string.custom_search_label),
                 initialValue = nameAdapter.state.value,
-                placeholder = stringResource(R.string.custom),
+                placeholder = stringResource(id = R.string.custom),
                 onConfirm = nameAdapter::onChange,
                 isErrorCheck = { it.isEmpty() },
             )
@@ -87,8 +87,8 @@ fun SearchUrlPreference(
     SearchPopupPreference(
         title = title,
         initialValue = initialValue,
-        placeholder = stringResource(R.string.custom_search_input_placeholder),
-        hint = stringResource(R.string.custom_search_input_hint),
+        placeholder = stringResource(id = R.string.custom_search_input_placeholder),
+        hint = stringResource(id = R.string.custom_search_input_hint),
         onConfirm = onConfirm,
         modifier = modifier,
     )

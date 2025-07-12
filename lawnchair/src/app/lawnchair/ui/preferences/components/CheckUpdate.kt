@@ -97,7 +97,7 @@ fun CheckUpdate(
                         },
                         modifier = Modifier.padding(top = 8.dp),
                     ) {
-                        Text(text = stringResource(R.string.download_update))
+                        Text(text = stringResource(id = R.string.download_update))
                     }
                 }
 
@@ -134,13 +134,13 @@ fun CheckUpdate(
                         },
                         modifier = Modifier.padding(top = 8.dp),
                     ) {
-                        Text(text = stringResource(R.string.install_update))
+                        Text(text = stringResource(id = R.string.install_update))
                     }
                 }
             }
         } else {
             Text(
-                text = stringResource(R.string.pro_updated),
+                text = stringResource(id = R.string.pro_updated),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 8.dp),
