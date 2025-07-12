@@ -64,7 +64,7 @@ fun AppDrawerFolderPreferenceItem(
         modifier = modifier,
     ) {
         ClickablePreference(
-            label = stringResource(R.string.app_drawer_folder),
+            label = stringResource(id = R.string.app_drawer_folder),
             modifier = Modifier,
             onClick = {
                 navController.navigate(route = AppDrawerFolder)
@@ -149,7 +149,7 @@ fun AppDrawerFoldersPreference(
             backArrowVisible = true,
         ) {
             PreferenceGroup(
-                heading = stringResource(R.string.settings),
+                heading = stringResource(id = R.string.settings),
             ) {
                 SwitchPreference(
                     adapter = prefs.folderApps.getAdapter(),
@@ -157,12 +157,12 @@ fun AppDrawerFoldersPreference(
                     description = stringResource(id = R.string.apps_in_folder_description),
                 )
             }
-            PreferenceGroup(heading = stringResource(R.string.folders_label)) {
+            PreferenceGroup(heading = stringResource(id = R.string.folders_label)) {
                 PreferenceTemplate(
                     title = {},
                     description = {
                         Text(
-                            text = stringResource(R.string.add_folder),
+                            text = stringResource(id = R.string.add_folder),
                             color = MaterialTheme.colorScheme.onSurface,
                         )
                     },
@@ -170,7 +170,7 @@ fun AppDrawerFoldersPreference(
                         bottomSheetHandler.show {
                             FolderEditSheet(
                                 FolderInfo().apply {
-                                    title = stringResource(R.string.my_folder_label)
+                                    title = stringResource(id = R.string.my_folder_label)
                                 },
                                 onRename = onCreateFolder,
                                 onNavigate = {},
