@@ -163,8 +163,6 @@ class FeedBridge(private val context: Context) {
             whitelist["amirz.aidlbridge"] = 0xb662cc2f
             whitelist["com.google.android.googlequicksearchbox"] = 0xe3ca78d8
             whitelist["com.google.android.apps.nexuslauncher"] = 0xb662cc2f
-            whitelist["app.lawnchair.lawnfeed"] = getSignatureHash(context, "app.lawnchair.lawnfeed")
-            whitelist["com.google.android.apps.searchlite"] = 0x0fa41615
         }
 
         fun getAvailableProviders(context: Context) = context.packageManager
@@ -176,7 +174,6 @@ class FeedBridge(private val context: Context) {
             .map { it.serviceInfo.applicationInfo }
             .distinct()
             .filter { getInstance(context).CustomBridgeInfo(it.packageName).isSigned() }
-            .sortedBy { it.loadLabel(context.packageManager).toString() }
 
         @JvmStatic
         fun useBridge(context: Context) = getInstance(context).let { it.shouldUseFeed || it.customBridgeAvailable() }
