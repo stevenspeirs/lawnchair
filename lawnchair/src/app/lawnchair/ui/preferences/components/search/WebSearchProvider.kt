@@ -49,29 +49,29 @@ fun WebSearchProvider(
         ListPreference(
             adapter = adapter,
             entries = entries,
-            label = stringResource(R.string.allapps_web_suggestion_provider_label),
+            label = stringResource(id = R.string.allapps_web_suggestion_provider_label),
         )
         if (adapter.state.value == WebSearchProvider.fromString("custom")) {
             SearchPopupPreference(
-                title = stringResource(R.string.custom_search_label),
+                title = stringResource(id = R.string.custom_search_label),
                 initialValue = nameAdapter.state.value,
-                placeholder = stringResource(R.string.custom),
+                placeholder = stringResource(id = R.string.custom),
                 onConfirm = nameAdapter::onChange,
                 isErrorCheck = { it.isEmpty() },
             )
             SearchPopupPreference(
-                title = stringResource(R.string.custom_search_url),
+                title = stringResource(id = R.string.custom_search_url),
                 initialValue = urlAdapter.state.value,
-                placeholder = stringResource(R.string.custom_search_input_placeholder),
-                hint = stringResource(R.string.custom_search_input_hint),
+                placeholder = stringResource(id = R.string.custom_search_input_placeholder),
+                hint = stringResource(id = R.string.custom_search_input_hint),
                 onConfirm = urlAdapter::onChange,
                 modifier = Modifier,
             )
             SearchPopupPreference(
-                title = stringResource(R.string.custom_search_suggestions_url),
+                title = stringResource(id = R.string.custom_search_suggestions_url),
                 initialValue = suggestionsUrlAdapter.state.value,
-                placeholder = stringResource(R.string.custom_search_input_placeholder),
-                hint = stringResource(R.string.custom_search_suggestions_hint),
+                placeholder = stringResource(id = R.string.custom_search_input_placeholder),
+                hint = stringResource(id = R.string.custom_search_suggestions_hint),
                 onConfirm = suggestionsUrlAdapter::onChange,
                 modifier = Modifier,
             )

@@ -46,7 +46,7 @@ fun DrawerSearchPreference(
         label = stringResource(id = R.string.show_app_search_bar),
         modifier = modifier,
     ) {
-        PreferenceGroup(heading = stringResource(R.string.general_label)) {
+        PreferenceGroup(heading = stringResource(id = R.string.general_label)) {
             ExpandAndShrink(visible = hiddenApps.isNotEmpty()) {
                 HiddenAppsInSearchPreference()
             }
@@ -58,8 +58,8 @@ fun DrawerSearchPreference(
                 context = context,
             )
             SwitchPreference(
-                label = stringResource(R.string.allapps_match_qsb_style_label),
-                description = stringResource(R.string.allapps_match_qsb_style_description),
+                label = stringResource(id = R.string.allapps_match_qsb_style_label),
+                description = stringResource(id = R.string.allapps_match_qsb_style_description),
                 adapter = prefs2.matchHotseatQsbStyle.getAdapter(),
             )
         }
@@ -75,7 +75,7 @@ fun DrawerSearchPreference(
                     checked = if (canDisable) adapter.state.value else true,
                     onCheckedChange = if (canDisable) adapter::onChange else ({}),
                     enabled = canDisable,
-                    label = stringResource(R.string.search_pref_result_apps_and_shortcuts_title),
+                    label = stringResource(id = R.string.search_pref_result_apps_and_shortcuts_title),
                     onClick = {
                         navController.navigate(SearchProviderPreference(SearchProviderId.APPS))
                     },
@@ -124,9 +124,9 @@ private fun SearchProvider(
 ) {
     val searchAlgorithmEntries = remember {
         sequenceOf(
-            ListPreferenceEntry(LawnchairSearchAlgorithm.APP_SEARCH) { stringResource(R.string.search_algorithm_app_search) },
-            ListPreferenceEntry(LawnchairSearchAlgorithm.LOCAL_SEARCH) { stringResource(R.string.search_algorithm_global_search_on_device) },
-            ListPreferenceEntry(LawnchairSearchAlgorithm.ASI_SEARCH) { stringResource(R.string.search_algorithm_global_search_via_asi) },
+            ListPreferenceEntry(LawnchairSearchAlgorithm.APP_SEARCH) { stringResource(id = R.string.search_algorithm_app_search) },
+            ListPreferenceEntry(LawnchairSearchAlgorithm.LOCAL_SEARCH) { stringResource(id = R.string.search_algorithm_global_search_on_device) },
+            ListPreferenceEntry(LawnchairSearchAlgorithm.ASI_SEARCH) { stringResource(id = R.string.search_algorithm_global_search_via_asi) },
         ).filter {
             when (it.value) {
                 LawnchairSearchAlgorithm.ASI_SEARCH -> LawnchairSearchAlgorithm.isASISearchEnabled(
@@ -141,7 +141,7 @@ private fun SearchProvider(
     ListPreference(
         adapter = preferenceManager2().searchAlgorithm.getAdapter(),
         entries = searchAlgorithmEntries,
-        label = stringResource(R.string.app_search_algorithm),
+        label = stringResource(id = R.string.app_search_algorithm),
     )
 }
 
@@ -182,8 +182,8 @@ private fun LocalSearchSettings(
     )
     SearchProviderPreferenceItem(
         adapter = prefs.searchResultFilesToggle.getAdapter(),
-        label = stringResource(R.string.search_pref_result_files_title),
-        description = stringResource(R.string.search_pref_result_files_description),
+        label = stringResource(id = R.string.search_pref_result_files_title),
+        description = stringResource(id = R.string.search_pref_result_files_description),
         onClick = {
             navController.navigate(SearchProviderPreference(SearchProviderId.FILES))
         },
@@ -205,6 +205,6 @@ private fun LocalSearchSettings(
     )
     SwitchPreference(
         adapter = prefs.searchResultCalculator.getAdapter(),
-        label = stringResource(R.string.all_apps_search_result_calculator),
+        label = stringResource(id = R.string.all_apps_search_result_calculator),
     )
 }

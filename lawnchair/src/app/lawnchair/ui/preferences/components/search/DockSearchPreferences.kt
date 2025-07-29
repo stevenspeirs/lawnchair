@@ -88,8 +88,8 @@ fun DockSearchPreference(
                             SliderPreference(
                                 label = stringResource(id = R.string.corner_radius_label),
                                 adapter = qsbCornerAdapter,
-                                step = 0.05f,
-                                valueRange = 0.0f..1.0f,
+                                step = 0.05F,
+                                valueRange = 0F..1F,
                                 showAsPercentage = true,
                             )
                             SliderPreference(
@@ -103,11 +103,11 @@ fun DockSearchPreference(
                             SliderPreference(
                                 label = stringResource(id = R.string.qsb_hotseat_stroke_width),
                                 adapter = qsbHotseatStrokeWidth,
-                                step = 1.0f,
-                                valueRange = 0.0f..10.0f,
+                                step = 1f,
+                                valueRange = 0f..10f,
                                 showUnit = "vw",
                             )
-                            ExpandAndShrink(visible = qsbHotseatStrokeWidth.state.value > 0.0f) {
+                            ExpandAndShrink(visible = qsbHotseatStrokeWidth.state.value > 0f) {
                                 ColorPreference(preference = prefs2.strokeColorStyle)
                             }
                         }
