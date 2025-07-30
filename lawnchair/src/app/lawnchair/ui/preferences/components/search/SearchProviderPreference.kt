@@ -26,6 +26,7 @@ import app.lawnchair.preferences.PreferenceAdapter
 import app.lawnchair.preferences.getAdapter
 import app.lawnchair.preferences.preferenceManager
 import app.lawnchair.preferences2.preferenceManager2
+import app.lawnchair.ui.preferences.components.PermissionDialog
 import app.lawnchair.ui.preferences.components.controls.MainSwitchPreference
 import app.lawnchair.ui.preferences.components.controls.SliderPreference
 import app.lawnchair.ui.preferences.components.controls.SwitchPreference
@@ -141,13 +142,13 @@ fun ContactsSearchProvider(
 
     MainSwitchPreference(
         adapter = prefs.searchResultPeople.getAdapter(),
-        label = stringResource(id = R.string.search_pref_result_people_title),
+        label = stringResource(R.string.search_pref_result_people_title),
         modifier = modifier,
         enabled = contactsPermissionState.status.isGranted,
     ) {
         PreferenceGroup {
             SliderPreference(
-                label = stringResource(id = R.string.max_people_result_count_title),
+                label = stringResource(R.string.max_people_result_count_title),
                 adapter = prefs2.maxPeopleResultCount.getAdapter(),
                 valueRange = 2..10,
                 step = 1,
@@ -159,8 +160,8 @@ fun ContactsSearchProvider(
         val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
 
         PermissionDialog(
-            title = stringResource(id = R.string.warn_contact_permission_title),
-            text = stringResource(id = R.string.warn_contact_permission_content),
+            title = stringResource(R.string.warn_contact_permission_title),
+            text = stringResource(id = R.string.warn_contact_permission_content, stringResource(id = R.string.derived_app_name)),
             isPermanentlyDenied = contactsPermissionState.status.shouldShowRationale,
             onConfirm = { contactsPermissionState.launchPermissionRequest() },
             onDismiss = {

@@ -1,5 +1,6 @@
 package app.lawnchair.ui.preferences.components.search
 
+import android.Manifest
 import android.app.Application
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -15,7 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -38,6 +39,7 @@ import app.lawnchair.preferences.PreferenceAdapter
 import app.lawnchair.preferences.getAdapter
 import app.lawnchair.preferences.preferenceManager
 import app.lawnchair.preferences2.preferenceManager2
+import app.lawnchair.ui.preferences.components.PermissionDialog
 import app.lawnchair.ui.preferences.components.controls.MainSwitchPreference
 import app.lawnchair.ui.preferences.components.controls.SliderPreference
 import app.lawnchair.ui.preferences.components.controls.SwitchPreference
@@ -78,6 +80,7 @@ fun FileSearchProvider(
 ) {
     val prefs = preferenceManager()
     val prefs2 = preferenceManager2()
+    val appName = stringResource(id = R.string.derived_app_name)
 
     val mainAdapter = prefs.searchResultFilesToggle.getAdapter()
     val hasAnyPermissions by viewModel.hasAnyPermissions.collectAsStateWithLifecycle()
@@ -94,12 +97,12 @@ fun FileSearchProvider(
     MainSwitchPreference(
         checked = mainAdapter.state.value,
         onCheckedChange = mainAdapter::onChange,
-        label = stringResource(id = R.string.search_pref_result_files_title),
+        label = stringResource(R.string.search_pref_result_files_title),
         enabled = hasAnyPermissions,
         modifier = modifier,
     )
     PreferenceGroup(
-        heading = stringResource(id = R.string.search_pref_files_search_on),
+        heading = stringResource(R.string.search_pref_files_search_on),
     ) {
         val allFilesAccessState by viewModel.allFilesAccessState.collectAsStateWithLifecycle()
         val allFilesAccessAdapter = prefs.searchResultAllFiles.getAdapter()
@@ -113,11 +116,11 @@ fun FileSearchProvider(
         } else {
             GenericAccessSetting(
                 adapter = allFilesAccessAdapter,
-                requiredPermission = android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                requiredPermission = Manifest.permission.READ_EXTERNAL_STORAGE,
                 switchEnabled = { allFilesAccessState != FileAccessState.Denied },
-                label = stringResource(id = R.string.search_pref_result_all_files_title),
-                permissionTitle = stringResource(id = R.string.permissions_external_storage),
-                permissionDescription = stringResource(id = R.string.permissions_external_storage_description),
+                label = stringResource(R.string.search_pref_result_all_files_title),
+                permissionTitle = stringResource(R.string.permissions_external_storage),
+                permissionDescription = stringResource(R.string.permissions_external_storage_description, appName),
                 onPermissionResult = { viewModel.refreshAccessStates() },
             )
         }
@@ -137,9 +140,9 @@ fun FileSearchProvider(
                 adapter = prefs.searchResultAudio.getAdapter(),
                 requiredPermission = android.Manifest.permission.READ_MEDIA_AUDIO,
                 switchEnabled = { audioAccessState != FileAccessState.Denied },
-                label = stringResource(id = R.string.search_pref_result_audio_media_title),
-                permissionTitle = stringResource(id = R.string.permissions_music_audio),
-                permissionDescription = stringResource(id = R.string.permissions_music_audio_description),
+                label = stringResource(R.string.search_pref_result_audio_media_title),
+                permissionTitle = stringResource(R.string.permissions_music_audio),
+                permissionDescription = stringResource(R.string.permissions_music_audio_description, appName),
                 onPermissionResult = { viewModel.refreshAccessStates() },
                 alwaysEnabled = allFilesAccessAdapter.state.value && allFilesAccessState == FileAccessState.Full,
             )
@@ -166,19 +169,18 @@ private fun ManageExternalStorageSetting(
     onPermissionRequest: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val context = LocalContext.current
     var showPermissionDialog by remember { mutableStateOf(false) }
 
     if (accessState == FileAccessState.Full) {
         SwitchPreference(
             adapter = adapter,
-            label = stringResource(id = R.string.search_pref_result_all_files_title),
+            label = stringResource(R.string.search_pref_result_all_files_title),
             modifier = modifier,
         )
     } else {
         TwoTargetSwitchPreference(
-            label = stringResource(id = R.string.search_pref_result_all_files_title),
-            description = stringResource(id = R.string.permissions_needed),
+            label = stringResource(R.string.search_pref_result_all_files_title),
+            description = stringResource(R.string.permissions_needed),
             checked = false,
             onCheckedChange = {
                 if (accessState == FileAccessState.Denied) {
@@ -198,32 +200,10 @@ private fun ManageExternalStorageSetting(
     }
 
     if (showPermissionDialog) {
-        if (!isPlayStoreFlavor()) {
-            PermissionDialog(
-                title = stringResource(id = R.string.permissions_manage_storage),
-                text = stringResource(id = R.string.permissions_manage_storage_description),
-                isPermanentlyDenied = true,
-                onConfirm = { },
-                onDismiss = { showPermissionDialog = false },
-                onGoToSettings = {
-                    onPermissionRequest()
-                    context.requestManageAllFilesAccessPermission()
-                },
-            )
-        } else {
-            AlertDialog(
-                onDismissRequest = { showPermissionDialog = false },
-                title = {
-                    Text(stringResource(id = R.string.manage_storage_access_denied_title))
-                },
-                text = {
-                    Text(stringResource(id = R.string.manage_storage_access_denied_description))
-                },
-                confirmButton = {
-                    OutlinedButton(onClick = { showPermissionDialog = false }) { Text(stringResource(id = R.string.dismiss)) }
-                },
-            )
-        }
+        FileAccessPermissionDialog(
+            onDismiss = { showPermissionDialog = false },
+            onPermissionRequest = onPermissionRequest,
+        )
     }
 }
 
@@ -239,8 +219,8 @@ private fun VisualMediaSetting(
     val context = LocalContext.current
     val permissionState = rememberMultiplePermissionsState(
         listOf(
-            android.Manifest.permission.READ_MEDIA_IMAGES,
-            android.Manifest.permission.READ_MEDIA_VIDEO,
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_VIDEO,
         ),
     ) {
         onPermissionRequest()
@@ -253,13 +233,13 @@ private fun VisualMediaSetting(
         SwitchPreference(
             checked = alwaysEnabled || adapter.state.value,
             onCheckedChange = adapter::onChange,
-            label = stringResource(id = R.string.search_pref_result_visual_media_title),
+            label = stringResource(R.string.search_pref_result_visual_media_title),
             enabled = !alwaysEnabled,
         )
     } else {
         TwoTargetSwitchPreference(
-            label = stringResource(id = R.string.search_pref_result_visual_media_title),
-            description = stringResource(id = R.string.permissions_needed),
+            label = stringResource(R.string.search_pref_result_visual_media_title),
+            description = stringResource(R.string.permissions_needed),
             checked = (adapter.state.value && accessState != FileAccessState.Denied),
             onCheckedChange = {
                 if (accessState == FileAccessState.Denied) {
@@ -281,8 +261,8 @@ private fun VisualMediaSetting(
 
     if (showPermissionDialog) {
         PermissionDialog(
-            title = stringResource(id = R.string.permissions_photos_videos),
-            text = stringResource(id = R.string.permissions_photos_videos_description),
+            title = stringResource(R.string.permissions_photos_videos),
+            text = stringResource(R.string.permissions_photos_videos_description, stringResource(id = R.string.derived_app_name)),
             isPermanentlyDenied = permissionState.allPermissionsGranted,
             onConfirm = { permissionState.launchMultiplePermissionRequest() },
             onDismiss = { showPermissionDialog = false },
@@ -293,8 +273,8 @@ private fun VisualMediaSetting(
     if (showPartialAccessDialog) {
         AlertDialog(
             onDismissRequest = { showPartialAccessDialog = false },
-            title = { Text(stringResource(id = R.string.permissions_photos_videos_full)) },
-            text = { Text(stringResource(id = R.string.permissions_photos_videos_full_description)) },
+            title = { Text(stringResource(R.string.permissions_photos_videos_full)) },
+            text = { Text(stringResource(R.string.permissions_photos_videos_full_description, stringResource(id = R.string.derived_app_name))) },
             confirmButton = {
                 Column {
                     Button(
@@ -303,7 +283,7 @@ private fun VisualMediaSetting(
                             showPartialAccessDialog = false
                         },
                         modifier = Modifier.fillMaxWidth(),
-                    ) { Text(stringResource(id = R.string.permissions_photos_videos_grant_full)) }
+                    ) { Text(stringResource(R.string.permissions_photos_videos_grant_full)) }
 
                     TextButton(
                         onClick = {
@@ -311,7 +291,7 @@ private fun VisualMediaSetting(
                             showPartialAccessDialog = false
                         },
                         modifier = Modifier.fillMaxWidth(),
-                    ) { Text(stringResource(id = R.string.permissions_photos_videos_manage_selected)) }
+                    ) { Text(stringResource(R.string.permissions_photos_videos_manage_selected)) }
 
                     TextButton(
                         onClick = { showPartialAccessDialog = false },
@@ -345,7 +325,7 @@ private fun GenericAccessSetting(
     if (!alwaysEnabled && !switchEnabled(permission)) {
         TwoTargetSwitchPreference(
             label = label,
-            description = stringResource(id = R.string.permissions_needed),
+            description = stringResource(R.string.permissions_needed),
             switchEnabled = false,
             checked = false,
             onCheckedChange = {},
@@ -372,39 +352,6 @@ private fun GenericAccessSetting(
             onGoToSettings = { context.openAppPermissionSettings() },
         )
     }
-}
-
-@Composable
-internal fun PermissionDialog(
-    title: String,
-    text: String,
-    isPermanentlyDenied: Boolean,
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit,
-    onGoToSettings: () -> Unit,
-) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(title) },
-        text = { Text(text) },
-        confirmButton = {
-            Button(
-                onClick = {
-                    if (isPermanentlyDenied) onGoToSettings() else onConfirm()
-                    onDismiss()
-                },
-            ) {
-                Text(
-                    stringResource(
-                        if (isPermanentlyDenied) R.string.open_permission_settings else R.string.grant_requested_permissions,
-                    ),
-                )
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(android.R.string.cancel)) }
-        },
-    )
 }
 
 @Composable
@@ -461,4 +408,73 @@ internal fun TwoTargetSwitchPreference(
         enabled = enabled,
         applyPaddings = false,
     )
+}
+
+/**
+ * A dialog that requests file access permission.
+ *
+ * On Android R and above, this requests manage all files access. Otherwise, it requests read
+ * external storage permission. For Play Store builds on Android R and above, it shows a dialog
+ * explaining that the permission is not available.
+ *
+ * @param onDismiss Called when the dialog is dismissed.
+ * @param modifier The modifier to be applied to the dialog.
+ * @param rationale The rationale to show to the user.
+ * @param onPermissionRequest Called when the permission is requested.
+ */
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+private fun FileAccessPermissionDialog(
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier,
+    rationale: String = stringResource(R.string.permissions_manage_storage_description, stringResource(id = R.string.derived_app_name)),
+    onPermissionRequest: () -> Unit = {},
+) {
+    val context = LocalContext.current
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        if (!isPlayStoreFlavor()) {
+            PermissionDialog(
+                title = stringResource(R.string.permissions_manage_storage),
+                modifier = modifier,
+                text = rationale,
+                isPermanentlyDenied = true,
+                onConfirm = { },
+                onDismiss = onDismiss,
+                onGoToSettings = {
+                    onPermissionRequest()
+                    context.requestManageAllFilesAccessPermission()
+                },
+            )
+        } else {
+            AlertDialog(
+                onDismissRequest = onDismiss,
+                modifier = modifier,
+                title = {
+                    Text(stringResource(R.string.manage_storage_access_denied_title))
+                },
+                text = {
+                    Text(stringResource(R.string.manage_storage_access_denied_description, stringResource(id = R.string.derived_app_name)))
+                },
+                confirmButton = {
+                    FilledTonalButton(onClick = onDismiss) { Text(stringResource(R.string.dismiss)) }
+                },
+            )
+        }
+    } else {
+        val permission = rememberPermissionState(Manifest.permission.READ_EXTERNAL_STORAGE)
+
+        PermissionDialog(
+            title = stringResource(R.string.permissions_external_storage),
+            modifier = modifier,
+            text = rationale,
+            isPermanentlyDenied = permission.status.shouldShowRationale,
+            onConfirm = {
+                onPermissionRequest()
+                permission.launchPermissionRequest()
+            },
+            onDismiss = onDismiss,
+            onGoToSettings = { context.openAppPermissionSettings() },
+        )
+    }
 }
