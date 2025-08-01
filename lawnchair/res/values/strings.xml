@@ -264,16 +264,10 @@
     <string name="icon_shape_square">Square</string>
     <string name="icon_shape_squircle">Squircle</string>
     <string name="icon_shape_teardrop">Teardrop</string>
-    <string name="icon_shape_flat_hexagon">Flat hexagon</string>
-    <string name="icon_shape_heptagon">Heptagon</string>
-    <string name="icon_shape_leaf">Leaf</string>
-    <string name="icon_shape_lemon">Lemon</string>
-    <string name="icon_shape_light_squircle">Light squircle</string>
-    <string name="icon_shape_nonagon">Nonagon</string>
-    <string name="icon_shape_pentagon">Pentagon</string>
-    <string name="icon_shape_strong_squircle">Strong squircle</string>
-    <string name="icon_shape_triangle">Triangle</string>
-    <string name="icon_shape_ultra_squircle">Ultra squircle</string>
+    <!-- Icon shape (Material 3 Expressive) -->
+    <string name="icon_shape_four_sided_cookie">Four-sided cookie</string>
+    <string name="icon_shape_seven_sided_cookie">Seven-sided cookie</string>
+    <string name="icon_shape_arch">Arch</string>
 
     <!-- Custom icon shapes -->
     <string name="custom_icon_shape">Custom icon shape</string>
@@ -281,14 +275,8 @@
     <string name="custom_icon_shape_edit">Edit custom icon shape</string>
     <string name="custom_icon_shape_corner">Corner shape</string>
     <string name="custom_icon_shape_corner_round">Round</string>
-    <string name="custom_icon_shape_corner_squircle">Squircle</string>
+    <string name="custom_icon_shape_corner_squircle">Smooth</string>
     <string name="custom_icon_shape_corner_cut">Cut</string>
-    <string name="custom_icon_shape_corner_arc">Arc</string>
-    <string name="custom_icon_shape_corner_cupertino">iOS</string>
-    <string name="custom_icon_shape_corner_light_squircle">Light squircle</string>
-    <string name="custom_icon_shape_corner_sammy">One UI</string>
-    <string name="custom_icon_shape_corner_strong_squircle">Strong squircle</string>
-    <string name="custom_icon_shape_corner_ultra_squircle">Ultra squircle</string>
     <string name="custom_icon_shape_top_left">Top left</string>
     <string name="custom_icon_shape_top_right">Top right</string>
     <string name="custom_icon_shape_bottom_left">Bottom left</string>
@@ -325,15 +313,14 @@
 
     <string name="font_variant_italic">Italic</string>
     <string name="font_weight_thin">Thin</string>
-    <string name="font_weight_extra_light">ExtraLight</string>
+    <string name="font_weight_extra_light">Extra light</string>
     <string name="font_weight_light">Light</string>
     <string name="font_weight_regular">Regular</string>
     <string name="font_weight_medium">Medium</string>
-    <string name="font_weight_semi_bold">SemiBold</string>
+    <string name="font_weight_semi_bold">Semibold</string>
     <string name="font_weight_bold">Bold</string>
-    <string name="font_weight_extra_bold">ExtraBold</string>
-    <string name="font_weight_black">Black</string>
-    <string name="font_weight_extra_black">ExtraBlack</string>
+    <string name="font_weight_extra_bold">Extra bold</string>
+    <string name="font_weight_extra_black">Black</string>
 
     <!--
 
@@ -782,7 +769,7 @@
     <string name="allapps_match_qsb_style_description">Clicking the dock search bar will now open the app drawer search UI</string>
 
     <string name="app_search_algorithm">Search algorithm</string>
-    <string name="search_algorithm_app_search">App search</string>
+    <string name="search_algorithm_app_search">App Search</string>
     <string name="search_algorithm_global_search_on_device">Global search (on-device)</string>
     <string name="search_algorithm_global_search_via_asi">Global search (via ASI)</string>
 

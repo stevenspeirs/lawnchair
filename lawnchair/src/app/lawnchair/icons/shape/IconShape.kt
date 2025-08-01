@@ -20,12 +20,13 @@
 package app.lawnchair.icons.shape
 
 import android.content.Context
+import android.graphics.Matrix
 import android.graphics.Path
 import android.graphics.PointF
 import android.util.Log
+import android.util.PathParser
+import app.lawnchair.util.unsafeLazy
 import com.android.launcher3.Utilities
-import kotlin.math.cos
-import kotlin.math.sin
 
 open class IconShape(
     val topLeft: Corner,
@@ -80,10 +81,10 @@ open class IconShape(
             bottomRight == Corner.fullArc
 
     private val tmpPoint = PointF()
-    open val windowTransitionRadius = 1.0f
+    open val windowTransitionRadius = 1f
 
     open fun getMaskPath(): Path {
-        return Path().also { addToPath(it, 0.0f, 0.0f, 100.0f, 100.0f, 50.0f) }
+        return Path().also { addToPath(it, 0f, 0f, 100f, 100f, 50f) }
     }
 
     open fun addShape(path: Path, x: Float, y: Float, radius: Float) {
@@ -96,15 +97,15 @@ open class IconShape(
     }
 
     @JvmOverloads
-    fun addToPath(
+    open fun addToPath(
         path: Path,
         left: Float,
         top: Float,
         right: Float,
         bottom: Float,
-        size: Float = 50.0f,
+        size: Float = 50f,
         endSize: Float = size,
-        progress: Float = 0.0f,
+        progress: Float = 0f,
     ) {
         val topLeftSizeX = Utilities.mapRange(progress, topLeft.scale.x * size, endSize)
         val topLeftSizeY = Utilities.mapRange(progress, topLeft.scale.y * size, endSize)
@@ -233,14 +234,14 @@ open class IconShape(
 
         companion object {
 
-            val fullArc = Corner(IconCornerShape.arc, 1.0f)
+            val fullArc = Corner(IconCornerShape.arc, 1f)
 
             fun fromString(value: String): Corner {
                 val parts = value.split(",")
                 val scaleX = parts[1].toFloat()
                 val scaleY = if (parts.size >= 3) parts[2].toFloat() else scaleX
-                check(scaleX in 0.0f..1.0f) { "scaleX must be in [0, 1]" }
-                check(scaleY in 0.0f..1.0f) { "scaleY must be in [0, 1]" }
+                check(scaleX in 0f..1f) { "scaleX must be in [0, 1]" }
+                check(scaleY in 0f..1f) { "scaleY must be in [0, 1]" }
                 return Corner(IconCornerShape.fromString(parts[0]), PointF(scaleX, scaleY))
             }
         }
@@ -251,10 +252,10 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
+        1f,
+        1f,
+        1f,
+        1f,
     ) {
 
         override fun toString(): String {
@@ -267,10 +268,10 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        0.16f,
-        0.16f,
-        0.16f,
-        0.16f,
+        .16f,
+        .16f,
+        .16f,
+        .16f,
     ) {
 
         override val windowTransitionRadius = .16f
@@ -285,13 +286,13 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        0.0f,
-        0.0f,
-        0.0f,
-        0.0f,
+        0f,
+        0f,
+        0f,
+        0f,
     ) {
 
-        override val windowTransitionRadius = 0.0f
+        override val windowTransitionRadius = 0f
 
         override fun toString(): String {
             return "sharpSquare"
@@ -303,10 +304,10 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        0.6f,
-        0.6f,
-        0.6f,
-        0.6f,
+        .6f,
+        .6f,
+        .6f,
+        .6f,
     ) {
 
         override val windowTransitionRadius = .6f
@@ -321,10 +322,10 @@ open class IconShape(
         IconCornerShape.Squircle,
         IconCornerShape.Squircle,
         IconCornerShape.Squircle,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
+        1f,
+        1f,
+        1f,
+        1f,
     ) {
 
         override fun toString(): String {
@@ -337,10 +338,10 @@ open class IconShape(
         IconCornerShape.Sammy,
         IconCornerShape.Sammy,
         IconCornerShape.Sammy,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
+        1f,
+        1f,
+        1f,
+        1f,
     ) {
 
         override fun toString(): String {
@@ -353,10 +354,10 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        0.3f,
+        1f,
+        1f,
+        1f,
+        .3f,
     ) {
 
         override fun toString(): String {
@@ -369,10 +370,10 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        PointF(1.0f, 0.6f),
-        PointF(1.0f, 0.6f),
-        PointF(1.0f, 0.6f),
-        PointF(1.0f, 0.6f),
+        PointF(1f, .6f),
+        PointF(1f, .6f),
+        PointF(1f, .6f),
+        PointF(1f, .6f),
     ) {
 
         override fun toString(): String {
@@ -385,10 +386,10 @@ open class IconShape(
         IconCornerShape.Cupertino,
         IconCornerShape.Cupertino,
         IconCornerShape.Cupertino,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
+        1f,
+        1f,
+        1f,
+        1f,
     ) {
 
         override val windowTransitionRadius = .45f
@@ -403,10 +404,10 @@ open class IconShape(
         IconCornerShape.Cut,
         IconCornerShape.Cut,
         IconCornerShape.Cut,
-        0.5f,
-        0.5f,
-        0.5f,
-        0.5f,
+        .5f,
+        .5f,
+        .5f,
+        .5f,
     ) {
 
         override fun toString(): String {
@@ -419,10 +420,10 @@ open class IconShape(
         IconCornerShape.CutHex,
         IconCornerShape.CutHex,
         IconCornerShape.CutHex,
-        PointF(1.0f, 0.5f),
-        PointF(1.0f, 0.5f),
-        PointF(1.0f, 0.5f),
-        PointF(1.0f, 0.5f),
+        PointF(1f, .5f),
+        PointF(1f, .5f),
+        PointF(1f, .5f),
+        PointF(1f, .5f),
     ) {
 
         override fun toString(): String {
@@ -435,13 +436,13 @@ open class IconShape(
         IconCornerShape.Cut,
         IconCornerShape.Cut,
         IconCornerShape.Cut,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
+        1f,
+        1f,
+        1f,
+        1f,
     ) {
 
-        override val windowTransitionRadius = 0.0f
+        override val windowTransitionRadius = 0f
 
         override fun toString(): String {
             return "diamond"
@@ -453,8 +454,8 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        1.0f,
-        1.0f,
+        1f,
+        1f,
         0.75f,
         0.75f,
     ) {
@@ -466,268 +467,155 @@ open class IconShape(
         }
     }
 
-    object FlatHexagon : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
+    /**
+     * Material 3 Expressive Shape
+     */
+    object FourSidedCookie : IconShape(
+        // Placeholder
+        Corner.fullArc,
+        Corner.fullArc,
+        Corner.fullArc,
+        Corner.fullArc,
     ) {
+        /**
+         * From AOSP Android 16.0.0_r2 ShapesProvider
+         */
+        private const val FOUR_SIDED_COOKIE_PATH =
+            "M39.888,4.517C46.338 7.319 53.662 7.319 60.112 4.517L63.605 3C84.733 -6.176 106.176 15.268 97 36.395L95.483 39.888C92.681 46.338 92.681 53.662 95.483 60.112L97 63.605C106.176 84.732 84.733 106.176 63.605 97L60.112 95.483C53.662 92.681 46.338 92.681 39.888 95.483L36.395 97C15.267 106.176 -6.176 84.732 3 63.605L4.517 60.112C7.319 53.662 7.319 46.338 4.517 39.888L3 36.395C -6.176 15.268 15.267 -6.176 36.395 3Z"
 
-        override fun getMaskPath(): Path = Path().also {
-            val centerX = 50.0f
-            val centerY = 50.0f
-            val radius = 50.0f
-            val angleStep = 360.0f / 6.0f
-            val startingAngle = 90.0f - angleStep / 2.0f
+        private val parsedPath by unsafeLazy {
+            PathParser.createPathFromPathData(FOUR_SIDED_COOKIE_PATH)
+        }
 
-            for (i in 0..5) {
-                val angle = startingAngle + angleStep * i
-                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
-                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
-                if (i == 0) {
-                    it.moveTo(x, y)
-                } else {
-                    it.lineTo(x, y)
-                }
-            }
+        private val matrix = Matrix()
 
-            it.close()
+        override fun getMaskPath(): Path {
+            return Path().also { addToPath(it, 0f, 0f, 100f, 100f) }
+        }
+
+        override fun addToPath(
+            path: Path,
+            left: Float,
+            top: Float,
+            right: Float,
+            bottom: Float,
+            size: Float,
+            endSize: Float,
+            progress: Float,
+        ) {
+            matrix.reset()
+            val width = right - left
+            val height = bottom - top
+            matrix.setScale(width / 100f, height / 100f)
+            matrix.postTranslate(left, top)
+
+            val tempPath = Path(parsedPath)
+            tempPath.transform(matrix)
+            path.addPath(tempPath)
         }
 
         override fun toString(): String {
-            return "flatHexagon"
+            return "foursidedcookie"
         }
     }
 
-    object Heptagon : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
+    object SevenSidedCookie : IconShape(
+        // Placeholder
+        Corner.fullArc,
+        Corner.fullArc,
+        Corner.fullArc,
+        Corner.fullArc,
     ) {
+        /**
+         * From AOSP Android 16.0.0_r2 ShapesProvider
+         */
+        private const val SEVEN_SIDED_COOKIE_PATH =
+            "M35.209 4.878C36.326 3.895 36.884 3.404 37.397 3.006 44.82 -2.742 55.18 -2.742 62.603 3.006 63.116 3.404 63.674 3.895 64.791 4.878 65.164 5.207 65.351 5.371 65.539 5.529 68.167 7.734 71.303 9.248 74.663 9.932 74.902 9.981 75.147 10.025 75.637 10.113 77.1 10.375 77.831 10.506 78.461 10.66 87.573 12.893 94.032 21.011 94.176 30.412 94.186 31.062 94.151 31.805 94.08 33.293 94.057 33.791 94.045 34.04 94.039 34.285 93.958 37.72 94.732 41.121 96.293 44.18 96.404 44.399 96.522 44.618 96.759 45.056 97.467 46.366 97.821 47.021 98.093 47.611 102.032 56.143 99.727 66.266 92.484 72.24 91.983 72.653 91.381 73.089 90.177 73.961 89.774 74.254 89.572 74.4 89.377 74.548 86.647 76.626 84.477 79.353 83.063 82.483 82.962 82.707 82.865 82.936 82.671 83.395 82.091 84.766 81.8 85.451 81.51 86.033 77.31 94.44 67.977 98.945 58.801 96.994 58.166 96.859 57.451 96.659 56.019 96.259 55.54 96.125 55.3 96.058 55.063 95.998 51.74 95.154 48.26 95.154 44.937 95.998 44.699 96.058 44.46 96.125 43.981 96.259 42.549 96.659 41.834 96.859 41.199 96.994 32.023 98.945 22.69 94.44 18.49 86.033 18.2 85.451 17.909 84.766 17.329 83.395 17.135 82.936 17.038 82.707 16.937 82.483 15.523 79.353 13.353 76.626 10.623 74.548 10.428 74.4 10.226 74.254 9.823 73.961 8.619 73.089 8.017 72.653 7.516 72.24 .273 66.266 -2.032 56.143 1.907 47.611 2.179 47.021 2.533 46.366 3.241 45.056 3.478 44.618 3.596 44.399 3.707 44.18 5.268 41.121 6.042 37.72 5.961 34.285 5.955 34.04 5.943 33.791 5.92 33.293 5.849 31.805 5.814 31.062 5.824 30.412 5.968 21.011 12.427 12.893 21.539 10.66 22.169 10.506 22.9 10.375 24.363 10.113 24.853 10.025 25.098 9.981 25.337 9.932 28.697 9.248 31.833 7.734 34.461 5.529 34.649 5.371 34.836 5.207 35.209 4.878Z"
 
-        override fun getMaskPath(): Path = Path().also {
-            val centerX = 50.0f
-            val centerY = 50.0f
-            val radius = 50.0f
-            val angleStep = 360.0f / 7.0f
-            val startingAngle = 90.0f - angleStep / 2.0f
+        private val parsedPath by unsafeLazy {
+            PathParser.createPathFromPathData(SEVEN_SIDED_COOKIE_PATH)
+        }
 
-            for (i in 0..6) {
-                val angle = startingAngle + angleStep * i
-                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
-                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
-                if (i == 0) {
-                    it.moveTo(x, y)
-                } else {
-                    it.lineTo(x, y)
-                }
-            }
+        private val matrix = Matrix()
 
-            it.close()
+        override fun getMaskPath(): Path {
+            return Path().also { addToPath(it, 0f, 0f, 100f, 100f) }
+        }
+
+        override fun addToPath(
+            path: Path,
+            left: Float,
+            top: Float,
+            right: Float,
+            bottom: Float,
+            size: Float,
+            endSize: Float,
+            progress: Float,
+        ) {
+            matrix.reset()
+            val width = right - left
+            val height = bottom - top
+            matrix.setScale(width / 100f, height / 100f)
+            matrix.postTranslate(left, top)
+
+            val tempPath = Path(parsedPath)
+            tempPath.transform(matrix)
+            path.addPath(tempPath)
         }
 
         override fun toString(): String {
-            return "heptagon"
+            return "sevensidedcookie"
         }
     }
 
-    object Leaf : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        0.0f,
-        1.0f,
-        1.0f,
-        0.0f,
+    object Arch : IconShape(
+        // Placeholder
+        Corner.fullArc,
+        Corner.fullArc,
+        Corner.fullArc,
+        Corner.fullArc,
     ) {
+        /**
+         * From AOSP Android 16.0.0_r2 ShapesProvider
+         */
+        private const val ARCH_PATH =
+            "M50 0C77.614 0 100 22.386 100 50C100 85.471 100 86.476 99.9 87.321 99.116 93.916 93.916 99.116 87.321 99.9 86.476 100 85.471 100 83.46 100H16.54C14.529 100 13.524 100 12.679 99.9 6.084 99.116 .884 93.916 .1 87.321 0 86.476 0 85.471 0 83.46L0 50C0 22.386 22.386 0 50 0Z"
+
+        private val parsedPath by unsafeLazy {
+            PathParser.createPathFromPathData(ARCH_PATH)
+        }
+
+        private val matrix = Matrix()
+
+        override fun getMaskPath(): Path {
+            return Path().also { addToPath(it, 0f, 0f, 100f, 100f) }
+        }
+
+        override fun addToPath(
+            path: Path,
+            left: Float,
+            top: Float,
+            right: Float,
+            bottom: Float,
+            size: Float,
+            endSize: Float,
+            progress: Float,
+        ) {
+            matrix.reset()
+            val width = right - left
+            val height = bottom - top
+            matrix.setScale(width / 100f, height / 100f)
+            matrix.postTranslate(left, top)
+
+            val tempPath = Path(parsedPath)
+            tempPath.transform(matrix)
+            path.addPath(tempPath)
+        }
+
+        override val windowTransitionRadius = 0.16f
 
         override fun toString(): String {
-            return "leaf"
-        }
-    }
-
-    object Lemon : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        0.2f,
-        0.2f,
-        1.0f,
-    ) {
-
-        override fun toString(): String {
-            return "lemon"
-        }
-    }
-
-    object LightSquircle : IconShape(
-        IconCornerShape.LightSquircle,
-        IconCornerShape.LightSquircle,
-        IconCornerShape.LightSquircle,
-        IconCornerShape.LightSquircle,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun toString(): String {
-            return "lightSquircle"
-        }
-    }
-
-    object Nonagon : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun getMaskPath(): Path = Path().also {
-            val centerX = 50.0f
-            val centerY = 50.0f
-            val radius = 50.0f
-            val angleStep = 360.0f / 9.0f
-            val startingAngle = 90.0f - angleStep / 2.0f
-
-            for (i in 0..8) {
-                val angle = startingAngle + angleStep * i
-                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
-                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
-                if (i == 0) {
-                    it.moveTo(x, y)
-                } else {
-                    it.lineTo(x, y)
-                }
-            }
-
-            it.close()
-        }
-
-        override fun toString(): String {
-            return "nonagon"
-        }
-    }
-
-    object Pentagon : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun getMaskPath(): Path = Path().also {
-            val centerX = 50.0f
-            val centerY = 50.0f
-            val radius = 50.0f
-            val angleStep = 360.0f / 5.0f
-            val startingAngle = 90.0f - angleStep / 2.0f
-
-            for (i in 0..4) {
-                val angle = startingAngle + angleStep * i
-                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
-                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
-                if (i == 0) {
-                    it.moveTo(x, y)
-                } else {
-                    it.lineTo(x, y)
-                }
-            }
-
-            it.close()
-        }
-
-        override fun toString(): String {
-            return "pentagon"
-        }
-    }
-
-    object StrongSquircle : IconShape(
-        IconCornerShape.StrongSquircle,
-        IconCornerShape.StrongSquircle,
-        IconCornerShape.StrongSquircle,
-        IconCornerShape.StrongSquircle,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun toString(): String {
-            return "strongSquircle"
-        }
-    }
-
-    object Triangle : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun getMaskPath(): Path = Path().also {
-            val centerX = 50.0f
-            val centerY = 50.0f
-            val radius = 50.0f
-            val angleStep = 360.0f / 3.0f
-            val startingAngle = 90.0f - angleStep / 2.0f
-
-            for (i in 0..2) {
-                val angle = startingAngle + angleStep * i
-                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
-                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
-                if (i == 0) {
-                    it.moveTo(x, y)
-                } else {
-                    it.lineTo(x, y)
-                }
-            }
-
-            it.close()
-        }
-
-        override fun toString(): String {
-            return "triangle"
-        }
-    }
-
-    object UltraSquircle : IconShape(
-        IconCornerShape.UltraSquircle,
-        IconCornerShape.UltraSquircle,
-        IconCornerShape.UltraSquircle,
-        IconCornerShape.UltraSquircle,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun toString(): String {
-            return "ultraSquircle"
+            return "arch"
         }
     }
 
@@ -756,16 +644,9 @@ open class IconShape(
             "hexagon" -> Hexagon
             "diamond" -> Diamond
             "egg" -> Egg
-            "flatHexagon" -> FlatHexagon
-            "heptagon" -> Heptagon
-            "leaf" -> Leaf
-            "lemon" -> Lemon
-            "lightSquircle" -> LightSquircle
-            "nonagon" -> Nonagon
-            "pentagon" -> Pentagon
-            "strongSquircle" -> StrongSquircle
-            "triangle" -> Triangle
-            "ultraSquircle" -> UltraSquircle
+            "foursidedcookie" -> FourSidedCookie
+            "sevensidedcookie" -> SevenSidedCookie
+            "arch" -> Arch
             "" -> null
             else -> runCatching { parseCustomShape(value) }.getOrNull()
         }
