@@ -27,6 +27,8 @@ import android.util.Log
 import android.util.PathParser
 import app.lawnchair.util.unsafeLazy
 import com.android.launcher3.Utilities
+import kotlin.math.cos
+import kotlin.math.sin
 
 open class IconShape(
     val topLeft: Corner,
@@ -81,10 +83,10 @@ open class IconShape(
             bottomRight == Corner.fullArc
 
     private val tmpPoint = PointF()
-    open val windowTransitionRadius = 1f
+    open val windowTransitionRadius = 1.0f
 
     open fun getMaskPath(): Path {
-        return Path().also { addToPath(it, 0f, 0f, 100f, 100f, 50f) }
+        return Path().also { addToPath(it, 0.0f, 0.0f, 100.0f, 100.0f, 50.0f) }
     }
 
     open fun addShape(path: Path, x: Float, y: Float, radius: Float) {
@@ -103,9 +105,9 @@ open class IconShape(
         top: Float,
         right: Float,
         bottom: Float,
-        size: Float = 50f,
+        size: Float = 50.0f,
         endSize: Float = size,
-        progress: Float = 0f,
+        progress: Float = 0.0f,
     ) {
         val topLeftSizeX = Utilities.mapRange(progress, topLeft.scale.x * size, endSize)
         val topLeftSizeY = Utilities.mapRange(progress, topLeft.scale.y * size, endSize)
@@ -234,14 +236,14 @@ open class IconShape(
 
         companion object {
 
-            val fullArc = Corner(IconCornerShape.arc, 1f)
+            val fullArc = Corner(IconCornerShape.arc, 1.0f)
 
             fun fromString(value: String): Corner {
                 val parts = value.split(",")
                 val scaleX = parts[1].toFloat()
                 val scaleY = if (parts.size >= 3) parts[2].toFloat() else scaleX
-                check(scaleX in 0f..1f) { "scaleX must be in [0, 1]" }
-                check(scaleY in 0f..1f) { "scaleY must be in [0, 1]" }
+                check(scaleX in 0.0f..1.0f) { "scaleX must be in [0, 1]" }
+                check(scaleY in 0.0f..1.0f) { "scaleY must be in [0, 1]" }
                 return Corner(IconCornerShape.fromString(parts[0]), PointF(scaleX, scaleY))
             }
         }
@@ -252,10 +254,10 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        1f,
-        1f,
-        1f,
-        1f,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
     ) {
 
         override fun toString(): String {
@@ -268,10 +270,10 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        .16f,
-        .16f,
-        .16f,
-        .16f,
+        0.16f,
+        0.16f,
+        0.16f,
+        0.16f,
     ) {
 
         override val windowTransitionRadius = .16f
@@ -286,13 +288,13 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        0f,
-        0f,
-        0f,
-        0f,
+        0.0f,
+        0.0f,
+        0.0f,
+        0.0f,
     ) {
 
-        override val windowTransitionRadius = 0f
+        override val windowTransitionRadius = 0.0f
 
         override fun toString(): String {
             return "sharpSquare"
@@ -304,10 +306,10 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        .6f,
-        .6f,
-        .6f,
-        .6f,
+        0.6f,
+        0.6f,
+        0.6f,
+        0.6f,
     ) {
 
         override val windowTransitionRadius = .6f
@@ -322,10 +324,10 @@ open class IconShape(
         IconCornerShape.Squircle,
         IconCornerShape.Squircle,
         IconCornerShape.Squircle,
-        1f,
-        1f,
-        1f,
-        1f,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
     ) {
 
         override fun toString(): String {
@@ -338,10 +340,10 @@ open class IconShape(
         IconCornerShape.Sammy,
         IconCornerShape.Sammy,
         IconCornerShape.Sammy,
-        1f,
-        1f,
-        1f,
-        1f,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
     ) {
 
         override fun toString(): String {
@@ -354,10 +356,10 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        1f,
-        1f,
-        1f,
-        .3f,
+        1.0f,
+        1.0f,
+        1.0f,
+        0.3f,
     ) {
 
         override fun toString(): String {
@@ -370,10 +372,10 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        PointF(1f, .6f),
-        PointF(1f, .6f),
-        PointF(1f, .6f),
-        PointF(1f, .6f),
+        PointF(1.0f, 0.6f),
+        PointF(1.0f, 0.6f),
+        PointF(1.0f, 0.6f),
+        PointF(1.0f, 0.6f),
     ) {
 
         override fun toString(): String {
@@ -386,10 +388,10 @@ open class IconShape(
         IconCornerShape.Cupertino,
         IconCornerShape.Cupertino,
         IconCornerShape.Cupertino,
-        1f,
-        1f,
-        1f,
-        1f,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
     ) {
 
         override val windowTransitionRadius = .45f
@@ -404,10 +406,10 @@ open class IconShape(
         IconCornerShape.Cut,
         IconCornerShape.Cut,
         IconCornerShape.Cut,
-        .5f,
-        .5f,
-        .5f,
-        .5f,
+        0.5f,
+        0.5f,
+        0.5f,
+        0.5f,
     ) {
 
         override fun toString(): String {
@@ -420,10 +422,10 @@ open class IconShape(
         IconCornerShape.CutHex,
         IconCornerShape.CutHex,
         IconCornerShape.CutHex,
-        PointF(1f, .5f),
-        PointF(1f, .5f),
-        PointF(1f, .5f),
-        PointF(1f, .5f),
+        PointF(1.0f, 0.5f),
+        PointF(1.0f, 0.5f),
+        PointF(1.0f, 0.5f),
+        PointF(1.0f, 0.5f),
     ) {
 
         override fun toString(): String {
@@ -436,13 +438,13 @@ open class IconShape(
         IconCornerShape.Cut,
         IconCornerShape.Cut,
         IconCornerShape.Cut,
-        1f,
-        1f,
-        1f,
-        1f,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
     ) {
 
-        override val windowTransitionRadius = 0f
+        override val windowTransitionRadius = 0.0f
 
         override fun toString(): String {
             return "diamond"
@@ -454,8 +456,8 @@ open class IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        1f,
-        1f,
+        1.0f,
+        1.0f,
         0.75f,
         0.75f,
     ) {
@@ -464,6 +466,271 @@ open class IconShape(
 
         override fun toString(): String {
             return "egg"
+        }
+    }
+
+    object FlatHexagon : IconShape(
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
+    ) {
+
+        override fun getMaskPath(): Path = Path().also {
+            val centerX = 50.0f
+            val centerY = 50.0f
+            val radius = 50.0f
+            val angleStep = 360.0f / 6.0f
+            val startingAngle = 90.0f - angleStep / 2.0f
+
+            for (i in 0..5) {
+                val angle = startingAngle + angleStep * i
+                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
+                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
+                if (i == 0) {
+                    it.moveTo(x, y)
+                } else {
+                    it.lineTo(x, y)
+                }
+            }
+
+            it.close()
+        }
+
+        override fun toString(): String {
+            return "flatHexagon"
+        }
+    }
+
+    object Heptagon : IconShape(
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
+    ) {
+
+        override fun getMaskPath(): Path = Path().also {
+            val centerX = 50.0f
+            val centerY = 50.0f
+            val radius = 50.0f
+            val angleStep = 360.0f / 7.0f
+            val startingAngle = 90.0f - angleStep / 2.0f
+
+            for (i in 0..6) {
+                val angle = startingAngle + angleStep * i
+                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
+                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
+                if (i == 0) {
+                    it.moveTo(x, y)
+                } else {
+                    it.lineTo(x, y)
+                }
+            }
+
+            it.close()
+        }
+
+        override fun toString(): String {
+            return "heptagon"
+        }
+    }
+
+    object Leaf : IconShape(
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        0.0f,
+        1.0f,
+        1.0f,
+        0.0f,
+    ) {
+
+        override fun toString(): String {
+            return "leaf"
+        }
+    }
+
+    object Lemon : IconShape(
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        1.0f,
+        0.2f,
+        0.2f,
+        1.0f,
+    ) {
+
+        override fun toString(): String {
+            return "lemon"
+        }
+    }
+
+    object LightSquircle : IconShape(
+        IconCornerShape.LightSquircle,
+        IconCornerShape.LightSquircle,
+        IconCornerShape.LightSquircle,
+        IconCornerShape.LightSquircle,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
+    ) {
+
+        override fun toString(): String {
+            return "lightSquircle"
+        }
+    }
+
+    object Nonagon : IconShape(
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
+    ) {
+
+        override fun getMaskPath(): Path = Path().also {
+            val centerX = 50.0f
+            val centerY = 50.0f
+            val radius = 50.0f
+            val angleStep = 360.0f / 9.0f
+            val startingAngle = 90.0f - angleStep / 2.0f
+
+            for (i in 0..8) {
+                val angle = startingAngle + angleStep * i
+                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
+                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
+                if (i == 0) {
+                    it.moveTo(x, y)
+                } else {
+                    it.lineTo(x, y)
+                }
+            }
+
+            it.close()
+        }
+
+        override fun toString(): String {
+            return "nonagon"
+        }
+    }
+
+    object Pentagon : IconShape(
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
+    ) {
+
+        override fun getMaskPath(): Path = Path().also {
+            val centerX = 50.0f
+            val centerY = 50.0f
+            val radius = 50.0f
+            val angleStep = 360.0f / 5.0f
+            val startingAngle = 90.0f - angleStep / 2.0f
+
+            for (i in 0..4) {
+                val angle = startingAngle + angleStep * i
+                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
+                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
+                if (i == 0) {
+                    it.moveTo(x, y)
+                } else {
+                    it.lineTo(x, y)
+                }
+            }
+
+            it.close()
+        }
+
+        override fun toString(): String {
+            return "pentagon"
+        }
+    }
+
+    object StrongSquircle : IconShape(
+        IconCornerShape.StrongSquircle,
+        IconCornerShape.StrongSquircle,
+        IconCornerShape.StrongSquircle,
+        IconCornerShape.StrongSquircle,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
+    ) {
+
+        override fun toString(): String {
+            return "strongSquircle"
+        }
+    }
+
+    object Triangle : IconShape(
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
+    ) {
+
+        override fun getMaskPath(): Path = Path().also {
+            val centerX = 50.0f
+            val centerY = 50.0f
+            val radius = 50.0f
+            val angleStep = 360.0f / 3.0f
+            val startingAngle = 90.0f - angleStep / 2.0f
+
+            for (i in 0..2) {
+                val angle = startingAngle + angleStep * i
+                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
+                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
+                if (i == 0) {
+                    it.moveTo(x, y)
+                } else {
+                    it.lineTo(x, y)
+                }
+            }
+
+            it.close()
+        }
+
+        override fun toString(): String {
+            return "triangle"
+        }
+    }
+
+    object UltraSquircle : IconShape(
+        IconCornerShape.UltraSquircle,
+        IconCornerShape.UltraSquircle,
+        IconCornerShape.UltraSquircle,
+        IconCornerShape.UltraSquircle,
+        1.0f,
+        1.0f,
+        1.0f,
+        1.0f,
+    ) {
+
+        override fun toString(): String {
+            return "ultraSquircle"
         }
     }
 
@@ -490,7 +757,7 @@ open class IconShape(
         private val matrix = Matrix()
 
         override fun getMaskPath(): Path {
-            return Path().also { addToPath(it, 0f, 0f, 100f, 100f) }
+            return Path().also { addToPath(it, 0.0f, 0.0f, 100.0f, 100.0f) }
         }
 
         override fun addToPath(
@@ -506,7 +773,7 @@ open class IconShape(
             matrix.reset()
             val width = right - left
             val height = bottom - top
-            matrix.setScale(width / 100f, height / 100f)
+            matrix.setScale(width / 100.0f, height / 100.0f)
             matrix.postTranslate(left, top)
 
             val tempPath = Path(parsedPath)
@@ -539,7 +806,7 @@ open class IconShape(
         private val matrix = Matrix()
 
         override fun getMaskPath(): Path {
-            return Path().also { addToPath(it, 0f, 0f, 100f, 100f) }
+            return Path().also { addToPath(it, 0.0f, 0.0f, 100.0f, 100.0f) }
         }
 
         override fun addToPath(
@@ -555,7 +822,7 @@ open class IconShape(
             matrix.reset()
             val width = right - left
             val height = bottom - top
-            matrix.setScale(width / 100f, height / 100f)
+            matrix.setScale(width / 100.0f, height / 100.0f)
             matrix.postTranslate(left, top)
 
             val tempPath = Path(parsedPath)
@@ -588,7 +855,7 @@ open class IconShape(
         private val matrix = Matrix()
 
         override fun getMaskPath(): Path {
-            return Path().also { addToPath(it, 0f, 0f, 100f, 100f) }
+            return Path().also { addToPath(it, 0.0f, 0.0f, 100.0f, 100.0f) }
         }
 
         override fun addToPath(
@@ -604,7 +871,7 @@ open class IconShape(
             matrix.reset()
             val width = right - left
             val height = bottom - top
-            matrix.setScale(width / 100f, height / 100f)
+            matrix.setScale(width / 100.0f, height / 100.0f)
             matrix.postTranslate(left, top)
 
             val tempPath = Path(parsedPath)
@@ -644,6 +911,16 @@ open class IconShape(
             "hexagon" -> Hexagon
             "diamond" -> Diamond
             "egg" -> Egg
+            "flatHexagon" -> FlatHexagon
+            "heptagon" -> Heptagon
+            "leaf" -> Leaf
+            "lemon" -> Lemon
+            "lightSquircle" -> LightSquircle
+            "nonagon" -> Nonagon
+            "pentagon" -> Pentagon
+            "strongSquircle" -> StrongSquircle
+            "triangle" -> Triangle
+            "ultraSquircle" -> UltraSquircle
             "foursidedcookie" -> FourSidedCookie
             "sevensidedcookie" -> SevenSidedCookie
             "arch" -> Arch

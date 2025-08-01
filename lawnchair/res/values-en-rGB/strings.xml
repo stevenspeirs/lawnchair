@@ -270,6 +270,10 @@
     <string name="icon_shape_strong_squircle">Strong squircle</string>
     <string name="icon_shape_triangle">Triangle</string>
     <string name="icon_shape_ultra_squircle">Ultra squircle</string>
+    <!-- Icon shape (Material 3 Expressive) -->
+    <string name="icon_shape_four_sided_cookie">Four-sided cookie</string>
+    <string name="icon_shape_seven_sided_cookie">Seven-sided cookie</string>
+    <string name="icon_shape_arch">Arch</string>
 
     <!-- Custom icon shapes -->
     <string name="custom_icon_shape">Custom icon shape</string>
