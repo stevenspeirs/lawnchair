@@ -203,7 +203,7 @@ private fun SliderPreferencePreview(
                 value = sliderValue,
                 onValueChangeFinished = {},
                 valueRange = 0.0f..1.0f,
-                step = 0.1f,
+                step = 0.05f,
                 showAsPercentage = true,
             )
         }
