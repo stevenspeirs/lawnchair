@@ -29,8 +29,8 @@ class VerticalSwipeTouchController(
 
     private var noIntercept = false
     private var currentMillis = 0L
-    private var currentVelocity = 0f
-    private var currentDisplacement = 0f
+    private var currentVelocity = 0.0f
+    private var currentDisplacement = 0.0f
 
     private var triggered = false
 
@@ -110,7 +110,7 @@ class VerticalSwipeTouchController(
         currentMillis = millis
 
         val deltaTimeMillis = (currentMillis - previousMillis).toFloat()
-        val velocity = if (deltaTimeMillis > 0) delta / deltaTimeMillis else 0f
+        val velocity = if (deltaTimeMillis > 0) delta / deltaTimeMillis else 0.0f
         currentVelocity = if (currentVelocity.absoluteValue < 0.001f) {
             velocity
         } else {
@@ -128,7 +128,7 @@ class VerticalSwipeTouchController(
     }
 
     companion object {
-        private const val SCROLL_VELOCITY_DAMPENING_RC = 1000f / (2f * Math.PI.toFloat() * 10f)
+        private const val SCROLL_VELOCITY_DAMPENING_RC = 1000.0f / (2.0f * Math.PI.toFloat() * 10.0f)
         private const val TRIGGER_VELOCITY = 2.25f
     }
 }

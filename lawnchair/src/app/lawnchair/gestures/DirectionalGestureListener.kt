@@ -32,8 +32,8 @@ abstract class DirectionalGestureListener(ctx: Context?) : OnTouchListener {
             velocityX: Float,
             velocityY: Float,
         ): Boolean {
-            val diffY = e2.y - (e1?.y ?: 0f)
-            val diffX = e2.x - (e1?.x ?: 0f)
+            val diffY = e2.y - (e1?.y ?: 0.0f)
+            val diffX = e2.x - (e1?.x ?: 0.0f)
 
             Log.d("GESTURE_DETECTION", "onFling: y " + shouldReactToSwipe(diffY, velocityY))
             Log.d("GESTURE_DETECTION", "onFling: X " + shouldReactToSwipe(diffX, velocityX))
