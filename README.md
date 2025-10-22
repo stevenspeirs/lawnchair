@@ -136,6 +136,7 @@ You can view all our links in the [Lawnchair Wiki](https://github.com/LawnchairL
 -   Corrected typo in text string
 -   Ensured Custom Icon shape sliders are of equal length
 -   Ensured System Icon shape is as accurate as possible
+-   Fixed font weight labels not displaying with their corresponding font weights on first selecting drop-down menu
 -   Fixed One UI icon corner shape
 -   Fixed Spotless style check error
 -   Formatted Calculator search result equation to display mathematical symbols
