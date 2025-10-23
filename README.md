@@ -151,3 +151,4 @@ You can view all our links in the [Lawnchair Wiki](https://github.com/LawnchairL
 -   Swapped Calculator search result subtitle and title
 -   Updated Google Fonts list
 -   Updated Inter ResourceFont font from v3.12 to v4.1
+-   Used rounded corners for the bottom of the Legal preference group on the About page
