@@ -238,7 +238,7 @@ fun About(
         item {
             PreferenceGroupItem(
                 cutTop = true,
-                cutBottom = true,
+                cutBottom = false,
             ) {
                 PreferenceDivider()
                 ClickablePreference(
