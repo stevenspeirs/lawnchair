@@ -547,7 +547,7 @@ open class IconShape(
         }
 
         override fun toString(): String {
-            return "heart" 
+            return "heart"
         }
     }
 
