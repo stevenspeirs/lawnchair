@@ -263,7 +263,7 @@ fun FolderEditSheet(
             OutlinedButton(
                 onClick = onDismiss,
             ) {
-                Text(stringResource(android.R.string.cancel))
+                Text(stringResource(id = android.R.string.cancel))
             }
             Spacer(Modifier.width(8.dp))
             Button(
@@ -272,7 +272,7 @@ fun FolderEditSheet(
                     onDismiss()
                 },
             ) {
-                Text(stringResource(android.R.string.ok))
+                Text(stringResource(id = android.R.string.ok))
             }
         },
         modifier = modifier,
