@@ -50,7 +50,7 @@ window = "1.5.0"
 
 agp = "8.13.0"
 baselineprofile = "1.4.1"
-kotlin = "2.1.10"
+kotlin = "2.2.21"
 protobuf = "0.9.5"
 licensee = "1.14.1"
 refine = "4.4.0"
@@ -135,6 +135,9 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 
+# Kotlin
+kotlin-androidExtensionRuntime = { module = "org.jetbrains.kotlin:kotlin-android-extensions-runtime", version.ref = "kotlin" }
+kotlin-parcelizeRuntime = { module = "org.jetbrains.kotlin:kotlin-parcelize-runtime", version.ref = "kotlin" }
 # KotlinX
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
