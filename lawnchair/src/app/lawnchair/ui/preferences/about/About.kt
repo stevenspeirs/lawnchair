@@ -221,7 +221,7 @@ fun About(
         }
         item {
             PreferenceGroupHeading(
-                stringResource(R.string.legal),
+                stringResource(id = R.string.legal),
             )
         }
         item {
