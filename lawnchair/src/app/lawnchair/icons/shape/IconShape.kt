@@ -506,6 +506,51 @@ open class IconShape(
         }
     }
 
+    object Heart : IconShape(
+        Corner.fullArc,
+        Corner.fullArc,
+        Corner.fullArc,
+        Corner.fullArc,
+    ) {
+        private const val HEART_PATH =
+            "M 50 30 C 30 10, 5 25, 5 50 C 5 75, 20 95, 50 95 C 80 95, 95 75, 95 50 C 95 25, 70 10, 50 30 Z"
+
+        private val parsedPath by unsafeLazy {
+            PathParser.createPathFromPathData(HEART_PATH)
+        }
+
+        private val matrix = Matrix()
+
+        override fun getMaskPath(): Path {
+            return Path().also { addToPath(it, 0.0f, 0.0f, 100.0f, 100.0f) }
+        }
+
+        override fun addToPath(
+            path: Path,
+            left: Float,
+            top: Float,
+            right: Float,
+            bottom: Float,
+            size: Float,
+            endSize: Float,
+            progress: Float,
+        ) {
+            matrix.reset()
+            val width = right - left
+            val height = bottom - top
+            matrix.setScale(width / 100.0f, height / 100.0f)
+            matrix.postTranslate(left, top)
+
+            val tempPath = Path(parsedPath)
+            tempPath.transform(matrix)
+            path.addPath(tempPath)
+        }
+
+        override fun toString(): String {
+            return "heart" 
+        }
+    }
+
     object Heptagon : IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
@@ -912,6 +957,7 @@ open class IconShape(
             "diamond" -> Diamond
             "egg" -> Egg
             "flatHexagon" -> FlatHexagon
+            "heart" -> Heart
             "heptagon" -> Heptagon
             "leaf" -> Leaf
             "lemon" -> Lemon
