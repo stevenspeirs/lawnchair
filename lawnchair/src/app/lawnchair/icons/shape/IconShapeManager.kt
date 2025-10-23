@@ -78,6 +78,7 @@ class IconShapeManager(private val context: Context) : SafeCloseable {
             IconShape.Diamond,
             IconShape.Egg,
             IconShape.FlatHexagon,
+            IconShape.Heart,
             IconShape.Heptagon,
             IconShape.Hexagon,
             IconShape.Leaf,
