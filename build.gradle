@@ -24,7 +24,7 @@ plugins {
 allprojects {
     plugins.withType(AndroidBasePlugin).configureEach {
         android {
-            buildToolsVersion "36.1.0"
+            buildToolsVersion '36.1.0'
             compileSdk {
                 version = release(36) {
                     minorApiLevel = 1
@@ -60,7 +60,7 @@ allprojects {
                     task.builtins {
                         remove java
                         java {
-                            option "lite"
+                            option 'lite'
                         }
                     }
                 }
@@ -109,7 +109,7 @@ allprojects {
                 }
                 tasks.withType(KotlinCompile).configureEach {
                     // Make sure the frameworkJar is always first in the classpath.
-                    libraries.setFrom files(frameworkJar, libraries)
+                    libraries.setFrom files(frameworkJar, libraries)					
                 }
             }
             dependencies {
@@ -139,35 +139,35 @@ final def buildCommit = providers.exec {
     commandLine('git', 'rev-parse', '--short=7', 'HEAD')
 }.standardOutput.asText.get().trim()
 
-final def ciBuild = System.getenv("CI") == "true"
-final def ciRef = System.getenv("GITHUB_REF") ?: ""
-final def ciRunNumber = System.getenv("GITHUB_RUN_NUMBER") ?: ""
-final def isReleaseBuild = ciBuild && ciRef.contains("beta")
-final def devReleaseName = ciBuild ? "Dev.(#${ciRunNumber})" : "Dev.(${buildCommit})"
-final def version = "15"
-final def releaseName = "Beta 1"
-final def versionDisplayName = "${version}.${isReleaseBuild ? releaseName : devReleaseName}"
-final def majorVersion = versionDisplayName.split("\\.")[0]
+final def ciBuild = System.getenv('CI') == 'true'
+final def ciRef = System.getenv('GITHUB_REF') ?: ''
+final def ciRunNumber = System.getenv('GITHUB_RUN_NUMBER') ?: ''
+final def isReleaseBuild = ciBuild && ciRef.contains('beta')
+final def devReleaseName = ciBuild ? "Dev.(#$ciRunNumber)" : "Dev.($buildCommit)"
+final def version = '15'
+final def releaseName = 'Beta 1'
+final def versionDisplayName = "$version.${isReleaseBuild ? releaseName : devReleaseName}"
+final def majorVersion = versionDisplayName.split('\\.')[0]
 
-final def quickstepMinSdk = "29"
-final def quickstepMaxSdk = "35"
+final def quickstepMinSdk = '29'
+final def quickstepMaxSdk = '35'
 
 android {
-    namespace "com.android.launcher3"
+    namespace 'com.android.launcher3'
     defaultConfig {
         // Lawnchair Launcher 15.0 Beta 1
         // See CONTRIBUTING.md#versioning-scheme
         versionCode 15_00_02_01
-        versionName "${versionDisplayName}"
-        buildConfigField "String", "VERSION_DISPLAY_NAME", "\"${versionDisplayName}\""
-        buildConfigField "String", "MAJOR_VERSION", "\"${majorVersion}\""
-        buildConfigField "String", "COMMIT_HASH", "\"${buildCommit}\""
-        buildConfigField "boolean", "ENABLE_AUTO_INSTALLS_LAYOUT", "false"
+        versionName "$versionDisplayName"
+        buildConfigField 'String', 'VERSION_DISPLAY_NAME', "\"$versionDisplayName\""
+        buildConfigField 'String', 'MAJOR_VERSION', "\"$majorVersion\""
+        buildConfigField 'String', 'COMMIT_HASH', "\"$buildCommit\""
+        buildConfigField 'boolean', 'ENABLE_AUTO_INSTALLS_LAYOUT', 'false'
 
         manifestPlaceholders.quickstepMinSdk = quickstepMinSdk
         manifestPlaceholders.quickstepMaxSdk = quickstepMaxSdk
-        buildConfigField "int", "QUICKSTEP_MIN_SDK", quickstepMinSdk
-        buildConfigField "int", "QUICKSTEP_MAX_SDK", quickstepMaxSdk
+        buildConfigField 'int', 'QUICKSTEP_MIN_SDK', quickstepMinSdk
+        buildConfigField 'int', 'QUICKSTEP_MAX_SDK', quickstepMaxSdk
     }
 
     applicationVariants.configureEach { variant ->
@@ -188,35 +188,35 @@ android {
     }
 
     packagingOptions.resources.excludes += [
-        "**/*.proto",
-        "**/*.bin",
-        "**/*.java",
-        "**/*.properties",
-        "**/*.version",
-        "**/*.*_module",
-        "com/**",
-        "google/**",
-        "kotlin/**",
-        "kotlinx/**",
-        "okhttp3/**",
-        "META-INF/services/**",
-        "META-INF/com/**",
-        "META-INF/licenses/**",
-        "META-INF/AL2.0",
-        "META-INF/LGPL2.1",
+        '**/*.proto',
+        '**/*.bin',
+        '**/*.java',
+        '**/*.properties',
+        '**/*.version',
+        '**/*.*_module',
+        'com/**',
+        'google/**',
+        'kotlin/**',
+        'kotlinx/**',
+        'okhttp3/**',
+        'META-INF/services/**',
+        'META-INF/com/**',
+        'META-INF/licenses/**',
+        'META-INF/AL2.0',
+        'META-INF/LGPL2.1',
     ]
 
     // Load all proguard configs from AOSP
     def proguardFilesFromAosp = allprojects
-        .collect { it.file("proguard.flags") }
+        .collect { it.file('proguard.flags') }
         .findAll { it.exists() }
         .toArray()
 
     def releaseSigning
     try {
         def keystoreProperties = new Properties()
-        keystoreProperties.load(rootProject.file("keystore.properties").newInputStream())
-        releaseSigning = signingConfigs.create("release") {
+        keystoreProperties.load(rootProject.file('keystore.properties').newInputStream())
+        releaseSigning = signingConfigs.create('release') {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
             storeFile rootProject.file(keystoreProperties['storeFile'])
@@ -233,7 +233,7 @@ android {
             applicationVariants.configureEach { variant ->
                 variant.outputs.configureEach {
                     def channel = variant.productFlavors.last().name
-                    // Override signingConfig to debug if the "nightly" flavor is selected
+                    // Override signingConfig to debug if the 'nightly' flavor is selected
                     if (channel.any { it == "nightly" }) {
                         signingConfig = signingConfigs.debug
                     }
@@ -243,15 +243,15 @@ android {
         }
 
         debug {
-            applicationIdSuffix ".debug"
-            resValue("string", "derived_app_name", "Lawnchair (Debug)")
+            applicationIdSuffix '.debug'
+            resValue('string', 'derived_app_name', 'Lawnchair SS (Debug)')
         }
 
         release {
-            resValue("string", "derived_app_name", "Lawnchair")
+            resValue('string', 'derived_app_name', 'Lawnchair SS')
             minifyEnabled true
             shrinkResources true
-            proguardFiles proguardFilesFromAosp + "proguard.pro"
+            proguardFiles proguardFilesFromAosp + 'proguard.pro'
         }
     }
 
@@ -265,36 +265,36 @@ android {
     }
 
     // See: https://developer.android.com/studio/build/build-variants#flavor-dimensions
-    flavorDimensions += ["app", "recents", "channel"]
+    flavorDimensions += ['app', 'recents', 'channel']
 
     productFlavors {
         lawn {
-            dimension "app"
+            dimension 'app'
         }
 
         withQuickstep {
-            dimension "recents"
+            dimension 'recents'
             minSdk 26
         }
 
         github {
             applicationId 'app.lawnchair'
-            dimension "channel"
+            dimension 'channel'
         }
 
         nightly {
             applicationId 'app.lawnchair.nightly'
-            dimension "channel"
+            dimension 'channel'
         }
 
         play {
-            applicationId "app.lawnchair.play"
-            dimension "channel"
+            applicationId 'app.lawnchair.play'
+            dimension 'channel'
             isDefault true
         }
 
         configureEach {
-            resValue("string", "launcher_component", "${applicationId}/app.lawnchair.LawnchairLauncher")
+            resValue('string', 'launcher_component', "$applicationId/app.lawnchair.LawnchairLauncher")
         }
     }
 
@@ -312,7 +312,7 @@ android {
             java.srcDirs = ['src_flags', 'src_shortcuts_overrides', 'lawnchair/src', 'tests/shared']
             aidl.srcDirs = ['lawnchair/aidl']
             res.srcDirs = ['lawnchair/res', 'platform_frameworks_libs_systemui/animationlib/res']
-            manifest.srcFile "lawnchair/AndroidManifest.xml"
+            manifest.srcFile 'lawnchair/AndroidManifest.xml'
             assets {
                 srcDirs 'lawnchair/assets'
             }
@@ -322,38 +322,38 @@ android {
         }
 
         github {
-            manifest.srcFile "github/AndroidManifest.xml"
+            manifest.srcFile 'github/AndroidManifest.xml'
         }
 
         nightly {
-            manifest.srcFile "nightly/AndroidManifest.xml"
+            manifest.srcFile 'nightly/AndroidManifest.xml'
         }
 
         lawnWithQuickstepGithub {
-            manifest.srcFile "quickstep/AndroidManifest-launcher.xml"
+            manifest.srcFile 'quickstep/AndroidManifest-launcher.xml'
         }
 
         lawnWithQuickstepNightly {
-            manifest.srcFile "quickstep/AndroidManifest-launcher.xml"
+            manifest.srcFile 'quickstep/AndroidManifest-launcher.xml'
         }
 
         lawnWithQuickstepPlay {
-            manifest.srcFile "quickstep/AndroidManifest-launcher.xml"
+            manifest.srcFile 'quickstep/AndroidManifest-launcher.xml'
         }
 
         withQuickstep {
             res.srcDirs = ['quickstep/res', 'quickstep/recents_ui_overrides/res']
             java.srcDirs = ['quickstep/src', 'quickstep/recents_ui_overrides/src']
-            manifest.srcFile "quickstep/AndroidManifest.xml"
+            manifest.srcFile 'quickstep/AndroidManifest.xml'
         }
     }
 }
 
 composeCompiler {
     stabilityConfigurationFiles.addAll(
-        layout.projectDirectory.file("compose_compiler_config.conf"),
+        layout.projectDirectory.file('compose_compiler_config.conf'),
     )
-    reportsDestination = layout.buildDirectory.dir("compose_build_reports")
+    reportsDestination = layout.buildDirectory.dir('compose_build_reports')
 }
 
 addFrameworkJar('framework-15.jar')
@@ -448,7 +448,7 @@ dependencies {
 
     // Smartspacer
     implementation(libs.smartspacer.sdk) {
-        exclude group: "com.github.skydoves", module: "balloon"
+        exclude group: 'com.github.skydoves', module: 'balloon'
     }
 
     implementation libs.hoko.blur
@@ -457,24 +457,24 @@ dependencies {
 }
 
 ksp {
-    arg("room.schemaLocation", "$projectDir/schemas")
+    arg('room.schemaLocation', "$projectDir/schemas")
 }
 
 
 spotless {
     java {
-        target("compatLib/**/src/**/*.java")
+        target('compatLib/**/src/**/*.java')
         googleJavaFormat().aosp()
         removeUnusedImports()
     }
     kotlin {
-        target("lawnchair/src/**/*.kt")
+        target('lawnchair/src/**/*.kt')
         ktlint().customRuleSets([
-            "io.nlopez.compose.rules:ktlint:0.4.27",
+            'io.nlopez.compose.rules:ktlint:0.4.27',
         ]).editorConfigOverride([
-            "ktlint_compose_compositionlocal-allowlist": "disabled",
-            "ktlint_compose_lambda-param-event-trailing": "disabled",
-            "ktlint_compose_content-slot-reused": "disabled",
+            'ktlint_compose_compositionlocal-allowlist': 'disabled',
+            'ktlint_compose_lambda-param-event-trailing': 'disabled',
+            'ktlint_compose_content-slot-reused': 'disabled',
         ])
     }
 }
@@ -485,9 +485,9 @@ licensee {
     allow(SpdxId.GPL_20_or_later)
     allowDependency(libs.libsu.core)
     allowDependency(libs.libsu.service)
-    allowUrl("https://github.com/patrykmichalik/opto/blob/master/LICENSE")
-    allowUrl("https://github.com/RikkaApps/HiddenApiRefinePlugin/blob/main/LICENSE")
-    allowUrl("https://opensource.org/licenses/mit-license.php")
+    allowUrl('https://github.com/patrykmichalik/opto/blob/master/LICENSE')
+    allowUrl('https://github.com/RikkaApps/HiddenApiRefinePlugin/blob/main/LICENSE')
+    allowUrl('https://opensource.org/licenses/mit-license.php')
 
     bundleAndroidAsset = true
     androidAssetReportPath = 'licenses.json'
