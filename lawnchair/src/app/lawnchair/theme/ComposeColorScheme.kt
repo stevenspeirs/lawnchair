@@ -48,8 +48,8 @@ internal fun Color.setLuminance(@FloatRange(from = 0.0, to = 100.0) newLuminance
 
 /** Helper method from monet ColorUtils.java */
 private fun labInvf(ft: Float): Float {
-    val e = 216f / 24389f
-    val kappa = 24389f / 27f
+    val e = 216.0f / 24389.0f
+    val kappa = 24389.0f / 27.0f
     val ft3 = ft * ft * ft
     return if (ft3 > e) {
         ft3
