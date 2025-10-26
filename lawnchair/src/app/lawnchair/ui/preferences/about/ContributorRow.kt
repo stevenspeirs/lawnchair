@@ -51,7 +51,7 @@ fun ContributorRow(
     modifier: Modifier = Modifier,
 ) {
     val statusText = when (member.status) {
-        ContributorStatus.Active -> stringResource(R.string.contributor_status_active)
+        ContributorStatus.Active -> stringResource(id = R.string.contributor_status_active)
         ContributorStatus.Idle -> ""
     }
 
