@@ -178,7 +178,7 @@ private fun Options(
             endWidget = {
                 if (showAppDownloadButton) {
                     ClickableIcon(
-                        painter = painterResource(R.drawable.ic_download),
+                        painter = painterResource(id = R.drawable.ic_download),
                         onClick = onAppDownloadClick,
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.padding(end = 4.dp),
