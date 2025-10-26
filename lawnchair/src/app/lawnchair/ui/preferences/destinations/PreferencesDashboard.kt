@@ -259,7 +259,7 @@ fun RowScope.PreferencesOverflowMenu(
         DropdownMenuItem(
             leadingIcon = {
                 Icon(
-                    painter = painterResource(R.drawable.ic_about),
+                    painter = painterResource(id = R.drawable.ic_about),
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
