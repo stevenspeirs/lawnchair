@@ -147,14 +147,14 @@ fun GridSettings(prefs: PreferenceManager, prefs2: PreferenceManager2) {
         adapter = prefs2.hotseatBottomFactor.getAdapter(),
         label = stringResource(id = R.string.hotseat_bottom_space_label),
         valueRange = 0.0f..1.7f,
-        step = 0.1f,
+        step = 0.05f,
         showAsPercentage = true,
     )
     SliderPreference(
         adapter = prefs2.pageIndicatorHeightFactor.getAdapter(),
         label = stringResource(id = R.string.page_indicator_height),
         valueRange = 0.0f..1.0f,
-        step = 0.1f,
+        step = 0.05f,
         showAsPercentage = true,
     )
 }
