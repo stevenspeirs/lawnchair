@@ -74,7 +74,7 @@ fun ColumnScope.WithWallpaper(
                 )
                 Spacer(Modifier.width(4.dp))
                 Text(
-                    stringResource(R.string.show_wallpaper),
+                    stringResource(id = R.string.show_wallpaper),
                 )
             }
         }
