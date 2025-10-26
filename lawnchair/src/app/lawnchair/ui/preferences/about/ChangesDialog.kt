@@ -53,7 +53,7 @@ fun ChangesDialog(
     ) {
         Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp)) {
             Text(
-                text = stringResource(R.string.changes_dialog_title),
+                text = stringResource(id = R.string.changes_dialog_title),
                 style = MaterialTheme.typography.headlineSmall,
             )
             Text(
@@ -85,7 +85,7 @@ fun ChangesDialog(
             } else {
                 item {
                     Text(
-                        text = stringResource(R.string.changes_dialog_error),
+                        text = stringResource(id = R.string.changes_dialog_error),
                         color = MaterialTheme.colorScheme.error,
                         style = MaterialTheme.typography.bodyMedium,
                     )
@@ -110,7 +110,7 @@ fun ChangesDialog(
                     onDismiss()
                 },
             ) {
-                Text(text = stringResource(R.string.download_update))
+                Text(text = stringResource(id = R.string.download_update))
             }
         }
     }
