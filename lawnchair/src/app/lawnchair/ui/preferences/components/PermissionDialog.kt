@@ -113,13 +113,13 @@ fun WallpaperAccessPermissionDialog(
                 onDismissRequest = onDismiss,
                 modifier = modifier,
                 title = {
-                    Text(stringResource(R.string.manage_storage_access_denied_title))
+                    Text(stringResource(id = R.string.manage_storage_access_denied_title))
                 },
                 text = {
-                    Text(stringResource(R.string.manage_storage_access_denied_description, stringResource(id = R.string.derived_app_name)))
+                    Text(stringResource(id = R.string.manage_storage_access_denied_description, stringResource(id = R.string.derived_app_name)))
                 },
                 confirmButton = {
-                    FilledTonalButton(onClick = onDismiss) { Text(stringResource(R.string.dismiss)) }
+                    FilledTonalButton(onClick = onDismiss) { Text(stringResource(id = R.string.dismiss)) }
                 },
             )
         } else {
@@ -134,11 +134,11 @@ fun WallpaperAccessPermissionDialog(
                     onDismissRequest = onDismiss,
                     modifier = modifier,
                     title = {
-                        Text(stringResource(R.string.permission_desc_wallpaper_multiple))
+                        Text(stringResource(id = R.string.permission_desc_wallpaper_multiple))
                     },
                     text = {
                         Column {
-                            Text(stringResource(R.string.permission_desc_wallpaper_multiple_desc, stringResource(id = R.string.derived_app_name)))
+                            Text(stringResource(id = R.string.permission_desc_wallpaper_multiple_desc, stringResource(id = R.string.derived_app_name)))
 
                             Spacer(modifier = Modifier.height(8.dp))
                             PermissionRow(
@@ -147,7 +147,7 @@ fun WallpaperAccessPermissionDialog(
                                     onPermissionRequest()
                                     context.requestManageAllFilesAccessPermission()
                                 },
-                                permissionName = stringResource(R.string.permission_label_manage_all_files),
+                                permissionName = stringResource(id = R.string.permission_label_manage_all_files),
                             )
                             PermissionRow(
                                 isChecked = mediaPermission.allPermissionsGranted,
@@ -175,12 +175,12 @@ fun WallpaperAccessPermissionDialog(
                 }
             } else {
                 PermissionDialog(
-                    title = stringResource(R.string.permissions_manage_storage),
+                    title = stringResource(id = R.string.permissions_manage_storage),
                     modifier = modifier,
                     text = stringResource(
                         R.string.permission_desc_wallpaper_base,
                         stringResource(id = R.string.derived_app_name),
-                        stringResource(R.string.permission_desc_ending_manage_all_files),
+                        stringResource(id = R.string.permission_desc_ending_manage_all_files),
                     ),
                     isPermanentlyDenied = true,
                     onConfirm = {},
@@ -200,12 +200,12 @@ fun WallpaperAccessPermissionDialog(
         val permission = rememberPermissionState(Manifest.permission.READ_EXTERNAL_STORAGE)
 
         PermissionDialog(
-            title = stringResource(R.string.permissions_external_storage),
+            title = stringResource(id = R.string.permissions_external_storage),
             modifier = modifier,
             text = stringResource(
                 R.string.permission_desc_wallpaper_base,
                 stringResource(id = R.string.derived_app_name),
-                stringResource(R.string.permission_desc_ending_read_all_files),
+                stringResource(id = R.string.permission_desc_ending_read_all_files),
             ),
             isPermanentlyDenied = permission.status.shouldShowRationale,
             onConfirm = {
@@ -260,7 +260,7 @@ fun PermissionRow(
             )
             if (!isChecked) {
                 Text(
-                    stringResource(R.string.grant_requested_permissions_tap),
+                    stringResource(id = R.string.grant_requested_permissions_tap),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodySmall,
                 )
