@@ -512,12 +512,7 @@ open class IconShape(
         Corner.fullArc,
         Corner.fullArc,
     ) {
-        private const val HEART_PATH =
-            "M 50 30 C 30 10, 5 25, 5 50 C 5 75, 30 95, 50 100 C 70 95, 95 75, 95 50 C 95 25, 70 10, 50 30 Z"
-
-        private val parsedPath by unsafeLazy {
-            PathParser.createPathFromPathData(HEART_PATH)
-        }
+        private val parsedPath: Path = PathParser.createPathFromPathData("M 50 30 C 30 10, 5 25, 5 50 C 5 75, 30 95, 50 100 C 70 95, 95 75, 95 50 C 95 25, 70 10, 50 30 Z")
 
         private val matrix = Matrix()
 
