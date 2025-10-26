@@ -34,7 +34,7 @@ fun UpdateSection(
             }
             UpdateState.UpToDate -> {
                 Text(
-                    text = stringResource(R.string.pro_updated),
+                    text = stringResource(id = R.string.pro_updated),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 8.dp),
@@ -44,7 +44,7 @@ fun UpdateSection(
                 Button(
                     onClick = onViewChanges,
                 ) {
-                    Text(text = stringResource(R.string.download_update))
+                    Text(text = stringResource(id = R.string.download_update))
                 }
             }
             is UpdateState.Downloading -> {
@@ -65,12 +65,12 @@ fun UpdateSection(
                         onInstall(updateState.file)
                     },
                 ) {
-                    Text(text = stringResource(R.string.install_update))
+                    Text(text = stringResource(id = R.string.install_update))
                 }
             }
             UpdateState.Failed -> {
                 Text(
-                    text = stringResource(R.string.update_check_failed),
+                    text = stringResource(id = R.string.update_check_failed),
                     color = MaterialTheme.colorScheme.error,
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(top = 8.dp),
