@@ -131,7 +131,6 @@ You can view all our links in the [Lawnchair Wiki](https://github.com/LawnchairL
 -   Arranged Quick Search Bar providers in alphabetical order
 -   Arranged sans-serif system fonts in alphabetical order
 -   Arranged Web Search providers in alphabetical order
--   Attempted to initially display font variants
 -   Corrected case of user interface label
 -   Corrected typo in text string
 -   Ensured Custom Icon shape sliders are of equal length
