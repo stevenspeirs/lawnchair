@@ -30,7 +30,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -330,9 +330,10 @@ private fun VariantDropdown(
         var showVariants by remember { mutableStateOf(false) }
 
         val context = LocalContext.current
-        LaunchedEffect(family) {
+        DisposableEffect(family) {
             val fontCache = FontCache.INSTANCE.get(context)
-            family.sortedVariants.forEach { fontCache.preloadFont(it) }
+            family.variants.forEach { fontCache.preloadFont(it.value) }
+            onDispose { }
         }
 
         TextButton(
