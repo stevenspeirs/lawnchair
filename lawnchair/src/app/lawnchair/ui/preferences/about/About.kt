@@ -188,16 +188,6 @@ fun About(
             }
         }
         preferenceGroupItems(
-            items = uiState.modification,
-            key = { _, it -> it.name },
-            isFirstChild = false,
-            heading = { stringResource(id = R.string.modification) },
-        ) { _, it ->
-            ContributorRow(
-                member = it,
-            )
-        }
-        preferenceGroupItems(
             items = uiState.coreTeam,
             key = { _, it -> it.name },
             isFirstChild = false,
