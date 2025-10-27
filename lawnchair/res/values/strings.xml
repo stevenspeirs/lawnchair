@@ -488,6 +488,7 @@
     <string name="quickswitch_maintenance">QuickSwitch maintenance</string>
     <string name="devops">DevOps</string>
     <string name="support_and_pr">Support and PR</string>
+    <string name="modification">Modification</string>
 
     <string name="community">Community</string>
     <string name="x_twitter" translatable="false">X</string>
