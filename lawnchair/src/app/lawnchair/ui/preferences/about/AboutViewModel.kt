@@ -34,6 +34,7 @@ class AboutViewModel(
                 versionName = BuildConfig.VERSION_NAME,
                 commitHash = BuildConfig.COMMIT_HASH,
                 coreTeam = team,
+                modificationTeam = modificationTeam,
                 supportAndPr = supportAndPr,
                 topLinks = topLinks,
                 bottomLinks = bottomLinks,
