@@ -473,7 +473,8 @@
     <string name="quickswitch_maintenance">QuickSwitch maintenance</string>
     <string name="devops">DevOps</string>
     <string name="support_and_pr">Support and PR</string>
-    <string name="modification">Modification</string>
+    <string name="modification_heading">Modification</string>
+    <string name="modification_role">Modification</string>
 
     <string name="community">Community</string>
     <string name="telegram">Telegram</string>
