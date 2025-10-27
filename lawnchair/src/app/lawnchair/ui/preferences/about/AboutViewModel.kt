@@ -162,7 +162,7 @@ class AboutViewModel(
             ),
         )
 
-        private val modification = listOf(
+        private val modificationTeam = listOf(
             TeamMember(
                 name = "tgex0",
                 role = Role.Modification,
