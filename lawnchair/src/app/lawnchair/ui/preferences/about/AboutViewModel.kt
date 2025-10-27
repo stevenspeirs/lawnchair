@@ -159,13 +159,17 @@ class AboutViewModel(
                 socialUrl = "https://yasan.glass",
                 githubUsername = "yasanglass",
             ),
+        )
+
+        private val modification = listOf(
             TeamMember(
                 name = "tgex0",
                 role = Role.Modification,
                 photoUrl = "https://avatars.githubusercontent.com/u/160293965",
                 socialUrl = "https://github.com/tgex0",
                 githubUsername = "tgex0",
-            ),        )
+            ),
+        )
 
         private val topLinks = listOf(
             Link(
