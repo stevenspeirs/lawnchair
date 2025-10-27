@@ -198,6 +198,16 @@ fun About(
             )
         }
         preferenceGroupItems(
+            items = uiState.modTeam,
+            key = { _, it -> it.name },
+            isFirstChild = false,
+            heading = { stringResource(id = R.string.mod_team) },
+        ) { _, it ->
+            ContributorRow(
+                member = it,
+            )
+        }
+        preferenceGroupItems(
             items = uiState.supportAndPr,
             key = { _, it -> it.name },
             isFirstChild = false,
