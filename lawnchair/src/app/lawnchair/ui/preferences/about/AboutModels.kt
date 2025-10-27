@@ -23,6 +23,7 @@ data class AboutUiState(
     val versionName: String = "",
     val commitHash: String = "",
     val coreTeam: List<TeamMember> = emptyList(),
+    val modificationTeam: List<TeamMember> = emptyList(),
     val supportAndPr: List<TeamMember> = emptyList(),
     val topLinks: List<Link> = emptyList(),
     val bottomLinks: List<Link> = emptyList(),
@@ -62,6 +63,7 @@ data class TeamMember(
 enum class Role(val descriptionResId: Int) {
     Development(descriptionResId = R.string.development),
     DevOps(descriptionResId = R.string.devops),
+    Modification(descriptionResId = R.string.modification),
     QuickSwitchMaintenance(descriptionResId = R.string.quickswitch_maintenance),
     Support(descriptionResId = R.string.support),
     SupportAndPr(descriptionResId = R.string.support_and_pr),
