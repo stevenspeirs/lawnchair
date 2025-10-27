@@ -332,7 +332,7 @@ private fun VariantDropdown(
         val context = LocalContext.current
         DisposableEffect(family) {
             val fontCache = FontCache.INSTANCE.get(context)
-            family.sortedVariants.forEach { fontCache.preloadFont(it) }
+            family.variants.forEach { fontCache.preloadFont(it.value) }
             onDispose { }
         }
 
