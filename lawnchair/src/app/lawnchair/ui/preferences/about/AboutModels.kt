@@ -63,7 +63,7 @@ data class TeamMember(
 enum class Role(val descriptionResId: Int) {
     Development(descriptionResId = R.string.development),
     DevOps(descriptionResId = R.string.devops),
-    Modification(descriptionResId = R.string.modification),
+    Modification(descriptionResId = R.string.modification_role),
     QuickSwitchMaintenance(descriptionResId = R.string.quickswitch_maintenance),
     Support(descriptionResId = R.string.support),
     SupportAndPr(descriptionResId = R.string.support_and_pr),
