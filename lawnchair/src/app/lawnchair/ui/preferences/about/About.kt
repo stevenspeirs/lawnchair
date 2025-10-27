@@ -201,7 +201,7 @@ fun About(
             items = uiState.modificationTeam,
             key = { _, it -> it.name },
             isFirstChild = false,
-            heading = { stringResource(id = R.string.product) },
+            heading = { stringResource(id = R.string.modification) },
         ) { _, it ->
             ContributorRow(
                 member = it,
