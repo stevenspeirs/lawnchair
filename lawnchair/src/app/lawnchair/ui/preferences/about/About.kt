@@ -109,7 +109,7 @@ fun About(
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_home_comp_modification),
+                    painter = painterResource(id = R.drawable.ic_launcher_home_comp),
                     contentDescription = null,
                     modifier = Modifier
                         .size(72.dp)
