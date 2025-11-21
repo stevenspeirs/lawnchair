@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Download
         run: |
           url='https://www.googleapis.com/webfonts/v1/webfonts?key=${{ secrets.GOOGLE_FONTS_API }}'
