@@ -254,6 +254,7 @@ private fun FontSelectionItem(
                     VariantDropdown(adapter = adapter, family = family)
                 }
             }
+
             onDelete != null -> {
                 {
                     IconButton(
@@ -268,6 +269,7 @@ private fun FontSelectionItem(
                     }
                 }
             }
+
             else -> null
         },
         applyPaddings = false,
