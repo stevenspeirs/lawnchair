@@ -98,47 +98,65 @@ class SearchTargetFactory(
     ): SearchTargetCompat {
         val result = calculation.result
         val equation = calculation.equation
+
+        val phiVariants = listOf(
+            "phi",
+            "ɸ",
+            "Φ",
+            "ϕ",
+            "ᵠ",
+            "ᵩ",
+            "ᶲ",
+            "ⱷ",
+            "Ⲫ",
+            "ⲫ",
+        )
+
+        val piVariants = listOf(
+            "pi",
+            "Π",
+            "ϖ",
+            "ᴨ",
+            "ℿ",
+            "ℼ",
+            "∏",
+            "∐",
+            "Ⲡ",
+            "ⲡ",
+        )
+
+        val tauVariants = listOf(
+            "tau",
+            "Τ",
+            "Ⲧ",
+            "ⲧ",
+        )
+
+        val replacements = mapOf(
+            "E" to "e",
+            "-" to "−",
+            "*" to "×",
+            "/" to "÷",
+            ">=" to "≥",
+            "<=" to "≤",
+            "||" to "∨",
+            "&&" to "∧",
+            "!=" to "≠",
+        )
+
         val formattedEquation = equation
             .replace(Regex("\\s+"), "")
-            .replace("E", "e")
-            .replace("phi", "φ", true)
-            .replace("ɸ", "φ", true)
-            .replace("Φ", "φ", true)
-            .replace("ϕ", "φ", true)
-            .replace("ᵠ", "φ", true)
-            .replace("ᵩ", "φ", true)
-            .replace("ᶲ", "φ", true)
-            .replace("ⱷ", "φ", true)
-            .replace("Ⲫ", "φ", true)
-            .replace("ⲫ", "φ", true)
-            .replace("pi", "π", true)
-            .replace("Π", "π", true)
-            .replace("ϖ", "π", true)
-            .replace("ᴨ", "π", true)
-            .replace("ℿ", "π", true)
-            .replace("ℼ", "π", true)
-            .replace("∏", "π", true)
-            .replace("∐", "π", true)
-            .replace("Ⲡ", "π", true)
-            .replace("ⲡ", "π", true)
-            .replace("tau", "τ", true)
-            .replace("Τ", "τ", true)
-            .replace("Ⲧ", "τ", true)
-            .replace("ⲧ", "τ", true)
-            .replace("-", "−")
-            .replace("*", "×")
-            .replace("/", "÷")
-            .replace(">=", "≥")
-            .replace("<=", "≤")
-            .replace("||", "∨")
-            .replace("&&", "∧")
-            .replace("!=", "≠")
+            .let { eq -> phiVariants.fold(eq) { acc, s -> acc.replace(s, "φ", true) } }
+            .let { eq -> piVariants.fold(eq) { acc, s -> acc.replace(s, "π", true) } }
+            .let { eq -> tauVariants.fold(eq) { acc, s -> acc.replace(s, "τ", true) } }
+            .let { eq -> replacements.entries.fold(eq) { acc, (k, v) -> acc.replace(k, v) } }
             .replace(",", ", ")
             .replace(Regex("(?<!=)=(?!=)|=="), " $0 ")
             .replace(Regex("([+−×÷%\\^>≥<≤∨∧≠])"), " $1 ")
             .replace(Regex("\\s+"), " ")
             .trim()
             .plus(" =")
+
         val uuid = UUID.randomUUID().toString()
         val id = "calculator:$uuid"
         val action = SearchActionCompat.Builder(id, result)
