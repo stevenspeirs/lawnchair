@@ -99,6 +99,17 @@ class SearchTargetFactory(
         val result = calculation.result
         val equation = calculation.equation
 
+        val keywords = listOf(
+            "abs",
+            "ceil",
+            "floor",
+            "if",
+            "max",
+            "min",
+            "round",
+            "sum",
+        )
+
         val phiVariants = listOf(
             "phi",
             "ɸ",
@@ -147,6 +158,7 @@ class SearchTargetFactory(
 
         val formattedEquation = equation
             .replace(Regex("\\s+"), "")
+            .let { eq -> keywords.fold(eq) { acc, k -> acc.replace(Regex("\\b$k\\b", RegexOption.IGNORE_CASE), k) } }
             .let { eq -> phiVariants.fold(eq) { acc, s -> acc.replace(s, "φ", true) } }
             .let { eq -> piVariants.fold(eq) { acc, s -> acc.replace(s, "π", true) } }
             .let { eq -> tauVariants.fold(eq) { acc, s -> acc.replace(s, "τ", true) } }
