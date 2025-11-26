@@ -142,6 +142,7 @@ class SearchTargetFactory(
             "||" to "∨",
             "&&" to "∧",
             "!=" to "≠",
+            "," to ", ",
         )
 
         val formattedEquation = equation
@@ -150,7 +151,6 @@ class SearchTargetFactory(
             .let { eq -> piVariants.fold(eq) { acc, s -> acc.replace(s, "π", true) } }
             .let { eq -> tauVariants.fold(eq) { acc, s -> acc.replace(s, "τ", true) } }
             .let { eq -> replacements.entries.fold(eq) { acc, (k, v) -> acc.replace(k, v) } }
-            .replace(",", ", ")
             .replace(Regex("(?<!=)=(?!=)|=="), " $0 ")
             .replace(Regex("([+−×÷%\\^>≥<≤∨∧≠])"), " $1 ")
             .replace(Regex("\\s+"), " ")
