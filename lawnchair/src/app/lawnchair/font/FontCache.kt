@@ -532,8 +532,7 @@ class FontCache private constructor(private val context: Context) : SafeCloseabl
             Pair("600", R.string.font_weight_semi_bold),
             Pair("700", R.string.font_weight_bold),
             Pair("800", R.string.font_weight_extra_bold),
-            Pair("900", R.string.font_weight_black),
-            Pair("1000", R.string.font_weight_extra_black),
+            Pair("900", R.string.font_weight_extra_black),
         )
 
         val provider = ComposeGoogleFont.Provider(
