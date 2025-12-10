@@ -351,8 +351,7 @@
     <string name="font_weight_semi_bold">SemiBold</string>
     <string name="font_weight_bold">Bold</string>
     <string name="font_weight_extra_bold">ExtraBold</string>
-    <string name="font_weight_black">Black</string>
-    <string name="font_weight_extra_black">ExtraBlack</string>
+    <string name="font_weight_extra_black">Black</string>
 
     <!--
 
