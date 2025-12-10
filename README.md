@@ -123,7 +123,6 @@ You can view all our links in the [Lawnchair Wiki](https://github.com/LawnchairL
 -   Added iOS, Light squircle, One UI, Strong squircle and Ultra squircle to Custom Icon corner shapes
 -   Added mathematical constants phi and tau to Calcuator search
 -   Added new line to ignored whitespace elements list in Calculator search
--   Added support for ExtraBlack font weight
 -   Allowed mathematical constants e, phi, pi and tau to be case insensitive in Calculator search
 -   Allowed mathematical symbols −, ×, ÷, ≠, ≥, ≤, ∨, ∧, ɸ, Φ, φ, ϕ, ᵠ, ᵩ, ᶲ, ⱷ, Ⲫ, ⲫ, Π, π, ϖ, ᴨ, ℿ, ℼ, ∏, ∐, Ⲡ, ⲡ, Τ, τ, Ⲧ and ⲧ to be used in Calculator search
 -   Arranged Custom Icon corner shapes in alphabetical order
@@ -133,6 +132,7 @@ You can view all our links in the [Lawnchair Wiki](https://github.com/LawnchairL
 -   Arranged Web Search providers in alphabetical order
 -   Corrected case of user interface label
 -   Corrected typo in text string
+-   Ensured consistent sorting of font variants for all font types
 -   Ensured Custom Icon shape sliders are of equal length
 -   Ensured System Icon shape is as accurate as possible
 -   Fixed font weight labels not displaying with their corresponding font weights on first selecting drop-down menu
