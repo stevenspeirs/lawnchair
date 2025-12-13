@@ -35,7 +35,7 @@ jobs:
       - name: Build
         run: ./gradlew assembleLawnWithQuickstepGithubRelease
       - name: Upload
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: lawnchair-${{ env.time }}
           path: build/outputs/apk/lawnWithQuickstepGithub/release/*.apk
