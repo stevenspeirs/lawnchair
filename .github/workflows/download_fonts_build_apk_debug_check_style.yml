@@ -11,10 +11,21 @@ jobs:
         uses: actions/checkout@v6
       - name: Download
         run: |
+          set -euo pipefail
           url='https://www.googleapis.com/webfonts/v1/webfonts?key=${{ secrets.GOOGLE_FONTS_API }}'
           output='lawnchair/assets/google_fonts.json'
           mkdir -p lawnchair/assets
-          curl -o $output $url || exit 1
+          curl -fsS "$url" | jq -c '.' > "$output"
+      - name: Validate
+        run: |
+          set -euo pipefail
+          file='lawnchair/assets/google_fonts.json'
+          jq -e '
+            .kind == "webfonts#webfontList"
+            and (.items | type == "array")
+            and (.items[] | has("family"))
+            and (.items[] | has("files"))
+          ' "$file" > /dev/null          
       - name: Checksum
         run: |
           output='lawnchair/assets/google_fonts.json'
