@@ -241,7 +241,7 @@ private fun ListSortingOptions(
                 }
             },
             text = {
-                Text(stringResource(id = R.string.folders_filter_duplicates))
+                Text(stringResource(R.string.folders_filter_duplicates))
             },
         )
         PreferenceDivider(modifier = Modifier.padding(vertical = 8.dp))
@@ -252,7 +252,7 @@ private fun ListSortingOptions(
                 )
             },
             text = {
-                Text(stringResource(id = R.string.action_reset))
+                Text(stringResource(R.string.action_reset))
             },
         )
     }
