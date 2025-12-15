@@ -100,7 +100,7 @@ fun SelectAppsForDrawerFolder(
             item {
                 if (selectedAppsInFolder.isNotEmpty()) {
                     DraggablePreferenceGroup<App>(
-                        label = stringResource(R.string.selected_apps),
+                        label = stringResource(id = R.string.selected_apps),
                         items = selectedAppsInFolder,
                         defaultList = selectedAppsInFolder,
                         onOrderChange = { newOrder ->
@@ -142,7 +142,7 @@ fun SelectAppsForDrawerFolder(
                                         newList.map { it.toAppInfo(context) },
                                     )
                                 }) {
-                                    Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.delete_label))
+                                    Icon(Icons.Rounded.Close, contentDescription = stringResource(id = R.string.delete_label))
                                 }
                             },
                         )
@@ -155,7 +155,7 @@ fun SelectAppsForDrawerFolder(
             preferenceGroupItems(
                 items = unselectedApps,
                 heading = if (selectedAppsInFolder.isNotEmpty()) {
-                    { stringResource(R.string.add_apps) }
+                    { stringResource(id = R.string.add_apps) }
                 } else {
                     null
                 },
