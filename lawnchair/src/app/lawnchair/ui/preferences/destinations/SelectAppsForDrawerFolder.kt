@@ -206,7 +206,7 @@ private fun ListSortingOptions(
                 hideMenu()
             },
             text = {
-                Text(stringResource(id = R.string.inverse_selection))
+                Text(stringResource(R.string.inverse_selection))
             },
         )
 
