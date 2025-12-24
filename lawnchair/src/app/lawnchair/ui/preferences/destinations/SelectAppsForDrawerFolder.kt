@@ -81,9 +81,9 @@ fun SelectAppsForDrawerFolder(
 
     PreferenceLayoutLazyColumn(
         label = if (loading) {
-            stringResource(id = R.string.loading)
+            stringResource(R.string.loading)
         } else {
-            stringResource(id = R.string.x_with_y_count, folderInfo?.title.toString(), selectedAppsInFolder.size)
+            stringResource(R.string.x_with_y_count, folderInfo?.title.toString(), selectedAppsInFolder.size)
         },
         modifier = modifier,
         isExpandedScreen = LocalIsExpandedScreen.current,
@@ -100,7 +100,7 @@ fun SelectAppsForDrawerFolder(
             item {
                 if (selectedAppsInFolder.isNotEmpty()) {
                     DraggablePreferenceGroup<App>(
-                        label = stringResource(id = R.string.selected_apps),
+                        label = stringResource(R.string.selected_apps),
                         items = selectedAppsInFolder,
                         defaultList = selectedAppsInFolder,
                         onOrderChange = { newOrder ->
@@ -142,7 +142,7 @@ fun SelectAppsForDrawerFolder(
                                         newList.map { it.toAppInfo(context) },
                                     )
                                 }) {
-                                    Icon(Icons.Rounded.Close, contentDescription = stringResource(id = R.string.delete_label))
+                                    Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.delete_label))
                                 }
                             },
                         )
@@ -155,7 +155,7 @@ fun SelectAppsForDrawerFolder(
             preferenceGroupItems(
                 items = unselectedApps,
                 heading = if (selectedAppsInFolder.isNotEmpty()) {
-                    { stringResource(id = R.string.add_apps) }
+                    { stringResource(R.string.add_apps) }
                 } else {
                     null
                 },
