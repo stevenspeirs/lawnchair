@@ -86,7 +86,7 @@ fun LauncherPopupPreference(
         }
 
         DraggablePreferenceGroup(
-            label = stringResource(id = R.string.popup_menu_items),
+            label = stringResource(R.string.popup_menu_items),
             items = optionsList,
             defaultList = LauncherOptionsPopup.DEFAULT_ORDER,
             onOrderChange = {
