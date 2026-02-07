@@ -238,8 +238,10 @@ private fun FontSelectionItem(
     PreferenceTemplate(
         modifier = modifier
             .clickable {
-                adapter.onChange(adapter.state.value.takeIf { it in family.variants.values }
-                    ?: family.default)
+                adapter.onChange(
+                    adapter.state.value.takeIf { it in family.variants.values }
+                        ?: family.default,
+                )
             },
         title = {
             Box(modifier = Modifier.height(52.dp)) {
