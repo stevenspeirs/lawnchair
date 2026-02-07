@@ -485,6 +485,12 @@
     <!-- Content description for arrow tip close button. [CHAR LIMIT=NONE] -->
     <string name="accessibility_close">Close</string>
 
+    <!-- Text for InfoPreferenceWithoutLinkPreview -->
+    <string name="info_preference_without_link_preview">Very important announcement</string>
+
+    <!-- Text for InfoPreferenceWithLinkPreview -->
+    <string name="info_preference_with_link_preview">Very important announcement with a very important link</string>
+
     <!-- Label of tab to indicate personal apps -->
     <string name="all_apps_personal_tab">Personal</string>
     <!-- Label of tab to indicate work apps -->

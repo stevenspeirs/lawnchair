@@ -98,6 +98,77 @@ class SearchTargetFactory(
     ): SearchTargetCompat {
         val result = calculation.result
         val equation = calculation.equation
+
+        val keywords = listOf(
+            "abs",
+            "ceil",
+            "floor",
+            "if",
+            "max",
+            "min",
+            "round",
+            "sum",
+        )
+
+        val phiVariants = listOf(
+            "phi",
+            "ɸ",
+            "Φ",
+            "ϕ",
+            "ᵠ",
+            "ᵩ",
+            "ᶲ",
+            "ⱷ",
+            "Ⲫ",
+            "ⲫ",
+        )
+
+        val piVariants = listOf(
+            "pi",
+            "Π",
+            "ϖ",
+            "ᴨ",
+            "ℿ",
+            "ℼ",
+            "∏",
+            "∐",
+            "Ⲡ",
+            "ⲡ",
+        )
+
+        val tauVariants = listOf(
+            "tau",
+            "Τ",
+            "Ⲧ",
+            "ⲧ",
+        )
+
+        val replacements = mapOf(
+            "E" to "e",
+            "-" to "−",
+            "*" to "×",
+            "/" to "÷",
+            ">=" to "≥",
+            "<=" to "≤",
+            "||" to "∨",
+            "&&" to "∧",
+            "!=" to "≠",
+            "," to ", ",
+        )
+
+        val formattedEquation = equation
+            .replace(Regex("\\s+"), "")
+            .let { eq -> keywords.fold(eq) { acc, k -> acc.replace(Regex("\\b$k\\b", RegexOption.IGNORE_CASE), k) } }
+            .let { eq -> phiVariants.fold(eq) { acc, s -> acc.replace(s, "φ", true) } }
+            .let { eq -> piVariants.fold(eq) { acc, s -> acc.replace(s, "π", true) } }
+            .let { eq -> tauVariants.fold(eq) { acc, s -> acc.replace(s, "τ", true) } }
+            .let { eq -> replacements.entries.fold(eq) { acc, (k, v) -> acc.replace(k, v) } }
+            .replace(Regex("(?<!=)=(?!=)|=="), " $0 ")
+            .replace(Regex("([+−×÷%\\^>≥<≤∨∧≠])"), " $1 ")
+            .replace(Regex("\\s+"), " ")
+            .trim()
+            .plus(" =")
+
         val uuid = UUID.randomUUID().toString()
         val id = "calculator:$uuid"
         val action = SearchActionCompat.Builder(id, result)
@@ -105,7 +176,7 @@ class SearchTargetFactory(
                 Icon.createWithResource(context, R.drawable.calculator)
                     .setTint(ColorTokens.TextColorSecondary.resolveColor(context)),
             )
-            .setSubtitle(equation)
+            .setSubtitle(formattedEquation)
             .setIntent(Intent())
             .build()
 

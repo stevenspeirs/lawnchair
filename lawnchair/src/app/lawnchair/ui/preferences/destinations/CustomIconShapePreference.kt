@@ -1,5 +1,7 @@
 package app.lawnchair.ui.preferences.destinations
 
+import android.graphics.Paint
+import android.util.TypedValue
 import android.widget.Toast
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
@@ -280,6 +282,38 @@ private fun IconShapeCornerPreference(
     )
 }
 
+@Composable
+private fun spToPx(
+    sp: Float,
+): Float {
+    val context = LocalContext.current
+    val displayMetrics = context.resources.displayMetrics
+    val scaledDensity = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, displayMetrics)
+    return sp * scaledDensity
+}
+
+@Composable
+private fun pxToDp(
+    px: Float,
+): Float {
+    val context = LocalContext.current
+    val displayMetrics = context.resources.displayMetrics
+    val density = displayMetrics.density
+    return px / density
+}
+
+private fun getMaxStringLengthInPixels(
+    strings: List<String>,
+    fontSize: Float,
+): Float {
+    val paint = Paint().apply {
+        textSize = fontSize
+    }
+    return strings.map {
+        paint.measureText(it)
+    }.maxOrNull() ?: 0.0f
+}
+
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun CornerSlider(
@@ -293,9 +327,23 @@ private fun CornerSlider(
     val bottomSheetHandler = LocalBottomSheetHandler.current
     val options = listOf<IconCornerShape>(
         IconCornerShape.arc,
-        IconCornerShape.Squircle,
         IconCornerShape.Cut,
+        IconCornerShape.Cupertino,
+        IconCornerShape.LightSquircle,
+        IconCornerShape.Sammy,
+        IconCornerShape.Squircle,
+        IconCornerShape.StrongSquircle,
+        IconCornerShape.UltraSquircle,
     )
+
+    val strings = options.map {
+        it.getLabel()
+    }
+    val textSize = 14.0f
+    val textSizeSp = spToPx(textSize)
+    val maxLengthPx = getMaxStringLengthInPixels(strings, textSizeSp)
+    val padding = 6.0f
+    val maxLengthDp = pxToDp(maxLengthPx) + padding
 
     val step = 0.1f
     val valueRange = 0f..1f
@@ -398,9 +446,9 @@ private fun CornerSlider(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    modifier = Modifier.requiredWidthIn(min = 48.dp),
+                    modifier = Modifier.requiredWidthIn(min = maxLengthDp.dp),
                     text = cornerShape.getLabel(),
-                    fontSize = 14.sp,
+                    fontSize = textSize.sp,
                 )
                 Icon(
                     imageVector = Icons.Rounded.ArrowDropDown,
@@ -414,7 +462,13 @@ private fun CornerSlider(
 
 @Composable
 private fun IconCornerShape.getLabel() = when (this) {
-    IconCornerShape.Squircle -> stringResource(id = R.string.custom_icon_shape_corner_squircle)
+    IconCornerShape.arc -> stringResource(id = R.string.custom_icon_shape_corner_arc)
+    IconCornerShape.Cupertino -> stringResource(id = R.string.custom_icon_shape_corner_cupertino)
     IconCornerShape.Cut -> stringResource(id = R.string.custom_icon_shape_corner_cut)
+    IconCornerShape.LightSquircle -> stringResource(id = R.string.custom_icon_shape_corner_light_squircle)
+    IconCornerShape.Sammy -> stringResource(id = R.string.custom_icon_shape_corner_sammy)
+    IconCornerShape.Squircle -> stringResource(id = R.string.custom_icon_shape_corner_squircle)
+    IconCornerShape.StrongSquircle -> stringResource(id = R.string.custom_icon_shape_corner_strong_squircle)
+    IconCornerShape.UltraSquircle -> stringResource(id = R.string.custom_icon_shape_corner_ultra_squircle)
     else -> stringResource(id = R.string.custom_icon_shape_corner_round)
 }

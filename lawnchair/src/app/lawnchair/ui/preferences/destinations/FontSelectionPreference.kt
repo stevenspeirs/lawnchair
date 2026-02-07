@@ -2,6 +2,7 @@ package app.lawnchair.ui.preferences.destinations
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Typeface
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -42,6 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.lawnchair.font.FontCache
@@ -278,6 +280,30 @@ private fun removeFamilyPrefix(
     return fontName.removePrefix(familyName).trim().toString()
 }
 
+@Composable
+private fun VariantText(
+    font: FontCache.Font,
+    text: String,
+) {
+    val context = LocalContext.current
+    val fontCache = remember { FontCache.INSTANCE.get(context) }
+
+    val typeface by produceState<Typeface?>(initialValue = fontCache.getLoadedFont(font)?.typeface) {
+        if (value == null) {
+            value = fontCache.getTypeface(font)
+        }
+    }
+
+    val fontFamily = remember(typeface, font) {
+        typeface?.let { FontFamily(it) } ?: font.composeFontFamily
+    }
+
+    Text(
+        text = text,
+        fontFamily = fontFamily,
+    )
+}
+
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun VariantDropdown(
@@ -331,9 +357,9 @@ private fun VariantDropdown(
                         showVariants = false
                     },
                     text = {
-                        Text(
+                        VariantText(
+                            font = font,
                             text = removeFamilyPrefix(family.displayName, font.displayName),
-                            fontFamily = font.composeFontFamily,
                         )
                     },
                 )

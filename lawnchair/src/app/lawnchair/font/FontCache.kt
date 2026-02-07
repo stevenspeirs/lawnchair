@@ -79,7 +79,7 @@ class FontCache @Inject constructor(
     val uiRegular = ResourceFont(
         context,
         R.font.googlesansflex_variable,
-        "Google Sans Flex " + context.getString(R.string.font_weight_medium),
+        "Google Sans Flex " + context.getString(R.string.font_weight_regular),
         mapOf(
             FontAxes.WEIGHT to FontWeight.Normal.weight.toFloat(),
             FontAxes.ROUNDNESS to 100f,
@@ -101,7 +101,7 @@ class FontCache @Inject constructor(
     val uiText = ResourceFont(
         context,
         R.font.googlesansflex_variable,
-        "Google Sans Flex " + context.getString(R.string.font_weight_medium),
+        "Google Sans Flex " + context.getString(R.string.font_weight_regular),
         mapOf(
             FontAxes.WEIGHT to FontWeight.Normal.weight.toFloat(),
             FontAxes.ROUNDNESS to 100f,
@@ -178,7 +178,9 @@ class FontCache @Inject constructor(
         constructor(font: Font) : this(font.displayName, mapOf(Pair("regular", font)))
 
         val default = variants.getOrElse("regular") { variants.values.first() }
-        val sortedVariants by lazy { variants.values.sortedBy { it.familySorter } }
+        val sortedVariants: List<Font> by lazy {
+            variants.values.sortedWith(compareBy({ it.fontWeight }, { if (it.isItalic) 1 else 0 }))
+        }
     }
 
     class TypefaceFamily(private val variants: Map<String, Typeface?>) {
@@ -190,7 +192,8 @@ class FontCache @Inject constructor(
 
         abstract val fullDisplayName: String
         abstract val displayName: String
-        open val familySorter get() = fullDisplayName
+        abstract val fontWeight: Int
+        abstract val isItalic: Boolean
         open val isAvailable get() = true
 
         abstract val composeFontFamily: FontFamily
@@ -228,6 +231,16 @@ class FontCache @Inject constructor(
 
         override val fullDisplayName = typeface.toString()
         override val displayName get() = fullDisplayName
+        override val fontWeight: Int
+            get() = when (typeface?.style ?: Typeface.NORMAL) {
+                Typeface.BOLD, Typeface.BOLD_ITALIC -> 700
+                else -> 400
+            }
+        override val isItalic: Boolean
+            get() = typeface?.style == Typeface.ITALIC || typeface?.style == Typeface.BOLD_ITALIC
+
+        override val composeFontFamily: FontFamily
+            get() = FontFamily(typeface ?: Typeface.DEFAULT)
 
         override suspend fun load(): Typeface? {
             return typeface
@@ -245,6 +258,15 @@ class FontCache @Inject constructor(
     class DummyFont : TypefaceFont(null) {
 
         private val hashCode = "DummyFont".hashCode()
+
+        override val fullDisplayName: String
+            get() = "DummyFont"
+        override val displayName: String
+            get() = "Dummy"
+        override val fontWeight: Int
+            get() = 400
+        override val isItalic: Boolean
+            get() = false
 
         override val composeFontFamily = FontFamily(Typeface.DEFAULT)
 
@@ -275,6 +297,12 @@ class FontCache @Inject constructor(
         } else {
             actualName
         }
+        override val displayName: String
+            get() = fullDisplayName
+        override val fontWeight: Int
+            get() = parseFontWeight(actualName)
+        override val isItalic: Boolean
+            get() = parseItalic(actualName)
 
         override val composeFontFamily = FontFamily(typeface!!)
 
@@ -320,6 +348,16 @@ class FontCache @Inject constructor(
         private val hashCode = "SystemFont|$family|$style".hashCode()
 
         override val fullDisplayName = family
+        override val displayName
+            get() = fullDisplayName
+        override val fontWeight: Int
+            get() = when (style) {
+                Typeface.BOLD, Typeface.BOLD_ITALIC -> 700
+                else -> 400
+            }
+        override val isItalic: Boolean
+            get() = style == Typeface.ITALIC || style == Typeface.BOLD_ITALIC
+
         override val composeFontFamily = FontFamily(typeface!!)
 
         override fun saveToJson(obj: JSONObject) {
@@ -363,6 +401,13 @@ class FontCache @Inject constructor(
         private val hashCode = "AssetFont|$name".hashCode()
 
         override val fullDisplayName = name
+        override val displayName: String
+            get() = fullDisplayName
+        override val fontWeight: Int
+            get() = parseFontWeight(name)
+        override val isItalic: Boolean
+            get() = parseItalic(name)
+
         override val composeFontFamily = FontFamily(ComposeFont("$name.ttf", assets))
 
         override fun saveToJson(obj: JSONObject) {
@@ -400,6 +445,12 @@ class FontCache @Inject constructor(
         private val hashCode = "ResourceFont|$name|$axisSettings".hashCode()
 
         override val fullDisplayName = name
+        override val displayName: String
+            get() = fullDisplayName
+        override val fontWeight: Int
+            get() = parseFontWeight(name)
+        override val isItalic: Boolean
+            get() = parseItalic(name)
 
         @OptIn(ExperimentalTextApi::class)
         override val composeFontFamily = FontFamily(
@@ -474,7 +525,10 @@ class FontCache @Inject constructor(
 
         override val displayName = createVariantName()
         override val fullDisplayName = "$family $displayName"
-        override val familySorter = "${GoogleFontsListing.getWeight(variant)}${GoogleFontsListing.isItalic(variant)}"
+        override val fontWeight: Int
+            get() = GoogleFontsListing.getWeight(variant).toInt()
+        override val isItalic: Boolean
+            get() = GoogleFontsListing.isItalic(variant)
 
         override val composeFontFamily = FontFamily(
             androidx.compose.ui.text.googlefonts.Font(
@@ -623,6 +677,51 @@ class FontCache @Inject constructor(
             providerPackage = "com.google.android.gms",
             certificates = R.array.com_google_android_gms_fonts_certs,
         )
+
+        private val fontWeightRules: List<Pair<Int, List<Regex>>> = listOf(
+            100 to listOf(
+                Regex("""\b(hairline|thin)\b"""),
+            ),
+            200 to listOf(
+                Regex("""\b(extra|ultra)\s*light\b"""),
+            ),
+            300 to listOf(
+                Regex("""\b(light)\b"""),
+            ),
+            400 to listOf(
+                Regex("""\b(normal|regular)\b"""),
+            ),
+            500 to listOf(
+                Regex("""\b(medium)\b"""),
+            ),
+            600 to listOf(
+                Regex("""\b(demi|semi)\s*bold\b"""),
+            ),
+            700 to listOf(
+                Regex("""\b(bold)\b"""),
+            ),
+            800 to listOf(
+                Regex("""\b(extra|ultra|x)\s*bold\b"""),
+            ),
+            900 to listOf(
+                Regex("""\b((extra\s*)?black|heavy)\b"""),
+            ),
+        )
+
+        private fun parseFontWeight(name: String): Int {
+            val lower = name.lowercase()
+            for ((value, patterns) in fontWeightRules) {
+                if (patterns.any { it.containsMatchIn(lower) }) {
+                    return value
+                }
+            }
+            return 400
+        }
+
+        private fun parseItalic(name: String): Boolean {
+            val lower = name.lowercase()
+            return "italic" in lower || "oblique" in lower
+        }
     }
 
     class AddFontException(message: String) : Exception(message)

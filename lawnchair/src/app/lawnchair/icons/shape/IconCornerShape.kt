@@ -137,41 +137,55 @@ sealed class IconCornerShape {
 
         override val controlDistance: Float = .1f
 
-        override fun toString(): String = "lightsquircle"
+        override fun toString(): String {
+            return "lightsquircle"
+        }
     }
 
     object Squircle : BaseBezierPath() {
 
         override val controlDistance: Float = .2f
 
-        override fun toString(): String = "squircle"
+        override fun toString(): String {
+            return "squircle"
+        }
     }
 
     object StrongSquircle : BaseBezierPath() {
 
         override val controlDistance: Float = .3f
 
-        override fun toString(): String = "strongsquircle"
+        override fun toString(): String {
+            return "strongsquircle"
+        }
     }
 
     object UltraSquircle : BaseBezierPath() {
 
         override val controlDistance: Float = .37f
 
-        override fun toString(): String = "ultrasquircle"
+        override fun toString(): String {
+            return "ultrasquircle"
+        }
     }
 
-    data object Sammy : BaseBezierPath() {
+    object Sammy : BaseBezierPath() {
 
         override val controlDistanceX: Float = 0.4431717f
         override val controlDistanceY: Float = 0.14010102f
+
+        override fun toString(): String {
+            return "sammy"
+        }
     }
 
     open class Arc : BaseBezierPath() {
 
         override val controlDistance: Float = roundControlDistance
 
-        override fun toString(): String = "arc"
+        override fun toString(): String {
+            return "arc"
+        }
     }
 
     object Cupertino : Arc() {

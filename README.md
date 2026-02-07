@@ -110,3 +110,33 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 [Nightly link]: https://nightly.link/LawnchairLauncher/lawnchair/workflows/ci/15-dev
 [Obtainium link]: https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22app.lawnchair.nightly%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2Flawnchairlauncher%2Flawnchair%22%2C%22author%22%3A%22Lawnchair%20Launcher%22%2C%22name%22%3A%22Lawnchair%20(Debug)%22%2C%22preferredApkIndex%22%3A0%2C%22additionalSettings%22%3A%22%7B%5C%22includePrereleases%5C%22%3Atrue%2C%5C%22fallbackToOlderReleases%5C%22%3Afalse%2C%5C%22filterReleaseTitlesByRegEx%5C%22%3A%5C%22Lawnchair%20Nightly%5C%22%2C%5C%22filterReleaseNotesByRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22verifyLatestTag%5C%22%3Afalse%2C%5C%22dontSortReleasesList%5C%22%3Afalse%2C%5C%22useLatestAssetDateAsReleaseDate%5C%22%3Afalse%2C%5C%22trackOnly%5C%22%3Afalse%2C%5C%22versionExtractionRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22matchGroupToUse%5C%22%3A%5C%22%5C%22%2C%5C%22versionDetection%5C%22%3Afalse%2C%5C%22releaseDateAsVersion%5C%22%3Atrue%2C%5C%22useVersionCodeAsOSVersion%5C%22%3Afalse%2C%5C%22apkFilterRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22invertAPKFilter%5C%22%3Afalse%2C%5C%22autoApkFilterByArch%5C%22%3Atrue%2C%5C%22appName%5C%22%3A%5C%22%5C%22%2C%5C%22shizukuPretendToBeGooglePlay%5C%22%3Afalse%2C%5C%22exemptFromBackgroundUpdates%5C%22%3Afalse%2C%5C%22skipUpdateNotifications%5C%22%3Afalse%2C%5C%22about%5C%22%3A%5C%22Lawnchair%20is%20a%20free%2C%20open-source%20home%20app%20for%20Android.%20(NOTE%3A%20This%20is%20the%20debug%20version%20of%20Lawnchair%2C%20for%20the%20beta%2Fstable%20versions%20see%20%5C%5C%5C%22Lawnchair%5C%5C%5C%22)%5C%22%7D%22%7D
 [GitHub link]: https://github.com/LawnchairLauncher/lawnchair/releases/tag/nightly
+
+## Modifications
+
+-   Added Flat hexagon, Heart, Heptagon, Leaf, Lemon, Light squircle, Nonagon, Pentagon, Strong squircle, Triangle and Ultra squircle icon shapes
+-   Added Lawnfeed and Google Go to Feed providers whitelist
+-   Added iOS, Light squircle, One UI, Strong squircle and Ultra squircle to Custom Icon corner shapes
+-   Added mathematical constants phi and tau to Calcuator search
+-   Added new line to ignored whitespace elements list in Calculator search
+-   Allowed mathematical constants e, phi, pi and tau to be case insensitive in Calculator search
+-   Allowed mathematical symbols −, ×, ÷, ≠, ≥, ≤, ∨, ∧, ɸ, Φ, φ, ϕ, ᵠ, ᵩ, ᶲ, ⱷ, Ⲫ, ⲫ, Π, π, ϖ, ᴨ, ℿ, ℼ, ∏, ∐, Ⲡ, ⲡ, Τ, τ, Ⲧ and ⲧ to be used in Calculator search
+-   Arranged Custom Icon corner shapes in alphabetical order
+-   Arranged Feed providers in alphabetical order
+-   Arranged Quick Search Bar providers in alphabetical order
+-   Arranged sans-serif system fonts in alphabetical order
+-   Arranged Web Search providers in alphabetical order
+-   Corrected case of user interface label
+-   Corrected typo in text string
+-   Ensured consistent sorting of font variants for all font types
+-   Ensured Custom Icon shape sliders are of equal length
+-   Ensured System Icon shape is as accurate as possible
+-   Fixed font weight labels not displaying with their corresponding font weights on first selecting drop-down menu
+-   Fixed One UI icon corner shape
+-   Fixed Spotless style check error
+-   Formatted Calculator search result equation to display mathematical symbols
+-   Refactored code for consistency
+-   Replaced 'Very important announcement with a very important link' with translatable text string
+-   Replaced 'Very important announcement' with translatable text string
+-   Signed APK with personal key
+-   Swapped Calculator search result subtitle and title
+-   Updated Google Fonts list
