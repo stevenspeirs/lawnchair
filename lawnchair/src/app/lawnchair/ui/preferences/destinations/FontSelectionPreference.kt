@@ -237,10 +237,7 @@ private fun FontSelectionItem(
     val selected = family.variants.any { it.value == adapter.state.value }
     PreferenceTemplate(
         modifier = modifier
-        .clickable {
-            adapter.onChange(adapter.state.value.takeIf { it in family.variants.values }
-                ?: family.default)
-        }
+        .clickable { adapter.onChange(family.default) }
         title = {
             Box(modifier = Modifier.height(52.dp)) {
                 Text(
