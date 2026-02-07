@@ -354,6 +354,12 @@ android {
     }
 }
 
+baselineProfile {
+    saveInSrc = true
+    mergeIntoMain = true
+    automaticGenerationDuringBuild = false
+}
+
 composeCompiler {
     stabilityConfigurationFiles.addAll(
         layout.projectDirectory.file("compose_compiler_config.conf"),
