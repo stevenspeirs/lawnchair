@@ -94,8 +94,11 @@ fun FontSelection(
             googleFamilies.indexOfFirst { it.family.equals("Google Sans Flex", true) }
 
         val googleSansFlex =
-            if (googleSansFlexIndex != -1) googleFamilies.removeAt(googleSansFlexIndex)
-            else null
+            if (googleSansFlexIndex != -1) {
+                googleFamilies.removeAt(googleSansFlexIndex)
+            } else {
+                null
+            }
 
         googleFamilies.sortBy { it.family.lowercase() }
 
