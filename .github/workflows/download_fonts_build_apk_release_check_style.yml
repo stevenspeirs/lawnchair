@@ -1,0 +1,125 @@
+name: Download Fonts Build APK Release Check Style
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-fonts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Download
+        run: |
+          set -euo pipefail
+          url='https://www.googleapis.com/webfonts/v1/webfonts?key=${{ secrets.GOOGLE_FONTS_API }}'
+          output='lawnchair/assets/google_fonts.json'
+          mkdir -p lawnchair/assets
+          curl -fsS "$url" | jq -c '.' > "$output"
+      - name: Validate
+        run: |
+          set -euo pipefail
+          file='lawnchair/assets/google_fonts.json'
+          jq -e '
+            .kind == "webfonts#webfontList"
+            and (.items | type == "array")
+            and (.items[] | has("family"))
+            and (.items[] | has("files"))
+          ' "$file" > /dev/null          
+      - name: Checksum
+        run: |
+          output='lawnchair/assets/google_fonts.json'
+          if [ -f $output ]; then
+            old_checksum=$(git show HEAD:$output | sha256sum | awk '{print $1}')
+            new_checksum=$(sha256sum $output | awk '{print $1}')
+            if [ $old_checksum == $new_checksum ]; then
+              echo 'checksum_match=true' >> $GITHUB_ENV
+            else
+              echo 'checksum_match=false' >> $GITHUB_ENV
+            fi
+          else
+            echo 'checksum_match=false' >> $GITHUB_ENV
+          fi
+      - name: Commit
+        run: |
+          if [ '${{ env.checksum_match }}' == 'false' ]; then
+            git config --global user.name 'GitHub Action'
+            git config --global user.email 'action@github.com'
+            git add lawnchair/assets/google_fonts.json
+            git commit -m 'Update Google fonts'
+            git push
+          fi
+  build-apk:
+    runs-on: ubuntu-latest
+    needs: download-fonts
+    steps:
+      - name: Time
+        run: echo time=$(date +'%s') >> $GITHUB_ENV
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: zulu
+          java-version: 24
+      - name: Gradle
+        uses: gradle/actions/setup-gradle@v5
+        with:
+          cache-cleanup: always
+      - name: Sign
+        if: github.repository_owner == 'tgex0'
+        env:
+          KEYSTORE: ${{ secrets.KEYSTORE }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          if [ -n  "$KEYSTORE" ]; then
+            echo storePassword="$KEYSTORE_PASSWORD" > keystore.properties
+            echo keyAlias="$KEY_ALIAS" >> keystore.properties
+            echo keyPassword="$KEY_PASSWORD" >> keystore.properties
+            echo storeFile="${{ github.workspace }}/keystore.jks" >> keystore.properties
+            echo "$KEYSTORE" | base64 --decode > ${{ github.workspace }}/keystore.jks
+          fi
+      - name: Build
+        run: ./gradlew assembleLawnWithQuickstepGithubRelease
+      - name: Upload
+        uses: actions/upload-artifact@v6
+        with:
+          name: lawnchair-${{ env.time }}
+          path: build/outputs/apk/lawnWithQuickstepGithub/release/*.apk
+  check-style:
+    runs-on: ubuntu-latest
+    needs: download-fonts
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: zulu
+          java-version: 24
+      - name: Gradle
+        uses: gradle/actions/setup-gradle@v5
+      - name: Spotless
+        run: ./gradlew spotlessCheck
+  final-status:
+    needs:
+      - download-fonts
+      - build-apk
+      - check-style
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Status
+        run: |
+          results=$(tr -d '\n' <<< '${{ toJSON(needs.*.result) }}')
+          if ! grep -q -v -E '(failure|cancelled)' <<< '$results'; then
+            echo 'Failure'
+            exit 1
+          fi
+          echo 'Success'

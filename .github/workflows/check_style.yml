@@ -1,0 +1,36 @@
+name: Check Style
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-style:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: zulu
+          java-version: 24
+      - name: Gradle
+        uses: gradle/actions/setup-gradle@v5
+      - name: Spotless
+        run: ./gradlew spotlessCheck
+  final-status:
+    needs:
+      - check-style
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Status
+        run: |
+          results=$(tr -d '\n' <<< '${{ toJSON(needs.*.result) }}')
+          if ! grep -q -v -E '(failure|cancelled)' <<< '$results'; then
+            echo 'Failure'
+            exit 1
+          fi
+          echo 'Success'
