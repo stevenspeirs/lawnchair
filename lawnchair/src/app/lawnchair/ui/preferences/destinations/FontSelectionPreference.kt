@@ -78,6 +78,17 @@ fun FontSelection(
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif")))
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-condensed")))
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-medium")))
+        val googleSansFlexVariants = HashMap<String, FontCache.Font>()
+        googleSansFlexVariants["100"] = FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_thin))
+        googleSansFlexVariants["200"] = FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_extra_light))
+        googleSansFlexVariants["300"] = FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_light))
+        googleSansFlexVariants["regular"] = FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_regular))
+        googleSansFlexVariants["500"] = FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_medium))
+        googleSansFlexVariants["600"] = FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_semi_bold))
+        googleSansFlexVariants["700"] = FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_bold))
+        googleSansFlexVariants["800"] = FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_extra_bold))
+        googleSansFlexVariants["900"] = FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_extra_black))
+        list.add(FontCache.Family("Google Sans Flex Variable", googleSansFlexVariants))
         GoogleFontsListing.INSTANCE.get(context).getFonts().mapTo(list) { font ->
             val variantsMap = HashMap<String, FontCache.Font>()
             val variants = font.variants.toTypedArray()
@@ -86,10 +97,7 @@ fun FontSelection(
             }
             FontCache.Family(font.family, variantsMap)
         }
-        val preferred = "Google Sans Flex"
-        value = list
-            .sortedBy { it.displayName.lowercase() }
-            .sortedByDescending { it.displayName == preferred }
+        value = list.sortedBy { it.displayName.lowercase() }
     }
     val allItems by remember { derivedStateOf { items + customFonts } }
     val adapter = fontPref.getAdapter()
