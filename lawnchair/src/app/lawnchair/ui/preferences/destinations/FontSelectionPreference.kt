@@ -312,7 +312,7 @@ private fun VariantText(
     val context = LocalContext.current
     val fontCache = remember { FontCache.INSTANCE.get(context) }
 
-    val typeface by produceState<Typeface?>(font, initialValue = fontCache.getLoadedFont(font)?.typeface) {
+    val typeface by produceState<Typeface?>(initialValue = fontCache.getLoadedFont(font)?.typeface) {
         if (value == null) {
             value = fontCache.getTypeface(font)
         }
