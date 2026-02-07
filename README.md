@@ -122,6 +122,7 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 -   Allowed mathematical symbols −, ×, ÷, ≠, ≥, ≤, ∨, ∧, ɸ, Φ, φ, ϕ, ᵠ, ᵩ, ᶲ, ⱷ, Ⲫ, ⲫ, Π, π, ϖ, ᴨ, ℿ, ℼ, ∏, ∐, Ⲡ, ⲡ, Τ, τ, Ⲧ and ⲧ to be used in Calculator search
 -   Arranged Custom Icon corner shapes in alphabetical order
 -   Arranged Feed providers in alphabetical order
+-   Arranged Google Fonts in alphabetical order
 -   Arranged Quick Search Bar providers in alphabetical order
 -   Arranged sans-serif system fonts in alphabetical order
 -   Arranged Web Search providers in alphabetical order
@@ -130,13 +131,13 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 -   Corrected typo in text string
 -   Ensured consistent sorting of font variants for all font types
 -   Ensured Custom Icon shape sliders are of equal length
--   Ensured Google Sans Flex font is not duplicated
 -   Ensured System Icon shape is as accurate as possible
 -   Fixed font weight labels not displaying with their corresponding font weights on first selecting drop-down menu
 -   Fixed One UI icon corner shape
 -   Fixed Spotless style check error
 -   Formatted Calculator search result equation to display mathematical symbols
--   Refactored code for consistency
+-   Refactored code
+-   Renamed internal font from Google Sans Flex to Google Sans Flex Variable
 -   Replaced 'Very important announcement with a very important link' with translatable text string
 -   Replaced 'Very important announcement' with translatable text string
 -   Signed APK with personal key
