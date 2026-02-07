@@ -100,11 +100,9 @@ fun FontSelection(
                 null
             }
 
-        googleFamilies.sortBy { it.family.lowercase() }
+        googleFamilies.sortBy { it.name.lowercase() }
 
-        googleSansFlex?.let {
-            googleFamilies.add(0, it)
-        }
+        googleSansFlex?.let { googleFamilies.add(0, it) }
 
         list.addAll(googleFamilies)
 
