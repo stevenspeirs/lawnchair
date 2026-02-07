@@ -89,15 +89,19 @@ fun FontSelection(
         googleSansFlexVariants["800"] = FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_extra_bold))
         googleSansFlexVariants["900"] = FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_extra_black))
         list.add(FontCache.Family("Google Sans Flex Variable", googleSansFlexVariants))
-        GoogleFontsListing.INSTANCE.get(context).getFonts().mapTo(list) { font ->
-            val variantsMap = HashMap<String, FontCache.Font>()
-            val variants = font.variants.toTypedArray()
-            font.variants.forEach { variant ->
-                variantsMap[variant] = FontCache.GoogleFont(context, font.family, variant, variants)
+        GoogleFontsListing.INSTANCE
+            .get(context)
+            .getFonts()
+            .sortedBy { it.family.lowercase() }
+            .mapTo(list) { font ->
+                val variantsMap = HashMap<String, FontCache.Font>()
+                val variants = font.variants.toTypedArray()
+                font.variants.forEach { variant ->
+                    variantsMap[variant] = FontCache.GoogleFont(context, font.family, variant, variants)
+                }
+                FontCache.Family(font.family, variantsMap)
             }
-            FontCache.Family(font.family, variantsMap)
-        }
-        value = list.sortedBy { it.displayName.lowercase() }
+        value = list
     }
     val allItems by remember { derivedStateOf { items + customFonts } }
     val adapter = fontPref.getAdapter()
