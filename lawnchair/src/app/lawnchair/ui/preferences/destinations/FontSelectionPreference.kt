@@ -82,7 +82,7 @@ fun FontSelection(
             .sortedWith(
                 compareByDescending<GoogleFont> { it.family == "Google Sans Flex" }
                     .thenBy { it.family },
-            )        
+            )
             .mapTo(list) { font ->
                 val variantsMap = HashMap<String, FontCache.Font>()
                 val variants = font.variants.toTypedArray()
