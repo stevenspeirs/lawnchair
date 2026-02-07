@@ -126,7 +126,7 @@ fun FontSelection(
                 val lowerCaseQuery = searchQuery.lowercase()
                 allItems.filter { it.displayName.lowercase().contains(lowerCaseQuery) }
             } else {
-                items
+                allItems
             }
         }
     }
@@ -189,7 +189,7 @@ fun FontSelection(
                 }
                 itemsIndexed(
                     items = customFonts,
-                    key = { _, family -> family.toString() },
+                    key = { _, family -> family.displayName },
                     contentType = { _, _ -> ContentType.FONT },
                 ) { index, family ->
                     PreferenceGroupItem(
@@ -214,7 +214,7 @@ fun FontSelection(
             preferenceGroupItems(
                 filteredItems,
                 isFirstChild = false,
-                key = { _, family -> family.toString() },
+                key = { _, family -> family.displayName },
                 contentType = { ContentType.FONT },
             ) { _, family ->
                 FontSelectionItem(
@@ -237,7 +237,10 @@ private fun FontSelectionItem(
     val selected = family.variants.any { it.value == adapter.state.value }
     PreferenceTemplate(
         modifier = modifier
-            .clickable { adapter.onChange(family.default) }
+        .clickable {
+            adapter.onChange(adapter.state.value.takeIf { it in family.variants.values }
+                ?: family.default)
+        },
         title = {
             Box(modifier = Modifier.height(52.dp)) {
                 Text(
@@ -309,7 +312,7 @@ private fun VariantText(
     val context = LocalContext.current
     val fontCache = remember { FontCache.INSTANCE.get(context) }
 
-    val typeface by produceState<Typeface?>(initialValue = fontCache.getLoadedFont(font)?.typeface) {
+    val typeface by produceState<Typeface?>(font, initialValue = fontCache.getLoadedFont(font)?.typeface) {
         if (value == null) {
             value = fontCache.getTypeface(font)
         }
@@ -343,7 +346,7 @@ private fun VariantDropdown(
         var showVariants by remember { mutableStateOf(false) }
 
         val context = LocalContext.current
-        DisposableEffect(family) {
+        DisposableEffect(Unit) {
             val fontCache = FontCache.INSTANCE.get(context)
             family.variants.forEach { fontCache.preloadFont(it.value) }
             onDispose { }
