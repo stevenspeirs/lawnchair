@@ -126,7 +126,7 @@ fun FontSelection(
                 val lowerCaseQuery = searchQuery.lowercase()
                 allItems.filter { it.displayName.lowercase().contains(lowerCaseQuery) }
             } else {
-                allItems
+                items
             }
         }
     }
@@ -343,7 +343,7 @@ private fun VariantDropdown(
         var showVariants by remember { mutableStateOf(false) }
 
         val context = LocalContext.current
-        DisposableEffect(Unit) {
+        DisposableEffect(family) {
             val fontCache = FontCache.INSTANCE.get(context)
             family.variants.forEach { fontCache.preloadFont(it.value) }
             onDispose { }
