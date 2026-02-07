@@ -33,6 +33,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -102,16 +103,18 @@ fun FontSelection(
                 FontCache.Family(font.family, variantsMap)
             }
         value = list
-        val current = adapter.state.value
-        list.forEach { family ->
-            family.variants.values.firstOrNull { it == current }?.let {
-                adapter.onChange(it)
-                return@produceState
-            }
-        }
     }
     val allItems by remember { derivedStateOf { items + customFonts } }
     val adapter = fontPref.getAdapter()
+    LaunchedEffect(items) {
+        val current = adapter.state.value
+        items.forEach { family ->
+            family.variants.values.firstOrNull { it == current }?.let {
+                adapter.onChange(it)
+                return@LaunchedEffect
+            }
+        }
+    }
     var searchQuery by remember { mutableStateOf("") }
 
     val hasFilter by remember { derivedStateOf { searchQuery.isNotEmpty() } }
@@ -121,7 +124,7 @@ fun FontSelection(
                 val lowerCaseQuery = searchQuery.lowercase()
                 allItems.filter { it.displayName.lowercase().contains(lowerCaseQuery) }
             } else {
-                items
+                allItems
             }
         }
     }
