@@ -80,7 +80,7 @@ fun FontSelection(
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-medium")))
         GoogleFontsListing.INSTANCE.get(context).getFonts()
             .sortedWith(
-                compareByDescending { it.family == "Google Sans Flex" }
+                compareByDescending<GoogleFontsListing.GoogleFont> { it.family == "Google Sans Flex" }
                     .thenBy { it.family },
             )
             .mapTo(list) { font ->
