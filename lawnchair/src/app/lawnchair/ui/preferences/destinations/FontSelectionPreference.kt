@@ -237,10 +237,10 @@ private fun FontSelectionItem(
     val selected = family.variants.any { it.value == adapter.state.value }
     PreferenceTemplate(
         modifier = modifier
-        .clickable {
-            adapter.onChange(adapter.state.value.takeIf { it in family.variants.values }
-                ?: family.default)
-        },
+            .clickable {
+                adapter.onChange(adapter.state.value.takeIf { it in family.variants.values }
+                    ?: family.default)
+            },
         title = {
             Box(modifier = Modifier.height(52.dp)) {
                 Text(
@@ -312,7 +312,7 @@ private fun VariantText(
     val context = LocalContext.current
     val fontCache = remember { FontCache.INSTANCE.get(context) }
 
-    val typeface by produceState<Typeface?>(font, initialValue = fontCache.getLoadedFont(font)?.typeface) {
+    val typeface by produceState<Typeface?>(initialValue = fontCache.getLoadedFont(font)?.typeface) {
         if (value == null) {
             value = fontCache.getTypeface(font)
         }
