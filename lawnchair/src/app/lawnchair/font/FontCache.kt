@@ -79,7 +79,7 @@ class FontCache @Inject constructor(
     val uiRegular = ResourceFont(
         context,
         R.font.googlesansflex_variable,
-        "Google Sans Flex " + context.getString(R.string.font_weight_regular),
+        "Google Sans Flex Variable " + context.getString(R.string.font_weight_regular),
         mapOf(
             FontAxes.WEIGHT to FontWeight.Normal.weight.toFloat(),
             FontAxes.ROUNDNESS to 100f,
@@ -90,7 +90,7 @@ class FontCache @Inject constructor(
     val uiMedium = ResourceFont(
         context,
         R.font.googlesansflex_variable,
-        "Google Sans Flex " + context.getString(R.string.font_weight_medium),
+        "Google Sans Flex Variable " + context.getString(R.string.font_weight_medium),
         mapOf(
             FontAxes.WEIGHT to FontWeight.Medium.weight.toFloat(),
             FontAxes.ROUNDNESS to 100f,
@@ -101,7 +101,7 @@ class FontCache @Inject constructor(
     val uiText = ResourceFont(
         context,
         R.font.googlesansflex_variable,
-        "Google Sans Flex " + context.getString(R.string.font_weight_regular),
+        "Google Sans Flex Variable " + context.getString(R.string.font_weight_regular),
         mapOf(
             FontAxes.WEIGHT to FontWeight.Normal.weight.toFloat(),
             FontAxes.ROUNDNESS to 100f,
@@ -112,7 +112,7 @@ class FontCache @Inject constructor(
     val uiTextMedium = ResourceFont(
         context,
         R.font.googlesansflex_variable,
-        "Google Sans Flex " + context.getString(R.string.font_weight_medium),
+        "Google Sans Flex Variable " + context.getString(R.string.font_weight_medium),
         mapOf(
             FontAxes.WEIGHT to FontWeight.Medium.weight.toFloat(),
             FontAxes.ROUNDNESS to 100f,
