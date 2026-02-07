@@ -130,6 +130,7 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 -   Corrected typo in text string
 -   Ensured consistent sorting of font variants for all font types
 -   Ensured Custom Icon shape sliders are of equal length
+-   Ensured Google Sans Flex font is not duplicated
 -   Ensured System Icon shape is as accurate as possible
 -   Fixed font weight labels not displaying with their corresponding font weights on first selecting drop-down menu
 -   Fixed One UI icon corner shape
