@@ -126,6 +126,7 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 -   Arranged sans-serif system fonts in alphabetical order
 -   Arranged Web Search providers in alphabetical order
 -   Corrected case of user interface label
+-   Corrected default font labels
 -   Corrected typo in text string
 -   Ensured consistent sorting of font variants for all font types
 -   Ensured Custom Icon shape sliders are of equal length
