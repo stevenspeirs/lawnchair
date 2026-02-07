@@ -189,7 +189,7 @@ fun FontSelection(
                 }
                 itemsIndexed(
                     items = customFonts,
-                    key = { _, family -> family.displayName },
+                    key = { _, family -> family.toString() },
                     contentType = { _, _ -> ContentType.FONT },
                 ) { index, family ->
                     PreferenceGroupItem(
@@ -214,7 +214,7 @@ fun FontSelection(
             preferenceGroupItems(
                 filteredItems,
                 isFirstChild = false,
-                key = { _, family -> family.displayName },
+                key = { _, family -> family.toString() },
                 contentType = { ContentType.FONT },
             ) { _, family ->
                 FontSelectionItem(
@@ -237,7 +237,7 @@ private fun FontSelectionItem(
     val selected = family.variants.any { it.value == adapter.state.value }
     PreferenceTemplate(
         modifier = modifier
-        .clickable { adapter.onChange(family.default) }
+            .clickable { adapter.onChange(family.default) }
         title = {
             Box(modifier = Modifier.height(52.dp)) {
                 Text(
