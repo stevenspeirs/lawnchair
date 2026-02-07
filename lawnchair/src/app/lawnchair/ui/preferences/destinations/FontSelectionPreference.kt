@@ -102,6 +102,13 @@ fun FontSelection(
                 FontCache.Family(font.family, variantsMap)
             }
         value = list
+        val current = adapter.state.value
+        list.forEach { family ->
+            family.variants.values.firstOrNull { it == current }?.let {
+                adapter.onChange(it)
+                return@produceState
+            }
+        }
     }
     val allItems by remember { derivedStateOf { items + customFonts } }
     val adapter = fontPref.getAdapter()
