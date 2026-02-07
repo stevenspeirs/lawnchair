@@ -78,19 +78,14 @@ fun FontSelection(
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif")))
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-condensed")))
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-medium")))
-        GoogleFontsListing.INSTANCE.get(context).getFonts()
-            .sortedWith(
-                compareByDescending<GoogleFontsListing.GoogleFont> { it.family == "Google Sans Flex" }
-                    .thenBy { it.family },
-            )
-            .mapTo(list) { font ->
-                val variantsMap = HashMap<String, FontCache.Font>()
-                val variants = font.variants.toTypedArray()
-                font.variants.forEach { variant ->
-                    variantsMap[variant] = FontCache.GoogleFont(context, font.family, variant, variants)
-                }
-                FontCache.Family(font.family, variantsMap)
+        GoogleFontsListing.INSTANCE.get(context).getFonts().mapTo(list) { font ->
+            val variantsMap = HashMap<String, FontCache.Font>()
+            val variants = font.variants.toTypedArray()
+            font.variants.forEach { variant ->
+                variantsMap[variant] = FontCache.GoogleFont(context, font.family, variant, variants)
             }
+            FontCache.Family(font.family, variantsMap)
+        }
         value = list
     }
     val allItems by remember { derivedStateOf { items + customFonts } }
