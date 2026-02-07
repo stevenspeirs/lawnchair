@@ -106,7 +106,7 @@ fun iconShapeEntries(context: Context): List<ListPreferenceEntry<IconShape>> {
         ListPreferenceEntry(IconShape.Teardrop) { stringResource(id = R.string.icon_shape_teardrop) },
         ListPreferenceEntry(IconShape.Triangle) { stringResource(id = R.string.icon_shape_triangle) },
         ListPreferenceEntry(IconShape.UltraSquircle) { stringResource(id = R.string.icon_shape_ultra_squircle) },
-        ListPreferenceEntry(IconShape.Very Sunny) { stringResource(id = R.string.icon_shape_very_sunny) },
+        ListPreferenceEntry(IconShape.VerySunny) { stringResource(id = R.string.icon_shape_very_sunny) },
     )
 }
 
