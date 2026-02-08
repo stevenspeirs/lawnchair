@@ -102,7 +102,7 @@ fun FontSelection(
             FontCache.Family(
                 displayName = "Google Sans Flex Variable",
                 variants = flexVariants,
-                default = flexVariants["400"] ?: flexVariants.values.first() 
+                default = flexVariants["400"] ?: flexVariants.values.first(),
             )
         )
         GoogleFontsListing.INSTANCE
