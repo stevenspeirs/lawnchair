@@ -177,8 +177,8 @@ class FontCache @Inject constructor(
 
         constructor(font: Font) : this(font.displayName, mapOf(Pair("regular", font)))
 
-        val default = variants["regular"] 
-            ?: variants["400"] 
+        val default = variants["regular"]
+            ?: variants["400"]
             ?: variants.values.first()
 
         val sortedVariants: List<Font> by lazy {
