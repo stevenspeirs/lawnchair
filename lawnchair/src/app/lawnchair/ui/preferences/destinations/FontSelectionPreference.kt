@@ -102,7 +102,7 @@ fun FontSelection(
             FontCache.Family(
                 displayName = "Google Sans Flex Variable",
                 variants = flexVariants,
-            )
+            ),
         )
         GoogleFontsListing.INSTANCE
             .get(context)
@@ -131,7 +131,7 @@ fun FontSelection(
         val matchedFont = allFonts.firstOrNull { it == currentFont }
             ?: allFonts.firstOrNull {
                 it.displayName.contains("Google Sans Flex") &&
-                it.fontWeight == (currentFont?.fontWeight ?: 400)
+                    it.fontWeight == (currentFont?.fontWeight ?: 400)
             }
 
         if (matchedFont != null && matchedFont != currentFont) {
