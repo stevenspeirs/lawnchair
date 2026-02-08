@@ -130,7 +130,7 @@ fun FontSelection(
 
         val matchedFont = allFonts.firstOrNull { it == currentFont }
             ?: allFonts.firstOrNull {
-                it.displayName.contains("Google Sans Flex") &&
+                it.displayName.contains("Google Sans Flex Variable") &&
                     it.fontWeight == (currentFont?.fontWeight ?: 400)
             }
 
