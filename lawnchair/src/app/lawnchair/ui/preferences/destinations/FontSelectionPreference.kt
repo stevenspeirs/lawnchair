@@ -88,10 +88,10 @@ fun FontSelection(
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-condensed")))
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-medium")))
         val flexVariants = mapOf(
-            "400" to flex(400, R.string.font_weight_regular),
             "100" to flex(100, R.string.font_weight_thin),
             "200" to flex(200, R.string.font_weight_extra_light),
             "300" to flex(300, R.string.font_weight_light),
+            "400" to flex(400, R.string.font_weight_regular),
             "500" to flex(500, R.string.font_weight_medium),
             "600" to flex(600, R.string.font_weight_semi_bold),
             "700" to flex(700, R.string.font_weight_bold),
