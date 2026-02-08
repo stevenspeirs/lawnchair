@@ -45,6 +45,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.lawnchair.font.FontAxes
@@ -99,9 +100,9 @@ fun FontSelection(
         )
         list.add(
             FontCache.Family(
-                "Google Sans Flex Variable",
-                flexVariants,
-                flexVariants["400"]!!
+                displayName = "Google Sans Flex Variable",
+                variants = flexVariants,
+                default = flexVariants["400"] ?: flexVariants.values.first() 
             )
         )
         GoogleFontsListing.INSTANCE
@@ -339,18 +340,17 @@ private fun VariantText(
     val fontCache = remember { FontCache.INSTANCE.get(context) }
 
     val typeface by produceState<Typeface?>(initialValue = fontCache.getLoadedFont(font)?.typeface) {
-        if (value == null) {
             value = fontCache.getTypeface(font)
         }
-    }
 
     val fontFamily = remember(typeface, font) {
-        typeface?.let { FontFamily(it) } ?: font.composeFontFamily
+        font.composeFontFamily
     }
 
     Text(
         text = text,
         fontFamily = fontFamily,
+        fontWeight = FontWeight(font.fontWeight),
     )
 }
 
