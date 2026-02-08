@@ -75,9 +75,8 @@ jobs:
     steps:
       - name: Status
         run: |
-          results=$(tr -d '\n' <<< '${{ toJSON(needs.*.result) }}')
-          if ! grep -q -v -E '(failure|cancelled)' <<< '$results'; then
-            echo 'Failure'
+          if echo '${{ toJSON(needs.*.result) }}' | grep -Eq '(failure|cancelled)'; then
+            echo 'Failure' >> $GITHUB_STEP_SUMMARY
             exit 1
           fi
-          echo 'Success'
+          echo 'Success' >> $GITHUB_STEP_SUMMARY
