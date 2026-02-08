@@ -114,8 +114,8 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 ## Modifications
 
 -   Added Flat hexagon, Heart, Heptagon, Leaf, Lemon, Light squircle, Nonagon, Pentagon, Strong squircle, Triangle and Ultra squircle icon shapes
--   Added Lawnfeed and Google Go to Feed providers whitelist
 -   Added iOS, Light squircle, One UI, Strong squircle and Ultra squircle to Custom Icon corner shapes
+-   Added Lawnfeed and Google Go to Feed providers whitelist
 -   Added mathematical constants phi and tau to Calcuator search
 -   Added new line to ignored whitespace elements list in Calculator search
 -   Allowed mathematical constants e, phi, pi and tau to be case insensitive in Calculator search
@@ -131,13 +131,19 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 -   Corrected typo in text string
 -   Ensured consistent sorting of font variants for all font types
 -   Ensured Custom Icon shape sliders are of equal length
+-   Ensured default font has a selected radio button
+-   Ensured font variant is retained on selecting current font
 -   Ensured System Icon shape is as accurate as possible
+-   Fixed font filter
 -   Fixed font weight labels not displaying with their corresponding font weights on first selecting drop-down menu
 -   Fixed One UI icon corner shape
 -   Fixed Spotless style check error
+-   Fixed unstable font keys
 -   Formatted Calculator search result equation to display mathematical symbols
--   Refactored code
+-   Listed all variants for Google Sans Flex Variable font
+-   Refactored code for consistency and efficiency
 -   Renamed internal font from Google Sans Flex to Google Sans Flex Variable
+-   Rendered Google Sans Flex Variable font variants
 -   Replaced 'Very important announcement with a very important link' with translatable text string
 -   Replaced 'Very important announcement' with translatable text string
 -   Signed APK with personal key
