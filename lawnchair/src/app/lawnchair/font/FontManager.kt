@@ -30,29 +30,17 @@ class FontManager @Inject constructor(
     private val specMap = createFontMap()
 
     private fun createFontMap(): Map<Int, FontSpec> {
+        val sansSerif = Typeface.SANS_SERIF
+        val sansSerifMedium = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+
         val prefs = PreferenceManager.getInstance(context)
-
-        val googleSansFlexRegular = FontCache.ResourceFont(
-            context,
-            R.font.googlesansflex_variable,
-            "Google Sans Flex Variable " + context.getString(R.string.font_weight_regular),
-        )
-        val googleSansFlexMedium = FontCache.ResourceFont(
-            context,
-            R.font.googlesansflex_variable,
-            "Google Sans Flex Variable " + context.getString(R.string.font_weight_medium),
-        )
-
-        val regularTypeface = googleSansFlexRegular.typeface ?: Typeface.DEFAULT
-        val mediumTypeface = googleSansFlexMedium.typeface ?: Typeface.DEFAULT
-
         return mapOf(
-            R.id.font_base_icon to FontSpec(prefs.fontWorkspace, regularTypeface),
-            R.id.font_button to FontSpec(prefs.fontHeadingMedium, mediumTypeface),
-            R.id.font_heading to FontSpec(prefs.fontHeading, regularTypeface),
-            R.id.font_heading_medium to FontSpec(prefs.fontHeadingMedium, mediumTypeface),
-            R.id.font_body to FontSpec(prefs.fontBody, regularTypeface),
-            R.id.font_body_medium to FontSpec(prefs.fontBodyMedium, mediumTypeface),
+            R.id.font_base_icon to FontSpec(prefs.fontWorkspace, sansSerif),
+            R.id.font_button to FontSpec(prefs.fontHeadingMedium, sansSerifMedium),
+            R.id.font_heading to FontSpec(prefs.fontHeading, sansSerif),
+            R.id.font_heading_medium to FontSpec(prefs.fontHeadingMedium, sansSerifMedium),
+            R.id.font_body to FontSpec(prefs.fontBody, sansSerif),
+            R.id.font_body_medium to FontSpec(prefs.fontBodyMedium, sansSerifMedium),
         )
     }
 
