@@ -190,7 +190,7 @@ class FontCache @Inject constructor(
     class TypefaceFamily(private val variants: Map<String, Typeface?>) {
 
         val default = variants["regular"]
-            ?: variants["400"] 
+            ?: variants["400"]
             ?: variants.values.firstOrNull()
             ?: FontCache.SystemFont("sans-serif")
     }
