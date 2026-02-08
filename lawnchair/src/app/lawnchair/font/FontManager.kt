@@ -32,25 +32,27 @@ class FontManager @Inject constructor(
     private fun createFontMap(): Map<Int, FontSpec> {
         val prefs = PreferenceManager.getInstance(context)
 
-        val googleSansFlexRegularTypeface = FontCache.ResourceFont(
+        val googleSansFlexRegular = FontCache.ResourceFont(
             context,
             R.font.googlesansflex_variable,
             "Google Sans Flex Variable " + context.getString(R.string.font_weight_regular),
-        ).typeface ?: Typeface.DEFAULT
-
-        val googleSansFlexMediumTypeface = FontCache.ResourceFont(
+        )
+        val googleSansFlexMedium = FontCache.ResourceFont(
             context,
             R.font.googlesansflex_variable,
             "Google Sans Flex Variable " + context.getString(R.string.font_weight_medium),
-        ).typeface ?: Typeface.DEFAULT
+        )
+
+        val regularTypeface = googleSansFlexRegular.typeface ?: Typeface.DEFAULT
+        val mediumTypeface = googleSansFlexMedium.typeface ?: Typeface.DEFAULT
 
         return mapOf(
-            R.id.font_base_icon to FontSpec(prefs.fontWorkspace, googleSansFlexRegularTypeface),
-            R.id.font_button to FontSpec(prefs.fontHeadingMedium, googleSansFlexMediumTypeface),
-            R.id.font_heading to FontSpec(prefs.fontHeading, googleSansFlexRegularTypeface),
-            R.id.font_heading_medium to FontSpec(prefs.fontHeadingMedium, googleSansFlexMediumTypeface),
-            R.id.font_body to FontSpec(prefs.fontBody, googleSansFlexRegularTypeface),
-            R.id.font_body_medium to FontSpec(prefs.fontBodyMedium, googleSansFlexMediumTypeface),
+            R.id.font_base_icon to FontSpec(prefs.fontWorkspace, regularTypeface),
+            R.id.font_button to FontSpec(prefs.fontHeadingMedium, mediumTypeface),
+            R.id.font_heading to FontSpec(prefs.fontHeading, regularTypeface),
+            R.id.font_heading_medium to FontSpec(prefs.fontHeadingMedium, mediumTypeface),
+            R.id.font_body to FontSpec(prefs.fontBody, regularTypeface),
+            R.id.font_body_medium to FontSpec(prefs.fontBodyMedium, mediumTypeface),
         )
     }
 
