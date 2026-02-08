@@ -128,7 +128,7 @@ fun FontSelection(
         val currentFont = adapter.state.value
         val allFonts = items.flatMap { it.variants.values } + customFonts.flatMap { it.variants.values }
 
-        val targetWeight = defaultWeights[adapter.pref.key] ?: 400
+        val targetWeight = defaultWeights[fontId] ?: 400
 
         val matchedFont = allFonts.firstOrNull { it == currentFont }
             ?: allFonts.firstOrNull {
