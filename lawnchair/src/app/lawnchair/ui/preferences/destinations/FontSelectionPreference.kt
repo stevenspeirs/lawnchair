@@ -115,25 +115,21 @@ fun FontSelection(
     val allItems by remember { derivedStateOf { items + customFonts } }
     val adapter = fontPref.getAdapter()
 
-    val defaultWeights = mapOf(
-        R.id.font_base_icon to 400,
-        R.id.font_button to 500,
-        R.id.font_heading to 400,
-        R.id.font_heading_medium to 500,
-        R.id.font_body to 400,
-        R.id.font_body_medium to 500,
-    )
-
     LaunchedEffect(items) {
         val currentFont = adapter.state.value
-        val allFonts = items.flatMap { it.variants.values } + customFonts.flatMap { it.variants.values }
+        val allFonts = items.flatMap { it.variants.values } +
+            customFonts.flatMap { it.variants.values }
 
-        val targetWeight = defaultWeights[fontId] ?: 400
+        val targetWeight = currentFont?.fontWeight ?: 400
 
-        val matchedFont = allFonts.firstOrNull { it == currentFont }
-            ?: allFonts.firstOrNull {
-                it.displayName.contains("Google Sans Flex") && it.fontWeight == targetWeight
-            }
+        val matchedFont =
+            // Try exact saved font first
+            allFonts.firstOrNull { it == currentFont }
+                // Otherwise fallback to Google Sans Flex with same weight
+                ?: allFonts.firstOrNull {
+                    it.displayName.contains("Google Sans Flex") &&
+                        it.fontWeight == targetWeight
+                }
 
         adapter.onChange(matchedFont ?: allFonts.firstOrNull() ?: currentFont)
     }
