@@ -116,12 +116,12 @@ fun FontSelection(
     val adapter = fontPref.getAdapter()
 
     private val defaultWeights = mapOf(
-        R.id.font_base_icon to 400,       // Regular
-        R.id.font_button to 500,          // Medium
-        R.id.font_heading to 400,         // Regular
-        R.id.font_heading_medium to 500,  // Medium
-        R.id.font_body to 400,            // Regular
-        R.id.font_body_medium to 500      // Medium
+        R.id.font_base_icon to 400,
+        R.id.font_button to 500,
+        R.id.font_heading to 400,
+        R.id.font_heading_medium to 500,
+        R.id.font_body to 400,
+        R.id.font_body_medium to 500,
     )
 
     LaunchedEffect(items) {
