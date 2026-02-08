@@ -72,6 +72,13 @@ fun FontSelection(
     fontPref: BasePreferenceManager.FontPref,
     modifier: Modifier = Modifier,
 ) {
+    fun flex(weight: Int, label: Int) =
+        FontCache.ResourceFont(
+            context,
+            R.font.googlesansflex_variable,
+            "Google Sans Flex Variable " + context.getString(label),
+            mapOf(FontCache.FontAxes.WEIGHT to weight.toFloat()),
+        )
     val context = LocalContext.current
     val customFonts by remember { FontCache.INSTANCE.get(context).customFonts }.collectAsStateWithLifecycle(initialValue = emptyList())
     val items by produceState(initialValue = emptyList<FontCache.Family>()) {
@@ -79,20 +86,19 @@ fun FontSelection(
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif")))
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-condensed")))
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-medium")))
-        val fontCache = FontCache.INSTANCE.get(context)
         list.add(
             FontCache.Family(
                 "Google Sans Flex Variable",
                 mapOf(
-                    "100" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_thin)),
-                    "200" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_extra_light)),
-                    "300" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_light)),
-                    "400" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_regular)),
-                    "500" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_medium)),
-                    "600" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_semi_bold)),
-                    "700" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_bold)),
-                    "800" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_extra_bold)),
-                    "900" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_extra_black)),
+                    "100" to flex(100, R.string.font_weight_thin),
+                    "200" to flex(200, R.string.font_weight_extra_light),
+                    "300" to flex(300, R.string.font_weight_light),
+                    "400" to flex(400, R.string.font_weight_regular),
+                    "500" to flex(500, R.string.font_weight_medium),
+                    "600" to flex(600, R.string.font_weight_semi_bold),
+                    "700" to flex(700, R.string.font_weight_bold),
+                    "800" to flex(800, R.string.font_weight_extra_bold),
+                    "900" to flex(900, R.string.font_weight_extra_black),
                 ),
             ),
         )
