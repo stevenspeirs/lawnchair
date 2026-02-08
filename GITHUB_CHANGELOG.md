@@ -66,6 +66,7 @@ Compatibility list:
 * [Lawnchair] Reimplement app drawer multiple lines logic (https://github.com/LawnchairLauncher/lawnchair/pull/6324)
 * [Launcher] Skip initialising QuickstepProtoLog for Android 11
 * [Lawnchair] Reimplement Lawnchair 13 migration
+* [Launcher] Launcher render At a Glance widget as search widget in preview
 
 ### 🥞 Development 4 Release 1 (Snapshot 10)
 
