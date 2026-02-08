@@ -177,7 +177,10 @@ class FontCache @Inject constructor(
 
         constructor(font: Font) : this(font.displayName, mapOf(Pair("regular", font)))
 
-        val default = variants.getOrElse("regular") { variants.values.first() }
+        val default = variants["regular"] 
+            ?: variants["400"] 
+            ?: variants.values.first()
+
         val sortedVariants: List<Font> by lazy {
             variants.values.sortedWith(compareBy({ it.fontWeight }, { if (it.isItalic) 1 else 0 }))
         }
