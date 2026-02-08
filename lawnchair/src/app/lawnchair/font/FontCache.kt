@@ -83,7 +83,7 @@ class FontCache @Inject constructor(
         mapOf(
             FontAxes.WEIGHT to FontWeight.Normal.weight.toFloat(),
             FontAxes.ROUNDNESS to 100f,
-            FontAxes.GRADE to 100f,
+            FontAxes.GRADE to 0.0f,
         ),
     )
 
@@ -116,7 +116,7 @@ class FontCache @Inject constructor(
         mapOf(
             FontAxes.WEIGHT to FontWeight.Medium.weight.toFloat(),
             FontAxes.ROUNDNESS to 100f,
-            FontAxes.GRADE to 100f,
+            FontAxes.GRADE to 0.0f,
         ),
     )
 
