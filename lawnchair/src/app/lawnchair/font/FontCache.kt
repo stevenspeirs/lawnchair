@@ -188,7 +188,9 @@ class FontCache @Inject constructor(
 
     class TypefaceFamily(private val variants: Map<String, Typeface?>) {
 
-        val default = variants.getOrElse("regular") { variants.values.firstOrNull() }
+        val default = variants["regular"] 
+            ?: variants["400"] 
+            ?: variants.values.first()
     }
 
     sealed class Font {
