@@ -91,7 +91,7 @@ fun FontSelection(
             "100" to flex(100, R.string.font_weight_thin),
             "200" to flex(200, R.string.font_weight_extra_light),
             "300" to flex(300, R.string.font_weight_light),
-            "regular" to flex(400, R.string.font_weight_regular),
+            "400" to flex(400, R.string.font_weight_regular),
             "500" to flex(500, R.string.font_weight_medium),
             "600" to flex(600, R.string.font_weight_semi_bold),
             "700" to flex(700, R.string.font_weight_bold),
