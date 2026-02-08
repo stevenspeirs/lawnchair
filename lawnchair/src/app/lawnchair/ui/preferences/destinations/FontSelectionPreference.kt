@@ -375,7 +375,7 @@ private fun VariantDropdown(
                 text = removeFamilyPrefix(family.displayName, selectedFont.displayName),
                 fontFamily = selectedFont.composeFontFamily,
                 fontWeight = FontWeight(selectedFont.fontWeight),
-                modifier = Modifier.wrapContentWidth()
+                modifier = Modifier.wrapContentWidth(),
             )
             Icon(
                 imageVector = Icons.Rounded.ArrowDropDown,
