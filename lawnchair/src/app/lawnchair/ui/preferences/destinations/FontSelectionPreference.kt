@@ -84,10 +84,17 @@ fun FontSelection(
             FontCache.Family(
                 "Google Sans Flex Variable",
                 mapOf(
-                    "regular" to fontCache.uiRegular,
-                    "500" to fontCache.uiMedium,
-                ),
-            ),
+                    "100" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_thin)),
+                    "200" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_extra_light)),
+                    "300" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_light)),
+                    "400" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_regular)),
+                    "500" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_medium)),
+                    "600" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_semi_bold)),
+                    "700" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_bold)),
+                    "800" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_extra_bold)),
+                    "900" to FontCache.ResourceFont(context, R.font.googlesansflex_variable, "Google Sans Flex Variable " + context.getString(R.string.font_weight_extra_black)),
+                )
+            )
         )
         GoogleFontsListing.INSTANCE
             .get(context)
