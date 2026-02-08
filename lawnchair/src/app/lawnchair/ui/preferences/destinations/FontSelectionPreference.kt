@@ -111,6 +111,7 @@ fun FontSelection(
         val currentFont = adapter.state.value
         val allFonts = items.flatMap { it.variants.values } + customFonts.flatMap { it.variants.values }
         val matchedFont = allFonts.firstOrNull { it == currentFont }
+            ?: allFonts.firstOrNull { it.displayName.contains("Google Sans Flex Variable") && it.fontWeight == 400 }
         adapter.onChange(matchedFont ?: allFonts.firstOrNull() ?: currentFont)
     }
     var searchQuery by remember { mutableStateOf("") }
