@@ -108,13 +108,10 @@ fun FontSelection(
     val allItems by remember { derivedStateOf { items + customFonts } }
     val adapter = fontPref.getAdapter()
     LaunchedEffect(items) {
-        val current = adapter.state.value
-        items.forEach { family ->
-            family.variants.values.firstOrNull { it == current }?.let {
-                adapter.onChange(it)
-                return@LaunchedEffect
-            }
-        }
+        val currentFont = adapter.state.value
+        val allFonts = items.flatMap { it.variants.values } + customFonts.flatMap { it.variants.values }
+        val matchedFont = allFonts.firstOrNull { it == currentFont }
+        adapter.onChange(matchedFont ?: allFonts.firstOrNull() ?: currentFont)
     }
     var searchQuery by remember { mutableStateOf("") }
 
