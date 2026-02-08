@@ -88,10 +88,10 @@ fun FontSelection(
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-condensed")))
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif-medium")))
         val flexVariants = mapOf(
+            "400" to flex(400, R.string.font_weight_regular),
             "100" to flex(100, R.string.font_weight_thin),
             "200" to flex(200, R.string.font_weight_extra_light),
             "300" to flex(300, R.string.font_weight_light),
-            "400" to flex(400, R.string.font_weight_regular),
             "500" to flex(500, R.string.font_weight_medium),
             "600" to flex(600, R.string.font_weight_semi_bold),
             "700" to flex(700, R.string.font_weight_bold),
@@ -101,8 +101,7 @@ fun FontSelection(
         list.add(
             FontCache.Family(
                 displayName = "Google Sans Flex Variable",
-                variants = flexVariants,
-                default = flexVariants["400"] ?: flexVariants.values.first(),
+                variants = flexVariants
             )
         )
         GoogleFontsListing.INSTANCE
@@ -124,21 +123,20 @@ fun FontSelection(
     val allItems by remember { derivedStateOf { items + customFonts } }
     val adapter = fontPref.getAdapter()
 
-    LaunchedEffect(items) {
+    LaunchedEffect(items, customFonts) {
         val currentFont = adapter.state.value
         val allFonts = items.flatMap { it.variants.values } +
-            customFonts.flatMap { it.variants.values }
+                customFonts.flatMap { it.variants.values }
 
-        val targetWeight = currentFont?.fontWeight ?: 400
+        val matchedFont = allFonts.firstOrNull { it == currentFont }
+            ?: allFonts.firstOrNull { 
+                it.displayName.contains("Google Sans Flex") && 
+                it.fontWeight == (currentFont?.fontWeight ?: 400) 
+            }
 
-        val matchedFont =
-            allFonts.firstOrNull { it == currentFont }
-                ?: allFonts.firstOrNull {
-                    it.displayName.contains("Google Sans Flex") &&
-                        it.fontWeight == targetWeight
-                }
-
-        adapter.onChange(matchedFont ?: allFonts.firstOrNull() ?: currentFont)
+        if (matchedFont != null && matchedFont != currentFont) {
+            adapter.onChange(matchedFont)
+        }
     }
 
     var searchQuery by remember { mutableStateOf("") }
@@ -349,7 +347,7 @@ private fun VariantText(
 
     Text(
         text = text,
-        fontFamily = fontFamily,
+        fontFamily = font.composeFontFamily,
         fontWeight = FontWeight(font.fontWeight),
     )
 }
