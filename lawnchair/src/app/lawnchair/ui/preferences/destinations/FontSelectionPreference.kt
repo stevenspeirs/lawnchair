@@ -123,9 +123,7 @@ fun FontSelection(
         val targetWeight = currentFont?.fontWeight ?: 400
 
         val matchedFont =
-            // Try exact saved font first
             allFonts.firstOrNull { it == currentFont }
-                // Otherwise fallback to Google Sans Flex with same weight
                 ?: allFonts.firstOrNull {
                     it.displayName.contains("Google Sans Flex") &&
                         it.fontWeight == targetWeight
