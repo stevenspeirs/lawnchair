@@ -47,6 +47,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.lawnchair.font.FontAxes
 import app.lawnchair.font.FontCache
 import app.lawnchair.font.googlefonts.GoogleFontsListing
 import app.lawnchair.preferences.BasePreferenceManager
@@ -79,7 +80,7 @@ fun FontSelection(
             context,
             R.font.googlesansflex_variable,
             "Google Sans Flex Variable " + context.getString(label),
-            mapOf(FontCache.FontAxes.WEIGHT to weight.toFloat()),
+            mapOf(FontAxes.WEIGHT to weight.toFloat()),
         )
         val list = mutableListOf<FontCache.Family>()
         list.add(FontCache.Family(FontCache.SystemFont("sans-serif")))
