@@ -138,9 +138,9 @@ fun FontSelection(
             allFonts.firstOrNull { it == currentFont }
 
                 ?: fontLookup[currentFamily]?.get(targetWeight)
-    
+
                 ?: fontLookup["Google Sans Flex Variable"]?.get(targetWeight)
-    
+
         adapter.onChange(matchedFont ?: allFonts.firstOrNull() ?: currentFont)
     }
 
