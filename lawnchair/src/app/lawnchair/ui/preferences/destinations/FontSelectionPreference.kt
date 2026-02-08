@@ -267,9 +267,7 @@ private fun FontSelectionItem(
             },
         title = {
             Box(modifier = Modifier.height(52.dp)) {
-                val previewFont = family.variants["regular"]
-                    ?: family.variants["400"]
-                    ?: family.default
+                val previewFont = family.default
                 Text(
                     text = family.displayName,
                     modifier = Modifier
