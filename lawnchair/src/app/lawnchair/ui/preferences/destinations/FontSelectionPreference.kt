@@ -334,17 +334,6 @@ private fun VariantText(
     font: FontCache.Font,
     text: String,
 ) {
-    val context = LocalContext.current
-    val fontCache = remember { FontCache.INSTANCE.get(context) }
-
-    val typeface by produceState<Typeface?>(initialValue = fontCache.getLoadedFont(font)?.typeface) {
-        value = fontCache.getTypeface(font)
-    }
-
-    val fontFamily = remember(typeface, font) {
-        font.composeFontFamily
-    }
-
     Text(
         text = text,
         fontFamily = font.composeFontFamily,
@@ -382,12 +371,11 @@ private fun VariantDropdown(
             contentPadding = VariantButtonContentPadding,
             shapes = ButtonDefaults.shapes(),
         ) {
-            AndroidText(
-                modifier = Modifier.wrapContentWidth(),
-                update = {
-                    it.text = removeFamilyPrefix(family.displayName, selectedFont.displayName)
-                    it.setFont(selectedFont)
-                },
+            Text(
+                text = removeFamilyPrefix(family.displayName, selectedFont.displayName),
+                fontFamily = selectedFont.composeFontFamily,
+                fontWeight = FontWeight(selectedFont.fontWeight),
+                modifier = Modifier.wrapContentWidth()
             )
             Icon(
                 imageVector = Icons.Rounded.ArrowDropDown,
