@@ -110,10 +110,26 @@ fun FontSelection(
     LaunchedEffect(items) {
         val currentFont = adapter.state.value
         val allFonts = items.flatMap { it.variants.values } + customFonts.flatMap { it.variants.values }
+
+        fun findGoogleSansFlex(weight: Int): FontCache.Font? {
+            return allFonts.firstOrNull {
+                it.displayName.contains("Google Sans Flex") &&
+                it.fontWeight == weight
+            }
+        }
+
+        val targetWeight = when (currentFont?.fontWeight ?: 400) {
+            in 0..450 -> 400
+            in 451..550 -> 500
+            else -> 400
+        }
+
         val matchedFont = allFonts.firstOrNull { it == currentFont }
-            ?: allFonts.firstOrNull { it.displayName.contains("Google Sans Flex Variable") && it.fontWeight == 400 }
+            ?: findGoogleSansFlex(targetWeight)
+
         adapter.onChange(matchedFont ?: allFonts.firstOrNull() ?: currentFont)
     }
+
     var searchQuery by remember { mutableStateOf("") }
 
     val hasFilter by remember { derivedStateOf { searchQuery.isNotEmpty() } }
