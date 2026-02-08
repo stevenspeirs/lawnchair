@@ -477,7 +477,7 @@ class FontCache @Inject constructor(
         override fun equals(other: Any?): Boolean {
             return other is ResourceFont &&
                    name == other.name &&
-                   axisSettings[FontAxes.WEIGHT] == axisSettings[FontAxes.WEIGHT]
+                   axisSettings[FontAxes.WEIGHT] == other.axisSettings[FontAxes.WEIGHT]
         }
 
         override fun hashCode(): Int {
