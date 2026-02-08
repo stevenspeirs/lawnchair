@@ -340,8 +340,8 @@ private fun VariantText(
     val fontCache = remember { FontCache.INSTANCE.get(context) }
 
     val typeface by produceState<Typeface?>(initialValue = fontCache.getLoadedFont(font)?.typeface) {
-            value = fontCache.getTypeface(font)
-        }
+        value = fontCache.getTypeface(font)
+    }
 
     val fontFamily = remember(typeface, font) {
         font.composeFontFamily
