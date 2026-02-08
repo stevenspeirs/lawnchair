@@ -72,13 +72,12 @@ fun FontSelection(
     fontPref: BasePreferenceManager.FontPref,
     modifier: Modifier = Modifier,
 ) {
-    fun flex(weight: Int, label: Int) =
-        FontCache.ResourceFont(
-            context,
-            R.font.googlesansflex_variable,
-            "Google Sans Flex Variable " + context.getString(label),
-            mapOf(FontCache.FontAxes.WEIGHT to weight.toFloat()),
-        )
+    fun flex(weight: Int, label: Int) = FontCache.ResourceFont(
+        context,
+        R.font.googlesansflex_variable,
+        "Google Sans Flex Variable " + context.getString(label),
+        mapOf(FontCache.FontAxes.WEIGHT to weight.toFloat()),
+    )
     val context = LocalContext.current
     val customFonts by remember { FontCache.INSTANCE.get(context).customFonts }.collectAsStateWithLifecycle(initialValue = emptyList())
     val items by produceState(initialValue = emptyList<FontCache.Family>()) {
