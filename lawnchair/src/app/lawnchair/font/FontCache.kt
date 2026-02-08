@@ -179,7 +179,8 @@ class FontCache @Inject constructor(
 
         val default = variants["regular"]
             ?: variants["400"]
-            ?: variants.values.first()
+            ?: variants.values.firstOrNull()
+            ?: FontCache.SystemFont("sans-serif")
 
         val sortedVariants: List<Font> by lazy {
             variants.values.sortedWith(compareBy({ it.fontWeight }, { if (it.isItalic) 1 else 0 }))
@@ -188,9 +189,10 @@ class FontCache @Inject constructor(
 
     class TypefaceFamily(private val variants: Map<String, Typeface?>) {
 
-        val default = variants["regular"] 
+        val default = variants["regular"]
             ?: variants["400"] 
-            ?: variants.values.first()
+            ?: variants.values.firstOrNull()
+            ?: FontCache.SystemFont("sans-serif")
     }
 
     sealed class Font {
