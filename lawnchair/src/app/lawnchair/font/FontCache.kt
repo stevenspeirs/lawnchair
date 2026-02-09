@@ -357,7 +357,8 @@ class FontCache @Inject constructor(
             @JvmStatic
             fun fromJson(context: Context, obj: JSONObject): Font {
                 val fontName = obj.getString(KEY_FONT_NAME)
-                return TTFFont(context, getFile(context, fontName))
+                val decodedName = Uri.decode(fontName) 
+                return TTFFont(context, getFile(context, decodedName))
             }
         }
     }
