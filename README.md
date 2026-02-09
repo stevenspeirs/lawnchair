@@ -140,6 +140,7 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 -   Fixed Spotless style check error
 -   Fixed unstable font keys
 -   Formatted Calculator search result equation to display mathematical symbols
+-   Improved readability of custom font names
 -   Listed all variants for Google Sans Flex Variable font
 -   Refactored code for consistency and efficiency
 -   Renamed internal font from Google Sans Flex to Google Sans Flex Variable
