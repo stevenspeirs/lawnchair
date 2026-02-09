@@ -333,7 +333,7 @@ class FontCache @Inject constructor(
 
                 val cleaned = decoded
                     .substringBeforeLast(".")
-                    .replace(Regex("[-_]"), " ")
+                    .replace(Regex("[_-]"), " ")
                     .replace(Regex("([a-z])([A-Z])"), "$1 $2")
                     .split(Regex("\\s+"))
                     .filter { it.isNotBlank() }
@@ -357,7 +357,7 @@ class FontCache @Inject constructor(
             @JvmStatic
             fun fromJson(context: Context, obj: JSONObject): Font {
                 val fontName = obj.getString(KEY_FONT_NAME)
-                val decodedName = Uri.decode(fontName) 
+                val decodedName = Uri.decode(fontName)
                 return TTFFont(context, getFile(context, decodedName))
             }
         }
