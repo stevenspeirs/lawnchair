@@ -297,7 +297,7 @@ class FontCache @Inject constructor(
 
     class TTFFont(context: Context, private val file: File) : TypefaceFont(createTypeface(file)) {
 
-        private val actualName: String = Uri.decode(file.name)
+        private val actualName: String = cleanFilename(file.name)
         override val isAvailable = typeface != null
         override val fullDisplayName: String = if (typeface == null) {
             context.getString(R.string.pref_fonts_missing_font)
@@ -317,16 +317,31 @@ class FontCache @Inject constructor(
 
         override fun saveToJson(obj: JSONObject) {
             super.saveToJson(obj)
-            obj.put(KEY_FONT_NAME, fullDisplayName)
+            obj.put(KEY_FONT_NAME, file.name)
         }
 
         override fun equals(other: Any?): Boolean {
-            return other is TTFFont && actualName == other.actualName
+            return other is TTFFont && file.absolutePath == other.file.absolutePath
         }
 
-        override fun hashCode() = actualName.hashCode()
+        override fun hashCode(): Int = file.absolutePath.hashCode()
 
         companion object {
+
+            private fun cleanFilename(fileName: String): String {
+                val decoded = Uri.decode(fileName)
+
+                val cleaned = decoded
+                    .substringBeforeLast(".")
+                    .replace(Regex("[-_]"), " ")
+                    .replace(Regex("([a-z])([A-Z])"), "$1 $2")
+                    .split(Regex("\\s+"))
+                    .filter { it.isNotBlank() }
+                    .joinToString(" ") { it.lowercase().replaceFirstChar { char -> char.uppercase() } }
+                    .trim()
+
+                return cleaned.ifBlank { decoded }
+            }
 
             fun createTypeface(file: File): Typeface? = runCatching { Typeface.createFromFile(file) }.getOrNull()
 
@@ -482,7 +497,7 @@ class FontCache @Inject constructor(
         }
 
         override fun equals(other: Any?): Boolean {
-            return other is ResourceFont && name == other.name && axisSettings[FontAxes.WEIGHT] == other.axisSettings[FontAxes.WEIGHT]
+            return other is ResourceFont && name == other.name && axisSettings == other.axisSettings
         }
 
         override fun hashCode(): Int {
@@ -690,7 +705,7 @@ class FontCache @Inject constructor(
                 Regex("""\b(hairline|thin)\b"""),
             ),
             200 to listOf(
-                Regex("""\b(extra|ultra)\s*light\b"""),
+                Regex("""\b(extra|ultra)[\s_-]?light\b"""),
             ),
             300 to listOf(
                 Regex("""\b(light)\b"""),
@@ -702,16 +717,16 @@ class FontCache @Inject constructor(
                 Regex("""\b(medium)\b"""),
             ),
             600 to listOf(
-                Regex("""\b(demi|semi)\s*bold\b"""),
+                Regex("""\b(demi|semi)[\s_-]?bold\b"""),
             ),
             700 to listOf(
                 Regex("""\b(bold)\b"""),
             ),
             800 to listOf(
-                Regex("""\b(extra|ultra|x)\s*bold\b"""),
+                Regex("""\b(extra|ultra|x)[\s_-]?bold\b"""),
             ),
             900 to listOf(
-                Regex("""\b((extra\s*)?black|heavy)\b"""),
+                Regex("""\b((extra[\s_-]?*)?black|heavy)\b"""),
             ),
         )
 
@@ -727,7 +742,7 @@ class FontCache @Inject constructor(
 
         private fun parseItalic(name: String): Boolean {
             val lower = name.lowercase()
-            return "italic" in lower || "oblique" in lower
+            return lower.contains(Regex("""\b(italic|oblique)\b"""))
         }
     }
 
