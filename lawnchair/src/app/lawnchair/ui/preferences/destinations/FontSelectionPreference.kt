@@ -31,7 +31,6 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -132,7 +131,10 @@ fun FontSelection(
                     it.fontWeight == (currentFont?.fontWeight ?: 400)
             }
 
-        if (matchedFont != null && matchedFont != currentFont) {
+        if (currentFont !is FontCache.TTFFont &&
+            matchedFont != null &&
+            matchedFont != currentFont
+        ) {
             adapter.onChange(matchedFont)
         }
     }
@@ -357,7 +359,7 @@ private fun VariantDropdown(
         var showVariants by remember { mutableStateOf(false) }
 
         val context = LocalContext.current
-        DisposableEffect(Unit) {
+        LaunchedEffect(family) {
             val fontCache = FontCache.INSTANCE.get(context)
             family.variants.forEach { fontCache.preloadFont(it.value) }
             onDispose { }
