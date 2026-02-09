@@ -362,7 +362,6 @@ private fun VariantDropdown(
         LaunchedEffect(family) {
             val fontCache = FontCache.INSTANCE.get(context)
             family.variants.forEach { fontCache.preloadFont(it.value) }
-            onDispose { }
         }
 
         TextButton(
