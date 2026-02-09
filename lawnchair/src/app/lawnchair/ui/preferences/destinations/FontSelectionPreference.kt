@@ -328,18 +328,6 @@ private fun removeFamilyPrefix(
     return fontName.removePrefix(familyName).trim().toString()
 }
 
-@Composable
-private fun VariantText(
-    font: FontCache.Font,
-    text: String,
-) {
-    Text(
-        text = text,
-        fontFamily = font.composeFontFamily,
-        fontWeight = FontWeight(font.fontWeight),
-    )
-}
-
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun VariantDropdown(
@@ -391,9 +379,10 @@ private fun VariantDropdown(
                         showVariants = false
                     },
                     text = {
-                        VariantText(
-                            font = font,
+                        Text(
                             text = removeFamilyPrefix(family.displayName, font.displayName),
+                            fontFamily = font.composeFontFamily,
+                            fontWeight = FontWeight(font.fontWeight),
                         )
                     },
                 )
