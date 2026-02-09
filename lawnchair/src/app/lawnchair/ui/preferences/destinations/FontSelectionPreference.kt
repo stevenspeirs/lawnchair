@@ -267,13 +267,12 @@ private fun FontSelectionItem(
             },
         title = {
             Box(modifier = Modifier.height(52.dp)) {
-                val previewFont = family.default
                 Text(
                     text = family.displayName,
                     modifier = Modifier
                         .align(Alignment.CenterStart)
                         .fillMaxWidth(),
-                    fontFamily = previewFont.composeFontFamily,
+                    fontFamily = family.default.composeFontFamily,
                 )
             }
         },
