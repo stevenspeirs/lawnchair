@@ -727,7 +727,7 @@ class FontCache @Inject constructor(
                 Regex("""\b(extra|ultra|x)[\s_-]?bold\b"""),
             ),
             900 to listOf(
-                Regex("""\b((extra[\s_-]?*)?black|heavy)\b"""),
+                Regex("""\b((extra[\s_-]*)?black|heavy)\b"""),
             ),
         )
 
