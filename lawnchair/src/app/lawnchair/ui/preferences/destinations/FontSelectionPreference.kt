@@ -360,7 +360,6 @@ private fun VariantDropdown(
             Text(
                 text = removeFamilyPrefix(family.displayName, selectedFont.displayName),
                 fontFamily = selectedFont.composeFontFamily,
-                fontWeight = FontWeight(selectedFont.fontWeight),
                 modifier = Modifier.wrapContentWidth(),
             )
             Icon(
@@ -382,7 +381,6 @@ private fun VariantDropdown(
                         Text(
                             text = removeFamilyPrefix(family.displayName, font.displayName),
                             fontFamily = font.composeFontFamily,
-                            fontWeight = FontWeight(font.fontWeight),
                         )
                     },
                 )
