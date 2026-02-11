@@ -135,7 +135,6 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 -   Ensured font variant is retained on selecting current font
 -   Ensured System Icon shape is as accurate as possible
 -   Fixed font filter
--   Fixed font weight labels not displaying with their corresponding font weights on first selecting drop-down menu
 -   Fixed One UI icon corner shape
 -   Fixed Spotless style check error
 -   Fixed unstable font keys
