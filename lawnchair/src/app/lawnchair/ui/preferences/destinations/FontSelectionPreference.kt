@@ -51,7 +51,6 @@ import app.lawnchair.font.googlefonts.GoogleFontsListing
 import app.lawnchair.preferences.BasePreferenceManager
 import app.lawnchair.preferences.PreferenceAdapter
 import app.lawnchair.preferences.getAdapter
-import app.lawnchair.ui.AndroidText
 import app.lawnchair.ui.OverflowMenu
 import app.lawnchair.ui.preferences.components.layout.PreferenceDivider
 import app.lawnchair.ui.preferences.components.layout.PreferenceGroupItem
