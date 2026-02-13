@@ -39,6 +39,7 @@ Compatibility list:
 * [Lawnchair] Compare GitHub digest with actual downloaded file in Nightly updater
 * [Lawnchair] Enable wrap adaptive icons by default (only on by default)
 * [Lawnchair] Enable bulk icon loading by default (toggle removed, on by default)
+* [Lawnchair] Allow customising force monochrome option
 
 #### Fixes
 * [Launcher] Limited Android 11 support

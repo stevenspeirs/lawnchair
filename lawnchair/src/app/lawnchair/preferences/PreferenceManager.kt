@@ -151,6 +151,8 @@ class PreferenceManager @Inject constructor(
         context.getApkVersionComparison().first[0],
     )
 
+    val forceIconMonochrome = BoolPref("pref_forceIconMonochrome", false, recreate)
+
     override fun close() {
         TODO("Not yet implemented")
     }
