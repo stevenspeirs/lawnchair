@@ -127,9 +127,9 @@ fun FontSelection(
 
         val matchedFont = allFonts.firstOrNull { candidate ->
             candidate::class == currentFont::class &&
-            candidate.displayName == currentFont.displayName &&
-            candidate.fontWeight == currentFont.fontWeight &&
-            candidate.isItalic == currentFont.isItalic
+                candidate.displayName == currentFont.displayName &&
+                candidate.fontWeight == currentFont.fontWeight &&
+                candidate.isItalic == currentFont.isItalic
         }
 
         if (currentFont !is FontCache.TTFFont &&
