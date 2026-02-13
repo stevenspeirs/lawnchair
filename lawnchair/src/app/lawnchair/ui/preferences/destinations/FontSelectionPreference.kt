@@ -120,15 +120,16 @@ fun FontSelection(
     val adapter = fontPref.getAdapter()
 
     LaunchedEffect(items, customFonts) {
-        val currentFont = adapter.state.value
+        val currentFont = adapter.state.value ?: return@LaunchedEffect
+
         val allFonts = items.flatMap { it.variants.values } +
             customFonts.flatMap { it.variants.values }
 
-        val matchedFont = allFonts.firstOrNull { it == currentFont }
-            ?: allFonts.firstOrNull {
-                it.displayName.contains("Google Sans Flex Variable") &&
-                    it.fontWeight == (currentFont?.fontWeight ?: 400)
-            }
+        val matchedFont = allFonts.firstOrNull { candidate ->
+            candidate::class == currentFont::class &&
+                candidate.fontWeight == currentFont.fontWeight &&
+                candidate.isItalic == currentFont.isItalic
+        }
 
         if (currentFont !is FontCache.TTFFont &&
             matchedFont != null &&
