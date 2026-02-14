@@ -380,7 +380,6 @@ class FontCache @Inject constructor(
             }
         override val isItalic: Boolean
             get() = style == Typeface.ITALIC || style == Typeface.BOLD_ITALIC
-
         override val composeFontFamily = FontFamily(typeface!!)
 
         override fun saveToJson(obj: JSONObject) {
@@ -430,7 +429,6 @@ class FontCache @Inject constructor(
             get() = parseFontWeight(name)
         override val isItalic: Boolean
             get() = parseItalic(name)
-
         override val composeFontFamily = FontFamily(ComposeFont("$name.ttf", assets))
 
         override fun saveToJson(obj: JSONObject) {
