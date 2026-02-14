@@ -48,6 +48,9 @@ jobs:
             git add lawnchair/assets/google_fonts.json
             git commit -m 'Update Google fonts'
             git push
+            echo 'Downloaded' >> $GITHUB_STEP_SUMMARY
+          else
+            echo 'Not downloaded' >> $GITHUB_STEP_SUMMARY          
           fi
   final-status:
     needs:
