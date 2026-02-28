@@ -21,7 +21,6 @@ jobs:
       - name: Gradle
         uses: gradle/actions/setup-gradle@v5
         with:
-          build-scan-publish: false
           cache-cleanup: always
       - name: Sign
         if: github.repository_owner == 'tgex0'
@@ -39,7 +38,7 @@ jobs:
             echo "$KEYSTORE" | base64 --decode > ${{ github.workspace }}/keystore.jks
           fi
       - name: Build
-        run: ./gradlew assembleLawnWithQuickstepGithubRelease
+        run: ./gradlew assembleLawnWithQuickstepGithubRelease --no-scan
       - name: Upload
         uses: actions/upload-artifact@v7
         with:
