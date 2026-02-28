@@ -70,6 +70,7 @@ jobs:
       - name: Gradle
         uses: gradle/actions/setup-gradle@v5
         with:
+          build-scan-publish: false
           cache-cleanup: always
       - name: Sign
         if: github.repository_owner == 'tgex0'
@@ -108,6 +109,8 @@ jobs:
           java-version: 24
       - name: Gradle
         uses: gradle/actions/setup-gradle@v5
+        with:
+          build-scan-publish: false
       - name: Spotless
         run: ./gradlew spotlessCheck
   final-status:
