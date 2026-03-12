@@ -20,6 +20,12 @@ data class SearchAdapterItem(
         return other is SearchAdapterItem && other.searchTarget.id == searchTarget.id
     }
 
+    override fun isContentSame(other: BaseAllAppsAdapter.AdapterItem): Boolean {
+        if (other !is SearchAdapterItem) return false
+        return other.searchTarget == searchTarget &&
+            other.viewType == viewType
+    }
+
     fun setRippleEffect(child: View) {
         val shape = RoundRectShape(background?.cornerRadii, null, null)
         val shapeDrawable = ShapeDrawable(shape)
