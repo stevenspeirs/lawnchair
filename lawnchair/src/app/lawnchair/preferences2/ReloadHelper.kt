@@ -44,9 +44,11 @@ class ReloadHelper(private val context: Context) {
         recreate()
     }
 
+    /**
+     * This doesn't work, please migrate this to being a [ThemeManager] reload,
+     * as of right now the behaviour is defaulted to L3 that listens on prefs changes
+     */
     fun reloadIcons() {
-        // This doesn't work, please migrate this to being a ThemeManager reload,
-        // as of right now the behaviour is defaulted to L3 that listens on prefs changes
         Executors.MODEL_EXECUTOR.execute {
             LauncherAppState.INSTANCE.get(context).iconCache.clearMemoryCache()
         }
