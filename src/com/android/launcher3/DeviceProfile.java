@@ -395,6 +395,8 @@ public class DeviceProfile {
 
         workspacePageIndicatorHeight = res.getDimensionPixelSize(
                 R.dimen.workspace_page_indicator_height);
+        workspacePageIndicatorHeight *= PreferenceExtensionsKt
+                .firstBlocking(preferenceManager2.getPageIndicatorHeightFactor());
         mWorkspacePageIndicatorOverlapWorkspace =
                 res.getDimensionPixelSize(R.dimen.workspace_page_indicator_overlap_workspace);
 
@@ -462,15 +464,6 @@ public class DeviceProfile {
         }
 
         setupAllAppsStyle(context);
-
-        workspacePageIndicatorHeight = res.getDimensionPixelSize(
-                R.dimen.workspace_page_indicator_height);
-        float pageIndicatorHeightFactor = PreferenceExtensionsKt
-            .firstBlocking(preferenceManager2.getPageIndicatorHeightFactor());
-        
-        workspacePageIndicatorHeight *= (int) pageIndicatorHeightFactor;
-//        mWorkspacePageIndicatorOverlapWorkspace = res
-//                .getDimensionPixelSize(R.dimen.workspace_page_indicator_overlap_workspace);
 
         if (!mIsResponsiveGrid) {
             TypedArray cellStyle;
@@ -1324,7 +1317,8 @@ public class DeviceProfile {
                     mTypeIndex,
                     scale,
                     iconSizePx,
-                    mIconDrawablePaddingOriginalPx
+                    mIconDrawablePaddingOriginalPx,
+                    allAppsCellHeightMultiplier
             );
         }
         updateAllAppsContainerWidth();
