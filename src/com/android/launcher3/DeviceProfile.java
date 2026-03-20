@@ -1305,17 +1305,15 @@ public class DeviceProfile {
             );
             updateAllAppsWithResponsiveMeasures();
         } else {
-            // LC: All apps should use scale 1.0, not workspace scale
-            // This ensures drawer icons are independent of workspace scaling
-            //updateAllAppsIconSize(1.0f, context.getResources());
-            // pE-TODO(QPR1): Investigate
+            // LC: All apps should use scale 1.0, not workspace scale.
+            // This ensures drawer icons are independent of workspace layout scaling.
             mAllAppsProfile = AllAppsProfile.Factory.createAllAppsProfile(
                     context.getResources(),
                     inv,
                     mMetrics,
                     mIsScalableGrid,
                     mTypeIndex,
-                    scale,
+                    1f, // See comment above
                     iconSizePx,
                     mIconDrawablePaddingOriginalPx,
                     allAppsCellHeightMultiplier
