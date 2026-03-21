@@ -97,7 +97,6 @@ class LawnchairApp : Application() {
         }
     }
 
-
     fun restart(recreateLauncher: Boolean = true) {
         if (recreateLauncher) {
             activityHandler.finishAll()
