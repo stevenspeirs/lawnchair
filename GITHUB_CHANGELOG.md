@@ -16,7 +16,7 @@ Compatibility list:
 | Android 8.1        | ❌               | ❌         | Not supported            |
 | Android 9          | ❌               | ❌         | Not supported            |
 | Android 10         | ❌               | ❌         | ❌                        |
-| Android 11         | ❌               | ❌         | ❌                        |
+| Android 11         | ✅               | ❌         | ❌                        |
 | Android 12.0       | ✅               | ❌         | ❌                        |
 | Android 12.1       | ✅               | ❌         | ❌                        |
 | Android 13         | ✅               | ❌         | ❌                        |
@@ -88,6 +88,24 @@ Compatibility list:
 * [Lawnchair/Workspace] Disallow infinite scroll to the left when feed is enabled
 * [Launcher] Crash when trying to use back gesture on below Android 16
 * [Lawnchair] Limited Android 9, 8.1, 8.0 support
+* [Lawnchair/Search] Launch app on enter for local search algorithm (https://github.com/LawnchairLauncher/lawnchair/pull/6477)
+* [Lawnchair/Search] Stale search result (https://github.com/LawnchairLauncher/lawnchair/pull/6472)
+* [Launcher] Don't run app archive on under Android 15
+* [Launcher] Fix inconsistent haptic across all Android version
+* [Lawnchair/Search] Fix accessibility issues with allapps blurred style
+* [Lawnchair/Search] Fix search result and focus decorator
+* [Launcher] Fix 5th folder preview item appearing out of bounds
+* [Launcher] Fully reimplement IDP/DP customisation
+* [Lawnchair/Settings] Pass preview IDP to preview renderer
+* [Launcher] Move from 7x7 grid to 4x7
+* [Lawnchair] Temporarily fix reloadIcons
+* [Launcher/AllApps] Don't use workspace scale on allapps
+* [Lawnchair/Settings] Leave Lawnchair settings lifecycle alone
+* [Lawnchair/Settings] Correct dropdown menu count
+* [Lawnchair] Register LawnchairApp activity handler
+* [Launcher] Don't call IProtoLog in launcher-level
+* [Launcher] Don't override device rotation prefs on phone form factor
+* [Launcher] Reimplement icon gesture customisation
 
 ### 🥞 Development 4 Release 1 (Snapshot 10)
 
