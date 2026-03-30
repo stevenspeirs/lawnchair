@@ -21,6 +21,9 @@ jobs:
       - name: Gradle
         uses: gradle/actions/setup-gradle@v6
         with:
+          build-scan-publish: false
+          build-scan-terms-of-use-url: 'https://gradle.com/terms-of-service'
+          build-scan-terms-of-use-agree: 'yes'
           cache-cleanup: always
       - name: Sign
         if: github.repository_owner == 'tgex0'
@@ -58,6 +61,10 @@ jobs:
           java-version: 24
       - name: Gradle
         uses: gradle/actions/setup-gradle@v6
+        with:
+          build-scan-publish: false
+          build-scan-terms-of-use-url: 'https://gradle.com/terms-of-service'
+          build-scan-terms-of-use-agree: 'yes'
       - name: Spotless
         run: ./gradlew spotlessCheck --no-scan
   final-status:
