@@ -1,7 +1,7 @@
 # Lawnchair contributing guidelines
 
 <picture>
-    <!-- Workaround to prevent the image from being clickable --->
+    <!-- Workaround to prevent the image from being clickable -->
     <source media="(prefers-color-scheme: dark)" srcset="docs/assets/lawnchair-round.webp" width="100">
     <img alt="" src="docs/assets/lawnchair-round.webp" width="100">
 </picture>
@@ -110,7 +110,7 @@ The following table lists the development stages used by Lawnchair:
 | Release Candidate | 03     |
 | Release           | 04     |
 
-### `string.xml` naming
+### `strings.xml` naming
 
 String `name` attributes in `strings.xml` should follow this format:
 
