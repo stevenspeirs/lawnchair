@@ -133,6 +133,7 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 -   Ensured Custom Icon shape sliders are of equal length
 -   Ensured default font has a selected radio button
 -   Ensured font variant is retained on selecting current font
+-   Ensured System Icon shape is as accurate as possible
 -   Fixed font filter
 -   Fixed One UI icon corner shape
 -   Fixed Spotless style check error
