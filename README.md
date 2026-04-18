@@ -113,7 +113,7 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 
 ## Modifications
 
--   Added Flat hexagon, Heart, Heptagon, Leaf, Lemon, Light squircle, Nonagon, Pentagon, Strong squircle, Triangle and Ultra squircle icon shapes
+-   Added Flat hexagon, Heart custom, Heptagon, Leaf custom, Lemon, Light squircle, Nonagon, Pentagon, Strong squircle, Triangle and Ultra squircle icon shapes
 -   Added iOS, Light squircle, One UI, Strong squircle and Ultra squircle to Custom Icon corner shapes
 -   Added Lawnfeed and Google Go to Feed providers whitelist
 -   Added mathematical constants phi and tau to Calcuator search
@@ -133,7 +133,6 @@ View all our links in the [Lawnchair Wiki](https://github.com/LawnchairLauncher/
 -   Ensured Custom Icon shape sliders are of equal length
 -   Ensured default font has a selected radio button
 -   Ensured font variant is retained on selecting current font
--   Ensured System Icon shape is as accurate as possible
 -   Fixed font filter
 -   Fixed One UI icon corner shape
 -   Fixed Spotless style check error
