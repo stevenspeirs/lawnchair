@@ -136,16 +136,10 @@ sealed class IconShape {
                 RoundedHexagon,
                 Stretched,
                 Vessel,
-                FlatHexagon,
-                HeartCustom,
-                Heptagon,
                 LeafCustom,
                 Lemon,
                 LightSquircle,
-                Nonagon,
-                Pentagon,
                 StrongSquircle,
-                Triangle,
                 UltraSquircle,
             )
                 .minByOrNull {
@@ -513,120 +507,6 @@ sealed class IconShape {
         svgPathString = "M12.97,0 C8.41,0 4.14,2.55 2.21,6.68 -1.03,13.61 -0.71,21.78 3.16,28.46 4.89,31.46 4.89,35.2 3.16,38.2 -1.05,45.48 -1.05,54.52 3.16,61.8 4.89,64.8 4.89,68.54 3.16,71.54 -0.71,78.22 -1.03,86.39 2.21,93.32 4.14,97.45 8.41,100 12.97,100 21.38,100 78.62,100 87.03,100 91.59,100 95.85,97.45 97.79,93.32 101.02,86.39 100.71,78.22 96.84,71.54 95.1,68.54 95.1,64.8 96.84,61.8 101.05,54.52 101.05,45.48 96.84,38.2 95.1,35.2 95.1,31.46 96.84,28.46 100.71,21.78 101.02,13.61 97.79,6.68 95.85,2.55 91.59,0 87.03,0 78.62,0 21.38,0 12.97,0 Z",
     )
 
-    object FlatHexagon : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun getMaskPath(): Path = Path().also {
-            val centerX = 50.0f
-            val centerY = 50.0f
-            val radius = 50.0f
-            val angleStep = 360.0f / 6.0f
-            val startingAngle = 90.0f - angleStep / 2.0f
-
-            for (i in 0..5) {
-                val angle = startingAngle + angleStep * i
-                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
-                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
-                if (i == 0) {
-                    it.moveTo(x, y)
-                } else {
-                    it.lineTo(x, y)
-                }
-            }
-
-            it.close()
-        }
-
-        override fun toString(): String {
-            return "flatHexagon"
-        }
-    }
-
-    object HeartCustom : IconShape(
-        Corner.fullArc,
-        Corner.fullArc,
-        Corner.fullArc,
-        Corner.fullArc,
-    ) {
-        private val parsedPath: Path = PathParser.createPathFromPathData("M 50 30 C 30 10, 5 25, 5 50 C 5 75, 30 95, 50 100 C 70 95, 95 75, 95 50 C 95 25, 70 10, 50 30 Z")
-
-        private val matrix = Matrix()
-
-        override fun getMaskPath(): Path {
-            return Path().also { addToPath(it, 0.0f, 0.0f, 100.0f, 100.0f) }
-        }
-
-        override fun addToPath(
-            path: Path,
-            left: Float,
-            top: Float,
-            right: Float,
-            bottom: Float,
-            size: Float,
-            endSize: Float,
-            progress: Float,
-        ) {
-            matrix.reset()
-            val width = right - left
-            val height = bottom - top
-            matrix.setScale(width / 100.0f, height / 100.0f)
-            matrix.postTranslate(left, top)
-
-            val tempPath = Path(parsedPath)
-            tempPath.transform(matrix)
-            path.addPath(tempPath)
-        }
-
-        override fun toString(): String {
-            return "heartCustom"
-        }
-    }
-
-    object Heptagon : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun getMaskPath(): Path = Path().also {
-            val centerX = 50.0f
-            val centerY = 50.0f
-            val radius = 50.0f
-            val angleStep = 360.0f / 7.0f
-            val startingAngle = 90.0f - angleStep / 2.0f
-
-            for (i in 0..6) {
-                val angle = startingAngle + angleStep * i
-                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
-                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
-                if (i == 0) {
-                    it.moveTo(x, y)
-                } else {
-                    it.lineTo(x, y)
-                }
-            }
-
-            it.close()
-        }
-
-        override fun toString(): String {
-            return "heptagon"
-        }
-    }
-
     object LeafCustom : IconShape(
         IconCornerShape.arc,
         IconCornerShape.arc,
@@ -675,80 +555,6 @@ sealed class IconShape {
         }
     }
 
-    object Nonagon : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun getMaskPath(): Path = Path().also {
-            val centerX = 50.0f
-            val centerY = 50.0f
-            val radius = 50.0f
-            val angleStep = 360.0f / 9.0f
-            val startingAngle = 90.0f - angleStep / 2.0f
-
-            for (i in 0..8) {
-                val angle = startingAngle + angleStep * i
-                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
-                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
-                if (i == 0) {
-                    it.moveTo(x, y)
-                } else {
-                    it.lineTo(x, y)
-                }
-            }
-
-            it.close()
-        }
-
-        override fun toString(): String {
-            return "nonagon"
-        }
-    }
-
-    object Pentagon : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun getMaskPath(): Path = Path().also {
-            val centerX = 50.0f
-            val centerY = 50.0f
-            val radius = 50.0f
-            val angleStep = 360.0f / 5.0f
-            val startingAngle = 90.0f - angleStep / 2.0f
-
-            for (i in 0..4) {
-                val angle = startingAngle + angleStep * i
-                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
-                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
-                if (i == 0) {
-                    it.moveTo(x, y)
-                } else {
-                    it.lineTo(x, y)
-                }
-            }
-
-            it.close()
-        }
-
-        override fun toString(): String {
-            return "pentagon"
-        }
-    }
-
     object StrongSquircle : IconShape(
         IconCornerShape.StrongSquircle,
         IconCornerShape.StrongSquircle,
@@ -762,43 +568,6 @@ sealed class IconShape {
 
         override fun toString(): String {
             return "strongSquircle"
-        }
-    }
-
-    object Triangle : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun getMaskPath(): Path = Path().also {
-            val centerX = 50.0f
-            val centerY = 50.0f
-            val radius = 50.0f
-            val angleStep = 360.0f / 3.0f
-            val startingAngle = 90.0f - angleStep / 2.0f
-
-            for (i in 0..2) {
-                val angle = startingAngle + angleStep * i
-                val x = centerX + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
-                val y = centerY + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
-                if (i == 0) {
-                    it.moveTo(x, y)
-                } else {
-                    it.lineTo(x, y)
-                }
-            }
-
-            it.close()
-        }
-
-        override fun toString(): String {
-            return "triangle"
         }
     }
 
@@ -872,16 +641,10 @@ sealed class IconShape {
             "roundedhexagon" -> RoundedHexagon
             "stretched" -> Stretched
             "vessel" -> Vessel
-            "flatHexagon" -> FlatHexagon
-            "heartCustom" -> HeartCustom
-            "heptagon" -> Heptagon
             "leafCustom" -> LeafCustom
             "lemon" -> Lemon
             "lightSquircle" -> LightSquircle
-            "nonagon" -> Nonagon
-            "pentagon" -> Pentagon
             "strongSquircle" -> StrongSquircle
-            "triangle" -> Triangle
             "ultraSquircle" -> UltraSquircle
             "" -> null
             else -> CustomCornerBased.fromStringOrNull(value)
