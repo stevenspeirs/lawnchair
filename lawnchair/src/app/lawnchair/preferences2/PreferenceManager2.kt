@@ -154,8 +154,10 @@ class PreferenceManager2 @Inject constructor(
         key = stringPreferencesKey(name = "custom_icon_shape"),
         defaultValue = null,
         parse = {
-            IconShape.fromString(value = it, context = context)
-                ?: IconShapeManager.getSystemIconShape(context)
+            IconShape.CustomCornerBased.fromStringOrNull(value = it)
+                ?: IconShape.CustomCornerBased(
+                    IconShapeManager.getSystemIconShape(context).findNearestShape(),
+                )
         },
         save = { it.toString() },
         onSet = { it?.let(iconShape::setBlocking) },
@@ -753,6 +755,16 @@ class PreferenceManager2 @Inject constructor(
     val swipeDownGestureHandler = serializablePreference<GestureHandlerConfig>(
         key = stringPreferencesKey("swipe_down_gesture_handler"),
         defaultValue = GestureHandlerConfig.OpenNotifications,
+    )
+
+    val twoFingerSwipeUpGestureHandler = serializablePreference<GestureHandlerConfig>(
+        key = stringPreferencesKey("two_finger_swipe_up_gesture_handler"),
+        defaultValue = GestureHandlerConfig.NoOp,
+    )
+
+    val twoFingerSwipeDownGestureHandler = serializablePreference<GestureHandlerConfig>(
+        key = stringPreferencesKey("two_finger_swipe_down_gesture_handler"),
+        defaultValue = GestureHandlerConfig.OpenQuickSettings,
     )
 
     val homePressGestureHandler = serializablePreference<GestureHandlerConfig>(
