@@ -111,12 +111,12 @@ sealed class IconShape {
             return listOf(
                 Circle,
                 Square,
+                SharpSquare,
                 RoundedSquare,
                 Squircle,
                 Sammy,
                 Teardrop,
                 Cylinder,
-                SharpSquare,
                 Cupertino,
                 Octagon,
                 Hexagon,
