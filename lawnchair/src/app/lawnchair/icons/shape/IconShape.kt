@@ -136,7 +136,7 @@ sealed class IconShape {
                 RoundedHexagon,
                 Stretched,
                 Vessel,
-                LeafCustom,
+                Leaflet,
                 Lemon,
                 LightSquircle,
                 StrongSquircle,
@@ -507,85 +507,41 @@ sealed class IconShape {
         svgPathString = "M12.97,0 C8.41,0 4.14,2.55 2.21,6.68 -1.03,13.61 -0.71,21.78 3.16,28.46 4.89,31.46 4.89,35.2 3.16,38.2 -1.05,45.48 -1.05,54.52 3.16,61.8 4.89,64.8 4.89,68.54 3.16,71.54 -0.71,78.22 -1.03,86.39 2.21,93.32 4.14,97.45 8.41,100 12.97,100 21.38,100 78.62,100 87.03,100 91.59,100 95.85,97.45 97.79,93.32 101.02,86.39 100.71,78.22 96.84,71.54 95.1,68.54 95.1,64.8 96.84,61.8 101.05,54.52 101.05,45.48 96.84,38.2 95.1,35.2 95.1,31.46 96.84,28.46 100.71,21.78 101.02,13.61 97.79,6.68 95.85,2.55 91.59,0 87.03,0 78.62,0 21.38,0 12.97,0 Z",
     )
 
-    object LeafCustom : IconShape(
+    object Leaflet : CornerBased(
+        key = "leaflet",
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
         IconCornerShape.arc,
-        0.0f,
-        1.0f,
-        1.0f,
-        0.0f,
-    ) {
+        0.0f, 1.0f, 1.0f, 0.0f,
+    )
 
-        override fun toString(): String {
-            return "leafCustom"
-        }
-    }
+    object Lemon : CornerBased(
+        key = "lemon",
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        IconCornerShape.arc,
+        1.0f, 0.2f, 0.2f, 1.0f,
+    )
 
-    object Lemon : IconShape(
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        IconCornerShape.arc,
-        1.0f,
-        0.2f,
-        0.2f,
-        1.0f,
-    ) {
-
-        override fun toString(): String {
-            return "lemon"
-        }
-    }
-
-    object LightSquircle : IconShape(
-        IconCornerShape.LightSquircle,
-        IconCornerShape.LightSquircle,
-        IconCornerShape.LightSquircle,
+    object LightSquircle : SimpleCornerBased(
+        key = "lightsquircle",
         IconCornerShape.LightSquircle,
         1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
+    )
 
-        override fun toString(): String {
-            return "lightSquircle"
-        }
-    }
-
-    object StrongSquircle : IconShape(
-        IconCornerShape.StrongSquircle,
-        IconCornerShape.StrongSquircle,
-        IconCornerShape.StrongSquircle,
+    object StrongSquircle : SimpleCornerBased(
+        key = "strongsquircle",
         IconCornerShape.StrongSquircle,
         1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
+    )
 
-        override fun toString(): String {
-            return "strongSquircle"
-        }
-    }
-
-    object UltraSquircle : IconShape(
-        IconCornerShape.UltraSquircle,
-        IconCornerShape.UltraSquircle,
-        IconCornerShape.UltraSquircle,
+    object UltraSquircle : SimpleCornerBased(
+        key = "ultrasquircle",
         IconCornerShape.UltraSquircle,
         1.0f,
-        1.0f,
-        1.0f,
-        1.0f,
-    ) {
-
-        override fun toString(): String {
-            return "ultraSquircle"
-        }
-    }
+    )
 
     companion object {
 
@@ -641,11 +597,11 @@ sealed class IconShape {
             "roundedhexagon" -> RoundedHexagon
             "stretched" -> Stretched
             "vessel" -> Vessel
-            "leafCustom" -> LeafCustom
+            "leaflet" -> Leaflet
             "lemon" -> Lemon
-            "lightSquircle" -> LightSquircle
-            "strongSquircle" -> StrongSquircle
-            "ultraSquircle" -> UltraSquircle
+            "lightsquircle" -> LightSquircle
+            "strongsquircle" -> StrongSquircle
+            "ultrasquircle" -> UltraSquircle
             "" -> null
             else -> CustomCornerBased.fromStringOrNull(value)
         }
