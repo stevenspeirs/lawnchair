@@ -319,9 +319,9 @@
     <string name="icon_shape_squircle">Squircle</string>
     <string name="icon_shape_teardrop">Teardrop</string>
     <string name="icon_shape_flat_hexagon">Flat hexagon</string>
-    <string name="icon_shape_heart">Heart</string>
+    <string name="icon_shape_heartCustom">Heart custom</string>
     <string name="icon_shape_heptagon">Heptagon</string>
-    <string name="icon_shape_leaf">Leaf</string>
+    <string name="icon_shape_leafCustom">Leaf custom</string>
     <string name="icon_shape_lemon">Lemon</string>
     <string name="icon_shape_light_squircle">Light squircle</string>
     <string name="icon_shape_nonagon">Nonagon</string>
