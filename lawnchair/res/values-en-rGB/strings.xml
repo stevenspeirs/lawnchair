@@ -318,10 +318,10 @@
     <string name="icon_shape_square">Square</string>
     <string name="icon_shape_squircle">Squircle</string>
     <string name="icon_shape_teardrop">Teardrop</string>
-    <string name="icon_shape_cardioid">Cardioid</string>
     <string name="icon_shape_flat_hexagon">Flat hexagon</string>
+    <string name="icon_shape_heart_custom">Heart custom</string>
     <string name="icon_shape_heptagon">Heptagon</string>
-    <string name="icon_shape_leaf">Leaf</string>
+    <string name="icon_shape_leaf_custom">Leaf custom</string>
     <string name="icon_shape_lemon">Lemon</string>
     <string name="icon_shape_light_squircle">Light squircle</string>
     <string name="icon_shape_nonagon">Nonagon</string>
