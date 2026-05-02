@@ -26,7 +26,7 @@ jobs:
           build-scan-terms-of-use-agree: 'yes'
           cache-cleanup: always
       - name: Sign
-        if: github.repository_owner == 'tgex0'
+        if: github.repository_owner == 'stevenspeirs'
         env:
           KEYSTORE: ${{ secrets.KEYSTORE }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
