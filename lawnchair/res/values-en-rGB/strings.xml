@@ -771,6 +771,7 @@
     <string name="paused_apps_dialog_title">App paused</string>
     <string name="paused_apps_dialog_message">%1$s was directly paused from the launcher</string>
     <string name="paused_apps_drop_target_label">Pause app</string>
+    <string name="open_in_store_drop_target_label">Open in store</string>
 
     <string name="dock_icons">Dock icons</string>
     <string name="hotseat_bottom_space_label">Bottom padding</string>
@@ -796,6 +797,7 @@
     <!-- <string name="search_provider_firefox" translatable="false">Firefox</string> -->
     <!-- <string name="search_provider_iceraven" translatable="false">Iceraven</string> -->
     <!-- <string name="search_provider_ironfox" translatable="false">IronFox</string> -->
+    <!-- <string name="search_provider_waterfox" translatable="false">Waterfox</string> -->
     <!-- <string name="search_provider_kagi" translatable="false">Kagi</string> -->
     <!-- <string name="search_provider_cromite" translatable="false">Cromite</string> -->
     <!-- <string name="search_provider_vivaldi" translatable="false">Vivaldi</string> -->
