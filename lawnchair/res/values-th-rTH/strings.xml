@@ -171,8 +171,6 @@
     <string name="always_reload_icons_label">โหลดไอคอนใหม่เสมอ</string>
     <string name="always_reload_icons_description">หลีกเลี่ยงการแคชจากชุดไอคอน</string>
     <string name="always_reload_icons_warning">Will cause icon to reload regularly, this is not required if icon pack doesn\'t update regularly</string>
-    <string name="icon_swipe_gestures">ท่าทางการปัดไอคอน</string>
-    <string name="icon_swipe_gestures_description">สั่งงานเมื่อปัดซ้ายหรือขวาบนไอคอนแทนการเลื่อนหน้าจอหลัก</string>
     <string name="show_deck_layout">เค้าโครงแบบ Deck</string>
     <string name="show_deck_layout_description">แสดงตัวเลือกเค้าโครงเพื่อซ่อนหน้ารวมแอปและเพิ่มแอปใหม่ไปยังหน้าจอหลักโดยอัตโนมัติ</string>
     <string name="material_expressive_label">Material 3 Expressive</string>
@@ -256,7 +254,7 @@
     <string name="icon_shape_seven_sided_cookie">คุกกี้ 7 เหลี่ยม</string>
     <string name="icon_shape_arch">ทรงโค้ง</string>
     <!-- Additional icon shapes -->
-    <string name="icon_shape_cloudy">Cloudy</string>
+    <string name="icon_shape_cloudy">เมฆมาก</string>
     <string name="icon_shape_flower">ดอกไม้</string>
     <string name="icon_shape_heart">หัวใจ</string>
     <string name="icon_shape_leaf">ใบไม้</string>
@@ -382,9 +380,9 @@
     <!-- Available targets -->
     <string name="smartspace_weather">สภาพอากาศ</string>
     <string name="smartspace_battery_status">สถานะแบตเตอรี่</string>
-    <string name="smartspace_torch">สถานะของไฟฉาย</string>
+    <string name="smartspace_torch">สถานะไฟฉาย</string>
     <string name="smartspace_now_playing">กำลังเล่น</string>
-    <string name="smartspace_onboarding">ต้อนรับและสอนใช้งาน</string>
+    <string name="smartspace_onboarding">สอนใช้งาน</string>
     <!-- Torch strings -->
     <string name="torch_status_on">ไฟฉายเปิดอยู่</string>
     <string name="torch_action_off">แตะเพื่อปิด</string>
@@ -545,6 +543,10 @@
     <string name="home_screen_unlock">ปลดล็อคหน้าแรก</string>
     <string name="home_screen_locked">หน้าจอหลักถูกล็อคแล้ว</string>
     <string name="home_screen_lock_description">ป้องกันการเปลี่ยนแปลงของวัตถุบนหน้าจอหลัก</string>
+    <string name="horizontal_padding_label">เว้นขอบข้าง</string>
+    <string name="vertical_padding_label">Vertical padding</string>
+    <string name="top_padding_label">Top padding</string>
+    <string name="widget_padding_label">Widget padding</string>
     <string name="set_default_home_page">ตั้งเป็นหน้าเริ่มต้น</string>
     <string name="default_home_page_set">Default home page updated</string>
     <string name="move_page_left">ย้ายหน้าไปทางซ้าย</string>
@@ -601,6 +603,7 @@
     <string name="paused_apps_dialog_title">พักแอปแล้ว</string>
     <string name="paused_apps_dialog_message">%1$s was directly paused from the launcher</string>
     <string name="paused_apps_drop_target_label">พักแอป</string>
+    <string name="open_in_store_drop_target_label">Open in store</string>
     <string name="dock_icons">จำนวนไอคอนในรายการโปรด</string>
     <string name="hotseat_bottom_space_label">เว้นขอบล่าง</string>
     <string name="page_indicator_height">ความสูงของตัวระบุหน้า</string>
