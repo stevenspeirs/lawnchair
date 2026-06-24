@@ -31,6 +31,8 @@ import app.lawnchair.search.algorithms.data.SettingInfo
 import app.lawnchair.search.algorithms.engine.provider.web.WebSearchProvider
 import app.lawnchair.theme.color.tokens.ColorTokens
 import app.lawnchair.util.calculateInSampleSize
+import app.lawnchair.util.createFilePreviewFallbackBitmap
+import app.lawnchair.util.createSmallSearchResultBitmap
 import app.lawnchair.util.createTextBitmap
 import app.lawnchair.util.file2Uri
 import app.lawnchair.util.mimeCompat
@@ -81,11 +83,9 @@ class SearchTargetFactory(
         val url = webSearchProvider.getSearchUrl(suggestion)
         val browserIntent = Intent(Intent.ACTION_VIEW, url.toUri())
         val id = suggestion + url
+        val bitmap = createSmallSearchResultBitmap(context, R.drawable.ic_allapps_search)
         val action = SearchActionCompat.Builder(id, suggestion).apply {
-            setIcon(
-                Icon.createWithResource(context, R.drawable.ic_allapps_search)
-                    .setTint(ColorTokens.TextColorSecondary.resolveColor(context)),
-            )
+            setIcon(Icon.createWithAdaptiveBitmap(bitmap))
             setIntent(browserIntent)
         }.build()
         return createSearchTarget(
@@ -102,85 +102,12 @@ class SearchTargetFactory(
     ): SearchTargetCompat {
         val result = calculation.result
         val equation = calculation.equation
-
-        val keywords = listOf(
-            "abs",
-            "ceil",
-            "floor",
-            "if",
-            "max",
-            "min",
-            "round",
-            "sum",
-        )
-
-        val phiVariants = listOf(
-            "phi",
-            "ɸ",
-            "Φ",
-            "ϕ",
-            "ᵠ",
-            "ᵩ",
-            "ᶲ",
-            "ⱷ",
-            "Ⲫ",
-            "ⲫ",
-        )
-
-        val piVariants = listOf(
-            "pi",
-            "Π",
-            "ϖ",
-            "ᴨ",
-            "ℿ",
-            "ℼ",
-            "∏",
-            "∐",
-            "Ⲡ",
-            "ⲡ",
-        )
-
-        val tauVariants = listOf(
-            "tau",
-            "Τ",
-            "Ⲧ",
-            "ⲧ",
-        )
-
-        val replacements = mapOf(
-            "E" to "e",
-            "-" to "−",
-            "*" to "×",
-            "/" to "÷",
-            ">=" to "≥",
-            "<=" to "≤",
-            "||" to "∨",
-            "&&" to "∧",
-            "!=" to "≠",
-            "," to ", ",
-        )
-
-        val formattedEquation = equation
-            .replace(Regex("\\s+"), "")
-            .let { eq -> keywords.fold(eq) { acc, k -> acc.replace(Regex("\\b$k\\b", RegexOption.IGNORE_CASE), k) } }
-            .let { eq -> phiVariants.fold(eq) { acc, s -> acc.replace(s, "φ", true) } }
-            .let { eq -> piVariants.fold(eq) { acc, s -> acc.replace(s, "π", true) } }
-            .let { eq -> tauVariants.fold(eq) { acc, s -> acc.replace(s, "τ", true) } }
-            .let { eq -> replacements.entries.fold(eq) { acc, (k, v) -> acc.replace(k, v) } }
-            .replace(Regex("(?<!=)=(?!=)|=="), " $0 ")
-            .replace(Regex("([+−×÷%\\^>≥<≤∨∧≠])"), " $1 ")
-            .replace(Regex("\\s+"), " ")
-            .trim()
-            .plus(" =")
-
         val uuid = UUID.randomUUID().toString()
         val id = "calculator:$uuid"
+        val bitmap = createSmallSearchResultBitmap(context, R.drawable.calculator)
         val action = SearchActionCompat.Builder(id, result)
-            .setIcon(
-                Icon.createWithResource(context, R.drawable.calculator)
-                    .setTint(ColorTokens.TextColorSecondary.resolveColor(context)),
-            )
-            .setSubtitle(formattedEquation)
+            .setIcon(Icon.createWithAdaptiveBitmap(bitmap))
+            .setSubtitle(equation)
             .setIntent(Intent())
             .build()
 
@@ -220,11 +147,9 @@ class SearchTargetFactory(
         val value = recentKeyword.getValueByKey("display1") ?: ""
         val browserIntent = Intent(Intent.ACTION_VIEW, searchUrl(value).toUri())
         val id = recentKeyword.data.toString() + searchUrl(value)
+        val bitmap = createSmallSearchResultBitmap(context, R.drawable.ic_recent)
         val action = SearchActionCompat.Builder(id, value)
-            .setIcon(
-                Icon.createWithResource(context, R.drawable.ic_recent)
-                    .setTint(ColorTokens.TextColorSecondary.resolveColor(context)),
-            )
+            .setIcon(Icon.createWithAdaptiveBitmap(bitmap))
             .setIntent(browserIntent)
             .build()
         return createSearchTarget(
@@ -254,11 +179,9 @@ class SearchTargetFactory(
             return null
         }
 
+        val bitmap = createSmallSearchResultBitmap(context, R.drawable.ic_setting)
         val actionBuilder = SearchActionCompat.Builder(id, SettingsTarget.formatSettingTitle(info.name))
-            .setIcon(
-                Icon.createWithResource(context, R.drawable.ic_setting)
-                    .setTint(ColorTokens.Accent1_600.resolveColor(context)),
-            )
+            .setIcon(Icon.createWithAdaptiveBitmap(bitmap))
             .setIntent(intent)
             .build()
 
@@ -492,9 +415,13 @@ object FilesTarget {
         val fileInfo = info as? FileInfo
         return if (fileInfo?.isImageType == true) {
             decodeThumbnailIcon(fileInfo.path)
-                ?: Icon.createWithResource(context, fileInfo.iconRes)
+                ?: Icon.createWithBitmap(createFilePreviewFallbackBitmap(context, fileInfo.iconRes))
         } else {
-            Icon.createWithResource(context, fileInfo?.iconRes ?: R.drawable.ic_folder)
+            val bitmap = createFilePreviewFallbackBitmap(
+                context,
+                fileInfo?.iconRes ?: R.drawable.ic_folder,
+            )
+            Icon.createWithBitmap(bitmap)
         }
     }
 
@@ -587,7 +514,7 @@ object ContactsTarget {
         // If contact photo is not available, create an icon with the first letter of the contact's name
         val initial = if (name.isNotEmpty()) name[0].uppercaseChar().toString() else "U"
         val textBitmap = createTextBitmap(context, initial)
-        return Icon.createWithBitmap(textBitmap)
+        return Icon.createWithAdaptiveBitmap(textBitmap)
     }
 }
 
